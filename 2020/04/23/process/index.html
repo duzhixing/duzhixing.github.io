@@ -5,19 +5,21 @@
   
 
   
-  <title>Hello World | Hexo</title>
+  <title>process | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="进程的几种状态  阻塞阻塞是一种被动的方式，由于获取资源获取不到而引起的等待。 睡眠睡眠的确是一种主动的方式 挂起挂起也是一种主动的行为，是系统层面对进程作出的合理操作。挂起的标志就是换出到外存，在外存的进程肯定是不能执行的，所以挂起的目的就很明显，在内存资源不足时，需要把一些进程换出到外存，给着急运行的进程腾地方。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2020/04/23/hello-world/index.html">
+<meta property="og:title" content="process">
+<meta property="og:url" content="http://yoursite.com/2020/04/23/process/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="进程的几种状态  阻塞阻塞是一种被动的方式，由于获取资源获取不到而引起的等待。 睡眠睡眠的确是一种主动的方式 挂起挂起也是一种主动的行为，是系统层面对进程作出的合理操作。挂起的标志就是换出到外存，在外存的进程肯定是不能执行的，所以挂起的目的就很明显，在内存资源不足时，需要把一些进程换出到外存，给着急运行的进程腾地方。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-23T07:53:30.995Z">
-<meta property="article:modified_time" content="2020-04-23T07:53:30.995Z">
+<meta property="og:image" content="https://img-blog.csdn.net/20170820200728157?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcWljaGVuZzc3Nw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="article:published_time" content="2020-04-23T08:13:50.661Z">
+<meta property="article:modified_time" content="2020-04-23T08:13:50.661Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20170820200728157?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcWljaGVuZzc3Nw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -66,10 +68,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-process" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/04/23/hello-world/" class="article-date">
-  <time datetime="2020-04-23T07:53:30.995Z" itemprop="datePublished">2020-04-23</time>
+    <a href="/2020/04/23/process/" class="article-date">
+  <time datetime="2020-04-23T08:13:50.661Z" itemprop="datePublished">2020-04-23</time>
 </a>
     
   </div>
@@ -80,7 +82,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      process
     </h1>
   
 
@@ -88,24 +90,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h1 id="进程的几种状态"><a href="#进程的几种状态" class="headerlink" title="进程的几种状态"></a>进程的几种状态</h1><hr>
+<p><img src="https://img-blog.csdn.net/20170820200728157?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcWljaGVuZzc3Nw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="三态模型" title="三态模型"></p>
+<h2 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h2><p>阻塞是一种被动的方式，由于获取资源获取不到而引起的等待。</p>
+<h2 id="睡眠"><a href="#睡眠" class="headerlink" title="睡眠"></a>睡眠</h2><p>睡眠的确是一种主动的方式</p>
+<h2 id="挂起"><a href="#挂起" class="headerlink" title="挂起"></a>挂起</h2><p>挂起也是一种主动的行为，是系统层面对进程作出的合理操作。<br>挂起的标志就是换出到外存，在外存的进程肯定是不能执行的，所以挂起的目的就很明显，在内存资源不足时，需要把一些进程换出到外存，给着急运行的进程腾地方。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/04/23/hello-world/" data-id="ck9chtbr60003ijjw3ib18n40" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/04/23/process/" data-id="ck9chtbr80005ijjwcuhl9cci" class="article-share-link">Share</a>
       
       
     </footer>
@@ -114,15 +108,20 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/04/23/blog-demo/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/04/23/auto-docker/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          blog_demo
+          auto-docker
         
       </div>
     </a>
   
+  
+    <a href="/2020/04/23/udp/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">udp</div>
+    </a>
   
 </nav>
 

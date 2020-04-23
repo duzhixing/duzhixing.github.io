@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>top | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="top 命令详解第一行详解01:06:48 当前时间 up 1:22 系统运行时间，格式为时:分 1 user 当前登录用户数 load average: 0.06, 0.60, 0.48 系统负载，即任务队列的平均长度。三个数值分别为 1分钟、5分钟、15分钟前到现在的平均值。第二，三行详解Tasks: 29 total 进程总数 1 running 正在运行的进程数 28 sleeping 睡">
+<meta property="og:type" content="article">
+<meta property="og:title" content="top">
+<meta property="og:url" content="http://yoursite.com/2020/04/23/top/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="top 命令详解第一行详解01:06:48 当前时间 up 1:22 系统运行时间，格式为时:分 1 user 当前登录用户数 load average: 0.06, 0.60, 0.48 系统负载，即任务队列的平均长度。三个数值分别为 1分钟、5分钟、15分钟前到现在的平均值。第二，三行详解Tasks: 29 total 进程总数 1 running 正在运行的进程数 28 sleeping 睡">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-23T08:13:50.661Z">
+<meta property="article:modified_time" content="2020-04-23T08:13:50.661Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-top" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/23/top/" class="article-date">
+  <time datetime="2020-04-23T08:13:50.661Z" itemprop="datePublished">2020-04-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      top
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="top-命令详解"><a href="#top-命令详解" class="headerlink" title="top 命令详解"></a>top 命令详解</h1><h2 id="第一行详解"><a href="#第一行详解" class="headerlink" title="第一行详解"></a>第一行详解</h2><pre><code>01:06:48 当前时间
+up 1:22 系统运行时间，格式为时:分
+1 user 当前登录用户数
+load average: 0.06, 0.60, 0.48 系统负载，即任务队列的平均长度。三个数值分别为 1分钟、5分钟、15分钟前到现在的平均值。</code></pre><h2 id="第二，三行详解"><a href="#第二，三行详解" class="headerlink" title="第二，三行详解"></a>第二，三行详解</h2><pre><code>Tasks: 29 total 进程总数
+1 running 正在运行的进程数
+28 sleeping 睡眠的进程数
+0 stopped 停止的进程数
+0 zombie 僵尸进程数
+Cpu(s): 0.3% us 用户空间占用CPU百分比
+1.0% sy 内核空间占用CPU百分比
+0.0% ni 用户进程空间内改变过优先级的进程占用CPU百分比
+98.7% id 空闲CPU百分比
+0.0% wa 等待输入输出的CPU时间百分比</code></pre><h2 id="进程动态显示属性"><a href="#进程动态显示属性" class="headerlink" title="进程动态显示属性"></a>进程动态显示属性</h2><pre><code>PR 优先级  
+NI nice值。负值表示高优先级，正值表示低优先级  
+TIME 进程使用的CPU时间总计，单位秒  
+TIME+ 进程使用的CPU时间总计，单位1/100秒  
+VIRT 进程使用的虚拟内存总量 VIRT=SWAP+RES  
+SWAP 进程使用的虚拟内存中，被换出的大小  
+RES 进程使用的、未被换出的物理内存大小  
+SHR 共享内存大小，单位kb  </code></pre><p>PRI也还是比较好理解的，即进程的优先级，或者通俗点说就是程序被CPU执行的先后顺序，<strong><em>此值越小进程的优先级别越高。</em></strong> 那NI呢？就是我们所要说的nice值了，其表示进程可被执行的优先级的修正数值。如前面所说，PRI值越小越快被执行，那么加入nice值后，将会使得PRI变为：</p>
+<pre><code>PRI(new)=PRI(old)+nice。</code></pre><p>这样，当nice值为负值的时候，那么该程序将会优先级值将变小，即其优先级会变高，则其越快被执行。<br>到目前为止，更需要强调一点的是，进程的nice值不是进程的优先级，他们不是一个概念，但是进程nice值会影响到进程的优先级变化。  </p>
+<p><strong><em>进程状态</em></strong></p>
+<pre><code>D=不可中断的睡眠状态
+R=运行
+S=睡眠
+T=跟踪/停止
+Z=僵尸进程</code></pre><h2 id="交换分区"><a href="#交换分区" class="headerlink" title="交换分区"></a>交换分区</h2><p>就是当内存不足的时候，把一部分 <strong><em>硬盘空间</em></strong>  虚拟成内存使用,从而解决内存容量不足的情况</p>
+<h2 id="top命令"><a href="#top命令" class="headerlink" title="top命令"></a><strong><em>top命令</em></strong></h2><p>top运行时候可以输入的命令</p>
+<pre><code>i 忽略闲置和僵死进程。这是一个开关式命令
+P 根据CPU使用百分比大小进行排序</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/04/23/top/" data-id="ck9chtbr90007ijjwh47yfyg8" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/23/udp/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          udp
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/23/unbuntu/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">unbuntu</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/04/23/attention_docker/">attention_docker</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/23/attention_dockerfile/">attention_dockerfile</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/23/auto-docker/">auto-docker</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/23/process/">process</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/23/udp/">udp</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
