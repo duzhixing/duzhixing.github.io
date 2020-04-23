@@ -64,123 +64,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-blog-demo1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/23/blog-demo1/" class="article-date">
-  <time datetime="2020-04-23T08:22:32.000Z" itemprop="datePublished">2020-04-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/23/blog-demo1/">blog_demo1</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>“What”</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/04/23/blog-demo1/" data-id="ck9ci0idh0000b2jw84tzc4a6" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-attention_docker" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/23/attention_docker/" class="article-date">
-  <time datetime="2020-04-23T08:13:50.661Z" itemprop="datePublished">2020-04-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/23/attention_docker/">attention_docker</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="ATTENTION-IN-DOCKER"><a href="#ATTENTION-IN-DOCKER" class="headerlink" title="ATTENTION IN DOCKER"></a>ATTENTION IN DOCKER</h1><h2 id="1-在docker删除image中"><a href="#1-在docker删除image中" class="headerlink" title="1.在docker删除image中"></a>1.在docker删除image中</h2><p><strong>有一部分容器使用的是相同的ID，因此不能通过删除ID来实现。</strong><br>比如 :  </p>
-<pre><code>docker  rmi 111111   // 111111代表着容器ID</code></pre><p>必须要通过删除容器名字来实现 如 ：</p>
-<pre><code>docker rmi hello   // hello代表着容器名字</code></pre><h2 id="2-在删除镜像前，需要先删除容器"><a href="#2-在删除镜像前，需要先删除容器" class="headerlink" title="2.在删除镜像前，需要先删除容器"></a>2.在删除镜像前，需要先删除容器</h2><pre><code>docker rm $(docker ps -aq)  </code></pre><p>-a 列出本地所有镜像，-q 只显示镜像ID</p>
-<h2 id="3-正确退出容器"><a href="#3-正确退出容器" class="headerlink" title="3.正确退出容器"></a>3.正确退出容器</h2><pre><code>ctrl+p                    +                        ctrl+q</code></pre><p>绝对不能使用exit或者ctrl+d来退出，这样整个系统就退出了！！</p>
-<h2 id="4-宿主机和容器之间的文件传输"><a href="#4-宿主机和容器之间的文件传输" class="headerlink" title="4.宿主机和容器之间的文件传输"></a>4.<a href="https://blog.csdn.net/xtfge0915/article/details/52169445" target="_blank" rel="noopener">宿主机和容器之间的文件传输</a></h2><p>从主机复制到容器</p>
-<pre><code>sudo docker cp host_path containerID:container_path</code></pre><p>从容器复制到主机</p>
-<pre><code>sudo docker cp containerID:container_path host_path</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/04/23/attention_docker/" data-id="ck9chtbqy0000ijjwdhs4a5dz" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-attention_dockerfile" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/23/attention_dockerfile/" class="article-date">
-  <time datetime="2020-04-23T08:13:50.661Z" itemprop="datePublished">2020-04-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/23/attention_dockerfile/">attention_dockerfile</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="WRITE-DOCKERFILE-ATTENTION"><a href="#WRITE-DOCKERFILE-ATTENTION" class="headerlink" title="WRITE DOCKERFILE ATTENTION"></a>WRITE DOCKERFILE ATTENTION</h1><p>1.在Ubuntu的Docker官方镜像中是没有缓存Apt的软件包列表的。因此在做其他任何基础软件的安装前，都需要至少先做一次</p>
-<pre><code>apt-get update。</code></pre><p>2.docker 中安装过程需要判断，用-y来默认表示同意。</p>
-<pre><code>apt install -y git -y代表着yes</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/04/23/attention_dockerfile/" data-id="ck9chtbr30001ijjw3dge8z2e" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-auto-docker" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/04/23/auto-docker/" class="article-date">
@@ -234,7 +117,87 @@ ENTRYPOINT command param1 param2（shell中执行。</code></pre><p>配置容器
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/04/23/auto-docker/" data-id="ck9chtbr50002ijjwfcxl4kfq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/04/23/auto-docker/" data-id="ck9ci9ty1000034jw9ny30kyv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-attention_docker" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/23/attention_docker/" class="article-date">
+  <time datetime="2020-04-23T08:13:50.661Z" itemprop="datePublished">2020-04-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/23/attention_docker/">attention_docker</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ATTENTION-IN-DOCKER"><a href="#ATTENTION-IN-DOCKER" class="headerlink" title="ATTENTION IN DOCKER"></a>ATTENTION IN DOCKER</h1><h2 id="1-在docker删除image中"><a href="#1-在docker删除image中" class="headerlink" title="1.在docker删除image中"></a>1.在docker删除image中</h2><p><strong>有一部分容器使用的是相同的ID，因此不能通过删除ID来实现。</strong><br>比如 :  </p>
+<pre><code>docker  rmi 111111   // 111111代表着容器ID</code></pre><p>必须要通过删除容器名字来实现 如 ：</p>
+<pre><code>docker rmi hello   // hello代表着容器名字</code></pre><h2 id="2-在删除镜像前，需要先删除容器"><a href="#2-在删除镜像前，需要先删除容器" class="headerlink" title="2.在删除镜像前，需要先删除容器"></a>2.在删除镜像前，需要先删除容器</h2><pre><code>docker rm $(docker ps -aq)  </code></pre><p>-a 列出本地所有镜像，-q 只显示镜像ID</p>
+<h2 id="3-正确退出容器"><a href="#3-正确退出容器" class="headerlink" title="3.正确退出容器"></a>3.正确退出容器</h2><pre><code>ctrl+p                    +                        ctrl+q</code></pre><p>绝对不能使用exit或者ctrl+d来退出，这样整个系统就退出了！！</p>
+<h2 id="4-宿主机和容器之间的文件传输"><a href="#4-宿主机和容器之间的文件传输" class="headerlink" title="4.宿主机和容器之间的文件传输"></a>4.<a href="https://blog.csdn.net/xtfge0915/article/details/52169445" target="_blank" rel="noopener">宿主机和容器之间的文件传输</a></h2><p>从主机复制到容器</p>
+<pre><code>sudo docker cp host_path containerID:container_path</code></pre><p>从容器复制到主机</p>
+<pre><code>sudo docker cp containerID:container_path host_path</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/04/23/attention_docker/" data-id="ck9ci9ty6000134jw3qejg4ui" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-attention_dockerfile" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/23/attention_dockerfile/" class="article-date">
+  <time datetime="2020-04-23T08:13:50.661Z" itemprop="datePublished">2020-04-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/23/attention_dockerfile/">attention_dockerfile</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="WRITE-DOCKERFILE-ATTENTION"><a href="#WRITE-DOCKERFILE-ATTENTION" class="headerlink" title="WRITE DOCKERFILE ATTENTION"></a>WRITE DOCKERFILE ATTENTION</h1><p>1.在Ubuntu的Docker官方镜像中是没有缓存Apt的软件包列表的。因此在做其他任何基础软件的安装前，都需要至少先做一次</p>
+<pre><code>apt-get update。</code></pre><p>2.docker 中安装过程需要判断，用-y来默认表示同意。</p>
+<pre><code>apt install -y git -y代表着yes</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/04/23/attention_dockerfile/" data-id="ck9ci9ty7000234jwfoyh6m3q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -275,46 +238,7 @@ ENTRYPOINT command param1 param2（shell中执行。</code></pre><p>配置容器
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/04/23/process/" data-id="ck9chtbr80005ijjwcuhl9cci" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-udp" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/04/23/udp/" class="article-date">
-  <time datetime="2020-04-23T08:13:50.661Z" itemprop="datePublished">2020-04-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/23/udp/">udp</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="UDP-for-VPN"><a href="#UDP-for-VPN" class="headerlink" title="UDP for VPN"></a>UDP for VPN</h1><h2 id="nc"><a href="#nc" class="headerlink" title="nc"></a>nc</h2><pre><code>dzx@dzx-N8xEJEK:~$ nc -vuz 192.168.209.121 123
-Connection to 192.168.209.121 123 port [udp/ntp] succeeded!</code></pre><p>实际使用时可以只用-u参数，-u代表udp协议 ，-v代表详细模式，-z代表只监测端口不发送数据</p>
-<p>##</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/04/23/udp/" data-id="ck9chtbr80006ijjw752uefrc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/04/23/process/" data-id="ck9ci9tya000534jw5mbnabw2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -379,7 +303,46 @@ P 根据CPU使用百分比大小进行排序</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/04/23/top/" data-id="ck9chtbr90007ijjwh47yfyg8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/04/23/top/" data-id="ck9ci9tya000634jw72qx1tek" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-udp" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/23/udp/" class="article-date">
+  <time datetime="2020-04-23T08:13:50.661Z" itemprop="datePublished">2020-04-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/23/udp/">udp</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="UDP-for-VPN"><a href="#UDP-for-VPN" class="headerlink" title="UDP for VPN"></a>UDP for VPN</h1><h2 id="nc"><a href="#nc" class="headerlink" title="nc"></a>nc</h2><pre><code>dzx@dzx-N8xEJEK:~$ nc -vuz 192.168.209.121 123
+Connection to 192.168.209.121 123 port [udp/ntp] succeeded!</code></pre><p>实际使用时可以只用-u参数，-u代表udp协议 ，-v代表详细模式，-z代表只监测端口不发送数据</p>
+<p>##</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/04/23/udp/" data-id="ck9ci9tyb000734jw3icx1d9u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -416,7 +379,7 @@ P 根据CPU使用百分比大小进行排序</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/04/23/unbuntu/" data-id="ck9chtbra0008ijjw1p1821fo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/04/23/unbuntu/" data-id="ck9ci9tyc000834jw2one5csw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -453,7 +416,7 @@ P 根据CPU使用百分比大小进行排序</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/04/23/blog-demo/" data-id="ck9chtbr70004ijjw9x0k5nzw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/04/23/blog-demo/" data-id="ck9ci9ty8000334jw378fgkgk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -502,7 +465,7 @@ P 根据CPU使用百分比大小进行排序</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/04/23/hello-world/" data-id="ck9chtbr60003ijjw3ib18n40" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/04/23/hello-world/" data-id="ck9ci9ty9000434jwfxor7k06" class="article-share-link">Share</a>
       
       
     </footer>
@@ -543,7 +506,7 @@ P 根据CPU使用百分比大小进行排序</code></pre>
       <ul>
         
           <li>
-            <a href="/2020/04/23/blog-demo1/">blog_demo1</a>
+            <a href="/2020/04/23/auto-docker/">auto-docker</a>
           </li>
         
           <li>
@@ -555,11 +518,11 @@ P 根据CPU使用百分比大小进行排序</code></pre>
           </li>
         
           <li>
-            <a href="/2020/04/23/auto-docker/">auto-docker</a>
+            <a href="/2020/04/23/process/">process</a>
           </li>
         
           <li>
-            <a href="/2020/04/23/process/">process</a>
+            <a href="/2020/04/23/top/">top</a>
           </li>
         
       </ul>
