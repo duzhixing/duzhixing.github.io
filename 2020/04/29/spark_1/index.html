@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>spark_1 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="SPARK 学习之路基础了解 &amp; Scala函数式编程与命令式编程命令式编程: 主要用于C++，Java，Python 这一种输入一条命令，然后程序对应执行的这种情况。并发度并不高，由于访存一致性原因，在并发时候，需要考虑加锁，所以效率不高。 函数式编程: 用于spark,hadoop等语言。其中内部变量，大部分是不可以更改的，所以就不存在什么访存一致性。并发度更高。特别是由于在CPU天花">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spark_1">
+<meta property="og:url" content="http://yoursite.com/2020/04/29/spark_1/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="SPARK 学习之路基础了解 &amp; Scala函数式编程与命令式编程命令式编程: 主要用于C++，Java，Python 这一种输入一条命令，然后程序对应执行的这种情况。并发度并不高，由于访存一致性原因，在并发时候，需要考虑加锁，所以效率不高。 函数式编程: 用于spark,hadoop等语言。其中内部变量，大部分是不可以更改的，所以就不存在什么访存一致性。并发度更高。特别是由于在CPU天花">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-29T10:23:47.667Z">
+<meta property="article:modified_time" content="2020-04-29T10:23:47.667Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-spark_1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/29/spark_1/" class="article-date">
+  <time datetime="2020-04-29T10:23:47.667Z" itemprop="datePublished">2020-04-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      spark_1
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="SPARK-学习之路"><a href="#SPARK-学习之路" class="headerlink" title="SPARK 学习之路"></a>SPARK 学习之路</h1><h2 id="基础了解-amp-Scala"><a href="#基础了解-amp-Scala" class="headerlink" title="基础了解 &amp; Scala"></a>基础了解 &amp; Scala</h2><h3 id="函数式编程与命令式编程"><a href="#函数式编程与命令式编程" class="headerlink" title="函数式编程与命令式编程"></a>函数式编程与命令式编程</h3><p><strong>命令式编程</strong>: 主要用于C++，Java，Python 这一种输入一条命令，然后程序对应执行的这种情况。并发度并不高，由于访存一致性原因，在并发时候，需要考虑加锁，所以效率不高。</p>
+<p><strong>函数式编程</strong>: 用于spark,hadoop等语言。其中内部变量，大部分是不可以更改的，所以就不存在什么访存一致性。并发度更高。特别是由于在CPU天花板之后，CPU转向多核发展，所以这种编程就开始使用广泛了。</p>
+<h3 id="Scala-运行"><a href="#Scala-运行" class="headerlink" title="Scala 运行"></a>Scala 运行</h3><p>在Scala 交互程序内部</p>
+<pre><code>load ./hello.scala</code></pre><p>在shell窗口时候<br><strong>1.编译</strong></p>
+<pre><code>scalac Hello.scala</code></pre><p><strong>2.运行</strong><br>运行生成的.class文件</p>
+<pre><code>scala Hello.class</code></pre><p>因为scalac 编译出来的也是.class文件，所以 也可以用java来运行,但是需要在路径中加入scala包</p>
+<pre><code>java -classpath .:/usr/local/scala/lib/scala.library.jar Hello.class</code></pre><h3 id="Scala-语法"><a href="#Scala-语法" class="headerlink" title="Scala 语法"></a>Scala 语法</h3><table>
+<thead>
+<tr>
+<th>基本类型</th>
+<th>是否可变</th>
+<th>赋初值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>val</td>
+<td>不可变</td>
+<td>val a:Int = 5 (val a = 5)</td>
+</tr>
+<tr>
+<td>var</td>
+<td>可变</td>
+<td>var a:Int = 5 (var a = 5)</td>
+</tr>
+<tr>
+<td>scala 他也会自动的判断数据类型</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>scala 的运算实际上是方法的运算</strong>:</p>
+<pre><code>3 + 5   等效与 (3).+ 5
+即 A 方法 B  = A.方法（B）</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/04/29/spark_1/" data-id="ck9l7144d000078jwdkvfb14h" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/04/23/auto-docker/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">auto-docker</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/04/29/spark_1/">spark_1</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/23/auto-docker/">auto-docker</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/23/attention_docker/">attention_docker</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/23/attention_dockerfile/">attention_dockerfile</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/23/process/">process</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
