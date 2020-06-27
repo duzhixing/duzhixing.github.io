@@ -20,19 +20,22 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="第四章">
+  <meta name="description" content="编程框架机理 &#x3D;&#x3D;编程框架的内部运转 具备开发框架的能力&#x3D;&#x3D; tensorflow 设计原则TensorFlow 的目的：  高性能  算子：每个算子对底层部件已经优化，可以更好的利用硬件性能。 计算图：优化了计算图，提高了计算图的计算效率（TODO 计算图如何优化） 并行： 根据计算图，并行没有数据依赖的节点   易开发  提炼了深度学习的很多共性算子，方便用户调用。  可移植  可以适用于不同">
 <meta property="og:type" content="website">
 <meta property="og:title" content="斗志">
-<meta property="og:url" content="http://yoursite.com/Aics/chap4.html">
+<meta property="og:url" content="http://yoursite.com/categories/Aics/chap5.html">
 <meta property="og:site_name" content="斗志">
-<meta property="og:description" content="第四章">
+<meta property="og:description" content="编程框架机理 &#x3D;&#x3D;编程框架的内部运转 具备开发框架的能力&#x3D;&#x3D; tensorflow 设计原则TensorFlow 的目的：  高性能  算子：每个算子对底层部件已经优化，可以更好的利用硬件性能。 计算图：优化了计算图，提高了计算图的计算效率（TODO 计算图如何优化） 并行： 根据计算图，并行没有数据依赖的节点   易开发  提炼了深度学习的很多共性算子，方便用户调用。  可移植  可以适用于不同">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-06-27T14:40:46.045Z">
-<meta property="article:modified_time" content="2020-06-27T14:40:46.045Z">
+<meta property="og:image" content="http://home.ustc.edu.cn/~dzx1/Picture/Aics/Automatic_derivation.png">
+<meta property="og:image" content="http://home.ustc.edu.cn/~dzx1/Picture/Aics/derivation.png">
+<meta property="article:published_time" content="2020-06-27T14:40:46.065Z">
+<meta property="article:modified_time" content="2020-06-27T14:40:46.065Z">
 <meta property="article:author" content="douzhi">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://home.ustc.edu.cn/~dzx1/Picture/Aics/Automatic_derivation.png">
 
-<link rel="canonical" href="http://yoursite.com/Aics/chap4">
+<link rel="canonical" href="http://yoursite.com/categories/Aics/chap5">
 
 
 <script id="page-configurations">
@@ -176,6 +179,13 @@
 
 <div class="post-meta">
   
+  <ul class="breadcrumb">
+          
+            <li><a href="/categories/">CATEGORIES</a></li>
+            <li><a href="/categories/Aics/">AICS</a></li>
+            <li>CHAP5</li>
+          
+  </ul>
 
 </div>
 
@@ -185,13 +195,63 @@
       
       
       <div class="post-body">
-          <h1 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h1>
+          <h1 id="编程框架机理"><a href="#编程框架机理" class="headerlink" title="编程框架机理"></a>编程框架机理</h1><hr>
+<p>==<strong>编程框架的内部运转 具备开发框架的能力</strong>==</p>
+<h2 id="tensorflow-设计原则"><a href="#tensorflow-设计原则" class="headerlink" title="tensorflow 设计原则"></a>tensorflow 设计原则</h2><p>TensorFlow 的目的：</p>
+<ol>
+<li><p><strong>高性能</strong></p>
+<ul>
+<li>算子：每个算子对底层部件已经优化，可以更好的利用硬件性能。</li>
+<li>计算图：优化了计算图，提高了计算图的计算效率（TODO 计算图如何优化）</li>
+<li>并行： 根据计算图，并行没有数据依赖的节点</li>
+</ul>
+</li>
+<li><p><strong>易开发</strong></p>
+<p> 提炼了深度学习的很多共性算子，方便用户调用。</p>
+</li>
+<li><p><strong>可移植</strong></p>
+<p> 可以适用于不同的异构系统，方便代码移植。<br> 表明对于同一个算子，开发了适合同步底层的代码。</p>
+</li>
+</ol>
+<h2 id="TensorFlow-计算图"><a href="#TensorFlow-计算图" class="headerlink" title="TensorFlow 计算图"></a>TensorFlow 计算图</h2><h3 id="计算图求导方法"><a href="#计算图求导方法" class="headerlink" title="计算图求导方法"></a>计算图求导方法</h3><h4 id="手动求解法"><a href="#手动求解法" class="headerlink" title="手动求解法"></a>手动求解法</h4><ul>
+<li>手动编写链式法则求导转化成计算机程序特别困难</li>
+<li>如果更改网络模型，需要改好多梯度求解算法</li>
+</ul>
+<h4 id="数值求导法"><a href="#数值求导法" class="headerlink" title="数值求导法"></a>数值求导法</h4><p>给一个很小的初始值，算出来偏差</p>
+<ul>
+<li>计算量大，求解速度慢</li>
+<li>可能引入舍入误差和截断误差</li>
+</ul>
+<h4 id="符号求导法"><a href="#符号求导法" class="headerlink" title="符号求导法"></a>符号求导法</h4><p>会引起表达式膨胀</p>
+<h4 id="自动求导法"><a href="#自动求导法" class="headerlink" title="自动求导法"></a>自动求导法</h4><p>==自动求导方法是界于数值求导方法和符号求导方法之间==</p>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Aics/Automatic_derivation.png" alt="自动求导方法"></p>
+<p>求导方法对比：</p>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Aics/derivation.png" alt="自动求导方法"></p>
+<h4 id="计算图分配"><a href="#计算图分配" class="headerlink" title="计算图分配"></a>计算图分配</h4><ol>
+<li><p>从起始点开始遍历计算图的每一个节点</p>
+</li>
+<li><p>然后考虑每个节点的可行设备集合</p>
+</li>
+<li><p>采用<strong>贪心算法</strong>，选择最快完成时间的设备分配给该节点。</p>
+</li>
+</ol>
+<blockquote>
+<p>常量折叠：有的常数节点可以被提亲计算，用新生成的节点代替原来的节点。<br>算数优化：对表达式优化<br>布局优化<br>Tensorflow 默认NHWC；GPU默认NCHW。<br>两个连续的GPU计算节点之间的 NCHW2NHWC 与NHWC2NCHE 可以相互抵消。<br>重映射：将出现频率较高的子图用一个单独的算子来替代。<br>消除子图的调度开销<br>不需要在计算过程中将数据调入内存，再调出内存。访存开销减少</p>
+</blockquote>
+
       </div>
       
       
       
     </div>
     
+  <ul class="breadcrumb">
+          
+            <li><a href="/categories/">CATEGORIES</a></li>
+            <li><a href="/categories/Aics/">AICS</a></li>
+            <li>CHAP5</li>
+          
+  </ul>
 
     
     
@@ -246,7 +306,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第四章"><span class="nav-number">1.</span> <span class="nav-text">第四章</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#编程框架机理"><span class="nav-number">1.</span> <span class="nav-text">编程框架机理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tensorflow-设计原则"><span class="nav-number">1.1.</span> <span class="nav-text">tensorflow 设计原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TensorFlow-计算图"><span class="nav-number">1.2.</span> <span class="nav-text">TensorFlow 计算图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#计算图求导方法"><span class="nav-number">1.2.1.</span> <span class="nav-text">计算图求导方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#手动求解法"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">手动求解法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数值求导法"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">数值求导法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#符号求导法"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">符号求导法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自动求导法"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">自动求导法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算图分配"><span class="nav-number">1.2.1.5.</span> <span class="nav-text">计算图分配</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

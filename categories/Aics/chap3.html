@@ -20,22 +20,23 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="编程框架机理 &#x3D;&#x3D;编程框架的内部运转 具备开发框架的能力&#x3D;&#x3D; tensorflow 设计原则TensorFlow 的目的：  高性能  算子：每个算子对底层部件已经优化，可以更好的利用硬件性能。 计算图：优化了计算图，提高了计算图的计算效率（TODO 计算图如何优化） 并行： 根据计算图，并行没有数据依赖的节点   易开发  提炼了深度学习的很多共性算子，方便用户调用。  可移植  可以适用于不同">
+  <meta name="description" content="Chap3 知识汇总chap3.3Alexnet ReLU 激活函数：训练中收敛速度更快。（比sigmod函数）  LRN局部响应归一化：提升较大响应，抑制较小响应 （现在被证明无明显效果）  MaxPool: 避免特征值被平均池化，提升代码鲁棒性  Dropout: 随机舍弃部分隐层节点，避免过拟合   VGGVGG 实现更深的网络VGG16 一共16层，不方便训练。他的实现方法是 先训练一部分">
 <meta property="og:type" content="website">
 <meta property="og:title" content="斗志">
-<meta property="og:url" content="http://yoursite.com/Aics/chap5.html">
+<meta property="og:url" content="http://yoursite.com/categories/Aics/chap3.html">
 <meta property="og:site_name" content="斗志">
-<meta property="og:description" content="编程框架机理 &#x3D;&#x3D;编程框架的内部运转 具备开发框架的能力&#x3D;&#x3D; tensorflow 设计原则TensorFlow 的目的：  高性能  算子：每个算子对底层部件已经优化，可以更好的利用硬件性能。 计算图：优化了计算图，提高了计算图的计算效率（TODO 计算图如何优化） 并行： 根据计算图，并行没有数据依赖的节点   易开发  提炼了深度学习的很多共性算子，方便用户调用。  可移植  可以适用于不同">
+<meta property="og:description" content="Chap3 知识汇总chap3.3Alexnet ReLU 激活函数：训练中收敛速度更快。（比sigmod函数）  LRN局部响应归一化：提升较大响应，抑制较小响应 （现在被证明无明显效果）  MaxPool: 避免特征值被平均池化，提升代码鲁棒性  Dropout: 随机舍弃部分隐层节点，避免过拟合   VGGVGG 实现更深的网络VGG16 一共16层，不方便训练。他的实现方法是 先训练一部分">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://home.ustc.edu.cn/~dzx1/Picture/Aics/Automatic_derivation.png">
-<meta property="og:image" content="http://home.ustc.edu.cn/~dzx1/Picture/Aics/derivation.png">
-<meta property="article:published_time" content="2020-06-27T14:40:46.065Z">
-<meta property="article:modified_time" content="2020-06-27T14:40:46.065Z">
+<meta property="og:image" content="http://home.ustc.edu.cn/~dzx/Picture/Aics/small_core_1.png">
+<meta property="og:image" content="c:/Users%5Cdzx1%5CDesktop%5C%E7%A0%94%E4%B8%80%E4%B8%8B%5C%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%AF%BC%E8%AE%BA%5Cpicture%5Csmall_core_2.png">
+<meta property="og:image" content="c:/Users%5Cdzx1%5CDesktop%5C%E7%A0%94%E4%B8%80%E4%B8%8B%5C%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%AF%BC%E8%AE%BA%5Cpicture%5Csoftmax_%E8%BE%85%E5%8A%A9%E7%BD%91%E7%BB%9C.png">
+<meta property="article:published_time" content="2020-06-27T14:40:46.045Z">
+<meta property="article:modified_time" content="2020-06-27T14:40:46.045Z">
 <meta property="article:author" content="douzhi">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://home.ustc.edu.cn/~dzx1/Picture/Aics/Automatic_derivation.png">
+<meta name="twitter:image" content="http://home.ustc.edu.cn/~dzx/Picture/Aics/small_core_1.png">
 
-<link rel="canonical" href="http://yoursite.com/Aics/chap5">
+<link rel="canonical" href="http://yoursite.com/categories/Aics/chap3">
 
 
 <script id="page-configurations">
@@ -179,6 +180,13 @@
 
 <div class="post-meta">
   
+  <ul class="breadcrumb">
+          
+            <li><a href="/categories/">CATEGORIES</a></li>
+            <li><a href="/categories/Aics/">AICS</a></li>
+            <li>CHAP3</li>
+          
+  </ul>
 
 </div>
 
@@ -188,49 +196,44 @@
       
       
       <div class="post-body">
-          <h1 id="编程框架机理"><a href="#编程框架机理" class="headerlink" title="编程框架机理"></a>编程框架机理</h1><hr>
-<p>==<strong>编程框架的内部运转 具备开发框架的能力</strong>==</p>
-<h2 id="tensorflow-设计原则"><a href="#tensorflow-设计原则" class="headerlink" title="tensorflow 设计原则"></a>tensorflow 设计原则</h2><p>TensorFlow 的目的：</p>
-<ol>
-<li><p><strong>高性能</strong></p>
+          <h1 id="Chap3-知识汇总"><a href="#Chap3-知识汇总" class="headerlink" title="Chap3 知识汇总"></a>Chap3 知识汇总</h1><h2 id="chap3-3"><a href="#chap3-3" class="headerlink" title="chap3.3"></a>chap3.3</h2><h3 id="Alexnet"><a href="#Alexnet" class="headerlink" title="Alexnet"></a>Alexnet</h3><ul>
+<li><p>ReLU 激活函数：训练中收敛速度更快。（比sigmod函数）</p>
+</li>
+<li><p>LRN局部响应归一化：提升较大响应，抑制较小响应 （现在被证明无明显效果）</p>
+</li>
+<li><p>MaxPool: 避免特征值被平均池化，提升代码鲁棒性</p>
+</li>
+<li><p>Dropout: 随机舍弃部分隐层节点，避免过拟合</p>
+</li>
+</ul>
+<h3 id="VGG"><a href="#VGG" class="headerlink" title="VGG"></a>VGG</h3><p>VGG 实现更深的网络<br>VGG16 一共16层，不方便训练。<br>他的实现方法是 先训练<code>一部分层</code>，比如11层，得到的数据中部分作为初始值，然后在初始条件下进行重新训练<code>更深</code>的神经网络。(但不适合更深的神经网络)</p>
+<p>==VGG 使用更小的卷积的原因==:</p>
 <ul>
-<li>算子：每个算子对底层部件已经优化，可以更好的利用硬件性能。</li>
-<li>计算图：优化了计算图，提高了计算图的计算效率（TODO 计算图如何优化）</li>
-<li>并行： 根据计算图，并行没有数据依赖的节点</li>
+<li>5x5的卷积核，可以用两个3x3的卷积核替代</li>
 </ul>
-</li>
-<li><p><strong>易开发</strong></p>
-<p> 提炼了深度学习的很多共性算子，方便用户调用。</p>
-</li>
-<li><p><strong>可移植</strong></p>
-<p> 可以适用于不同的异构系统，方便代码移植。<br> 表明对于同一个算子，开发了适合同步底层的代码。</p>
-</li>
-</ol>
-<h2 id="TensorFlow-计算图"><a href="#TensorFlow-计算图" class="headerlink" title="TensorFlow 计算图"></a>TensorFlow 计算图</h2><h3 id="计算图求导方法"><a href="#计算图求导方法" class="headerlink" title="计算图求导方法"></a>计算图求导方法</h3><h4 id="手动求解法"><a href="#手动求解法" class="headerlink" title="手动求解法"></a>手动求解法</h4><ul>
-<li>手动编写链式法则求导转化成计算机程序特别困难</li>
-<li>如果更改网络模型，需要改好多梯度求解算法</li>
-</ul>
-<h4 id="数值求导法"><a href="#数值求导法" class="headerlink" title="数值求导法"></a>数值求导法</h4><p>给一个很小的初始值，算出来偏差</p>
+<p><img src="http://home.ustc.edu.cn/~dzx/Picture/Aics/small_core_1.png" alt="小的卷积可以替代大的卷积"></p>
 <ul>
-<li>计算量大，求解速度慢</li>
-<li>可能引入舍入误差和截断误差</li>
+<li>干同样的事情所需要更少的参数，计算量存储变小了，还可以防止过拟合</li>
 </ul>
-<h4 id="符号求导法"><a href="#符号求导法" class="headerlink" title="符号求导法"></a>符号求导法</h4><p>会引起表达式膨胀</p>
-<h4 id="自动求导法"><a href="#自动求导法" class="headerlink" title="自动求导法"></a>自动求导法</h4><p>==自动求导方法是界于数值求导方法和符号求导方法之间==</p>
-<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Aics/Automatic_derivation.png" alt="自动求导方法"></p>
-<p>求导方法对比：</p>
-<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Aics/derivation.png" alt="自动求导方法"></p>
-<h4 id="计算图分配"><a href="#计算图分配" class="headerlink" title="计算图分配"></a>计算图分配</h4><ol>
-<li><p>从起始点开始遍历计算图的每一个节点</p>
-</li>
-<li><p>然后考虑每个节点的可行设备集合</p>
-</li>
-<li><p>采用<strong>贪心算法</strong>，选择最快完成时间的设备分配给该节点。</p>
-</li>
-</ol>
-<blockquote>
-<p>常量折叠：有的常数节点可以被提亲计算，用新生成的节点代替原来的节点。<br>算数优化：对表达式优化<br>布局优化<br>Tensorflow 默认NHWC；GPU默认NCHW。<br>两个连续的GPU计算节点之间的 NCHW2NHWC 与NHWC2NCHE 可以相互抵消。<br>重映射：将出现频率较高的子图用一个单独的算子来替代。<br>消除子图的调度开销<br>不需要在计算过程中将数据调入内存，再调出内存。访存开销减少</p>
-</blockquote>
+<p><img src="C:/Users%5Cdzx1%5CDesktop%5C%E7%A0%94%E4%B8%80%E4%B8%8B%5C%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%AF%BC%E8%AE%BA%5Cpicture%5Csmall_core_2.png" alt="更少的参数"></p>
+<h2 id="chap3-4"><a href="#chap3-4" class="headerlink" title="chap3.4"></a>chap3.4</h2><h3 id="Inception"><a href="#Inception" class="headerlink" title="Inception"></a>Inception</h3><p>==1x1的卷积核可以更改通道c的大小==</p>
+<p>辅助神经网络防止过拟合。</p>
+<p><img src="C:/Users%5Cdzx1%5CDesktop%5C%E7%A0%94%E4%B8%80%E4%B8%8B%5C%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%AF%BC%E8%AE%BA%5Cpicture%5Csoftmax_%E8%BE%85%E5%8A%A9%E7%BD%91%E7%BB%9C.png" alt="辅助神经网络"><br>越接近输入的地方，更新权重越小，越不好更新。</p>
+<h3 id="BN-Inception"><a href="#BN-Inception" class="headerlink" title="BN-Inception"></a>BN-Inception</h3><p><strong>BathNorm 函数</strong>：</p>
+<ul>
+<li>normalize</li>
+</ul>
+<p>将激活层输入部分分布在==激活函数的敏感部分==。</p>
+<ul>
+<li>scale and shift(bias)</li>
+</ul>
+<p>归一化后的输入是的网络的表达能力下降。通过增加训练参数提高网络的表达能力</p>
+<p>BathNorm 函数 还可以将训练的学习率提高到5倍，乃至30倍。训练速度可以得到明显加快。</p>
+<h3 id="Inception-v3"><a href="#Inception-v3" class="headerlink" title="Inception-v3"></a>Inception-v3</h3><p><strong>Factorization(因式分解的思想)</strong>（inception-v3）：</p>
+<p>将3x3的卷积拆分成1x3和3x1的卷积，减少了参数数量，同时通过<strong>非对称</strong>的卷积结构拆分增加了特征多样性。</p>
+<h2 id="chap3-5"><a href="#chap3-5" class="headerlink" title="chap3.5"></a>chap3.5</h2><h3 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h3><p>之前遇到的<strong>问题</strong>：更深的卷积神经网络的误差比较大。</p>
+<p><strong>梯度消失？</strong> No！使用BathNorm课有效地缓解梯度消失<br><strong>过拟合？</strong> No！更深的神经网络在训练集的误差同样更高。</p>
+<p>==神经网络退化==：收敛到极值点而非最值点。（陷入局部最优）</p>
 
       </div>
       
@@ -238,6 +241,13 @@
       
     </div>
     
+  <ul class="breadcrumb">
+          
+            <li><a href="/categories/">CATEGORIES</a></li>
+            <li><a href="/categories/Aics/">AICS</a></li>
+            <li>CHAP3</li>
+          
+  </ul>
 
     
     
@@ -292,7 +302,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#编程框架机理"><span class="nav-number">1.</span> <span class="nav-text">编程框架机理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tensorflow-设计原则"><span class="nav-number">1.1.</span> <span class="nav-text">tensorflow 设计原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TensorFlow-计算图"><span class="nav-number">1.2.</span> <span class="nav-text">TensorFlow 计算图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#计算图求导方法"><span class="nav-number">1.2.1.</span> <span class="nav-text">计算图求导方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#手动求解法"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">手动求解法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数值求导法"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">数值求导法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#符号求导法"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">符号求导法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自动求导法"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">自动求导法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算图分配"><span class="nav-number">1.2.1.5.</span> <span class="nav-text">计算图分配</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Chap3-知识汇总"><span class="nav-number">1.</span> <span class="nav-text">Chap3 知识汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#chap3-3"><span class="nav-number">1.1.</span> <span class="nav-text">chap3.3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Alexnet"><span class="nav-number">1.1.1.</span> <span class="nav-text">Alexnet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VGG"><span class="nav-number">1.1.2.</span> <span class="nav-text">VGG</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chap3-4"><span class="nav-number">1.2.</span> <span class="nav-text">chap3.4</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Inception"><span class="nav-number">1.2.1.</span> <span class="nav-text">Inception</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BN-Inception"><span class="nav-number">1.2.2.</span> <span class="nav-text">BN-Inception</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Inception-v3"><span class="nav-number">1.2.3.</span> <span class="nav-text">Inception-v3</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chap3-5"><span class="nav-number">1.3.</span> <span class="nav-text">chap3.5</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ResNet"><span class="nav-number">1.3.1.</span> <span class="nav-text">ResNet</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
