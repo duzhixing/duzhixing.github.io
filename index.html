@@ -123,17 +123,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">0</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">1</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">0</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">10</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">16</span></a>
 
   </li>
   </ul>
@@ -163,7 +163,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/A/attention_dockerfile/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/28/docker/attention_dockerfile/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="http://home.ustc.edu.cn/~dzx1/Picture/Aics/derivation.png">
@@ -177,7 +177,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/06/27/A/attention_dockerfile/" class="post-title-link" itemprop="url">A/attention_dockerfile</a>
+            <a href="/2020/06/28/docker/attention_dockerfile/" class="post-title-link" itemprop="url">WRITE DOCKERFILE ATTENTION</a>
         </h2>
 
         <div class="post-meta">
@@ -186,16 +186,19 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-06-27 22:33:50" itemprop="dateCreated datePublished" datetime="2020-06-27T22:33:50+08:00">2020-06-27</time>
+              <time title="创建时间：2020-06-28 12:12:57 / 修改时间：00:08:10" itemprop="dateCreated datePublished" datetime="2020-06-28T12:12:57+08:00">2020-06-28</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-23 16:13:50" itemprop="dateModified" datetime="2020-04-23T16:13:50+08:00">2020-04-23</time>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
               </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a>
+                </span>
+            </span>
 
           
 
@@ -229,7 +232,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/A/attention_docker/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/28/docker/auto-docker/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="http://home.ustc.edu.cn/~dzx1/Picture/Aics/derivation.png">
@@ -243,7 +246,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/06/27/A/attention_docker/" class="post-title-link" itemprop="url">A/attention_docker</a>
+            <a href="/2020/06/28/docker/auto-docker/" class="post-title-link" itemprop="url">Auto-Docker-Build</a>
         </h2>
 
         <div class="post-meta">
@@ -252,86 +255,19 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-06-27 22:33:50" itemprop="dateCreated datePublished" datetime="2020-06-27T22:33:50+08:00">2020-06-27</time>
+              <time title="创建时间：2020-06-28 12:12:57 / 修改时间：00:08:14" itemprop="dateCreated datePublished" datetime="2020-06-28T12:12:57+08:00">2020-06-28</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-23 16:13:50" itemprop="dateModified" datetime="2020-04-23T16:13:50+08:00">2020-04-23</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="ATTENTION-IN-DOCKER"><a href="#ATTENTION-IN-DOCKER" class="headerlink" title="ATTENTION IN DOCKER"></a>ATTENTION IN DOCKER</h1><h2 id="1-在docker删除image中"><a href="#1-在docker删除image中" class="headerlink" title="1.在docker删除image中"></a>1.在docker删除image中</h2><p><strong>有一部分容器使用的是相同的ID，因此不能通过删除ID来实现。</strong><br>比如 :  </p>
-<pre><code>docker  rmi 111111   // 111111代表着容器ID</code></pre><p>必须要通过删除容器名字来实现 如 ：</p>
-<pre><code>docker rmi hello   // hello代表着容器名字</code></pre><h2 id="2-在删除镜像前，需要先删除容器"><a href="#2-在删除镜像前，需要先删除容器" class="headerlink" title="2.在删除镜像前，需要先删除容器"></a>2.在删除镜像前，需要先删除容器</h2><pre><code>docker rm $(docker ps -aq)  </code></pre><p>-a 列出本地所有镜像，-q 只显示镜像ID</p>
-<h2 id="3-正确退出容器"><a href="#3-正确退出容器" class="headerlink" title="3.正确退出容器"></a>3.正确退出容器</h2><pre><code>ctrl+p                    +                        ctrl+q</code></pre><p>绝对不能使用exit或者ctrl+d来退出，这样整个系统就退出了！！</p>
-<h2 id="4-宿主机和容器之间的文件传输"><a href="#4-宿主机和容器之间的文件传输" class="headerlink" title="4.宿主机和容器之间的文件传输"></a>4.<a href="https://blog.csdn.net/xtfge0915/article/details/52169445" target="_blank" rel="noopener">宿主机和容器之间的文件传输</a></h2><p>从主机复制到容器</p>
-<pre><code>sudo docker cp host_path containerID:container_path</code></pre><p>从容器复制到主机</p>
-<pre><code>sudo docker cp containerID:container_path host_path</code></pre>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/A/auto-docker/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="http://home.ustc.edu.cn/~dzx1/Picture/Aics/derivation.png">
-      <meta itemprop="name" content="douzhi">
-      <meta itemprop="description" content="nice to meet you">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="斗志">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/27/A/auto-docker/" class="post-title-link" itemprop="url">A/auto-docker</a>
-        </h2>
-
-        <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
+                <i class="far fa-folder"></i>
               </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-27 22:33:50" itemprop="dateCreated datePublished" datetime="2020-06-27T22:33:50+08:00">2020-06-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a>
                 </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-23 16:13:50" itemprop="dateModified" datetime="2020-04-23T16:13:50+08:00">2020-04-23</time>
-              </span>
+            </span>
 
           
 
@@ -390,7 +326,7 @@ ENTRYPOINT command param1 param2（shell中执行。</code></pre><p>配置容器
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/A/process/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/28/docker/attention_docker/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="http://home.ustc.edu.cn/~dzx1/Picture/Aics/derivation.png">
@@ -404,7 +340,80 @@ ENTRYPOINT command param1 param2（shell中执行。</code></pre><p>配置容器
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/06/27/A/process/" class="post-title-link" itemprop="url">A/process</a>
+            <a href="/2020/06/28/docker/attention_docker/" class="post-title-link" itemprop="url">ATTENTION IN DOCKER</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-28 12:12:57 / 修改时间：00:08:13" itemprop="dateCreated datePublished" datetime="2020-06-28T12:12:57+08:00">2020-06-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="ATTENTION-IN-DOCKER"><a href="#ATTENTION-IN-DOCKER" class="headerlink" title="ATTENTION IN DOCKER"></a>ATTENTION IN DOCKER</h1><h2 id="1-在docker删除image中"><a href="#1-在docker删除image中" class="headerlink" title="1.在docker删除image中"></a>1.在docker删除image中</h2><p><strong>有一部分容器使用的是相同的ID，因此不能通过删除ID来实现。</strong><br>比如 :  </p>
+<pre><code>docker  rmi 111111   // 111111代表着容器ID</code></pre><p>必须要通过删除容器名字来实现 如 ：</p>
+<pre><code>docker rmi hello   // hello代表着容器名字</code></pre><h2 id="2-在删除镜像前，需要先删除容器"><a href="#2-在删除镜像前，需要先删除容器" class="headerlink" title="2.在删除镜像前，需要先删除容器"></a>2.在删除镜像前，需要先删除容器</h2><pre><code>docker rm $(docker ps -aq)  </code></pre><p>-a 列出本地所有镜像，-q 只显示镜像ID</p>
+<h2 id="3-正确退出容器"><a href="#3-正确退出容器" class="headerlink" title="3.正确退出容器"></a>3.正确退出容器</h2><pre><code>ctrl+p                    +                        ctrl+q</code></pre><p>绝对不能使用exit或者ctrl+d来退出，这样整个系统就退出了！！</p>
+<h2 id="4-宿主机和容器之间的文件传输"><a href="#4-宿主机和容器之间的文件传输" class="headerlink" title="4.宿主机和容器之间的文件传输"></a>4.<a href="https://blog.csdn.net/xtfge0915/article/details/52169445" target="_blank" rel="noopener">宿主机和容器之间的文件传输</a></h2><p>从主机复制到容器</p>
+<pre><code>sudo docker cp host_path containerID:container_path</code></pre><p>从容器复制到主机</p>
+<pre><code>sudo docker cp containerID:container_path host_path</code></pre>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/28/process/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://home.ustc.edu.cn/~dzx1/Picture/Aics/derivation.png">
+      <meta itemprop="name" content="douzhi">
+      <meta itemprop="description" content="nice to meet you">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="斗志">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/28/process/" class="post-title-link" itemprop="url">process</a>
         </h2>
 
         <div class="post-meta">
@@ -414,15 +423,8 @@ ENTRYPOINT command param1 param2（shell中执行。</code></pre><p>配置容器
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-06-27 22:33:50" itemprop="dateCreated datePublished" datetime="2020-06-27T22:33:50+08:00">2020-06-27</time>
+              <time title="创建时间：2020-06-28 00:06:11" itemprop="dateCreated datePublished" datetime="2020-06-28T00:06:11+08:00">2020-06-28</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-23 16:13:50" itemprop="dateModified" datetime="2020-04-23T16:13:50+08:00">2020-04-23</time>
-              </span>
 
           
 
@@ -459,7 +461,7 @@ ENTRYPOINT command param1 param2（shell中执行。</code></pre><p>配置容器
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/A/udp/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/28/udp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="http://home.ustc.edu.cn/~dzx1/Picture/Aics/derivation.png">
@@ -473,7 +475,7 @@ ENTRYPOINT command param1 param2（shell中执行。</code></pre><p>配置容器
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/06/27/A/udp/" class="post-title-link" itemprop="url">A/udp</a>
+            <a href="/2020/06/28/udp/" class="post-title-link" itemprop="url">udp</a>
         </h2>
 
         <div class="post-meta">
@@ -483,15 +485,8 @@ ENTRYPOINT command param1 param2（shell中执行。</code></pre><p>配置容器
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-06-27 22:33:50" itemprop="dateCreated datePublished" datetime="2020-06-27T22:33:50+08:00">2020-06-27</time>
+              <time title="创建时间：2020-06-28 00:06:07" itemprop="dateCreated datePublished" datetime="2020-06-28T00:06:07+08:00">2020-06-28</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-23 16:13:50" itemprop="dateModified" datetime="2020-04-23T16:13:50+08:00">2020-04-23</time>
-              </span>
 
           
 
@@ -526,7 +521,7 @@ Connection to 192.168.209.121 123 port [udp/ntp] succeeded!</code></pre><p>实�
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/06/spark_1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/Aics/chap2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="http://home.ustc.edu.cn/~dzx1/Picture/Aics/derivation.png">
@@ -540,7 +535,7 @@ Connection to 192.168.209.121 123 port [udp/ntp] succeeded!</code></pre><p>实�
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/05/06/spark_1/" class="post-title-link" itemprop="url">spark_1</a>
+            <a href="/2020/06/27/Aics/chap2/" class="post-title-link" itemprop="url">Aics_chap2</a>
         </h2>
 
         <div class="post-meta">
@@ -550,7 +545,23 @@ Connection to 192.168.209.121 123 port [udp/ntp] succeeded!</code></pre><p>实�
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-05-06 15:54:47" itemprop="dateCreated datePublished" datetime="2020-05-06T15:54:47+08:00">2020-05-06</time>
+              <time title="创建时间：2020-06-27 12:12:57" itemprop="dateCreated datePublished" datetime="2020-06-27T12:12:57+08:00">2020-06-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-28 00:06:29" itemprop="dateModified" datetime="2020-06-28T00:06:29+08:00">2020-06-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Aics/" itemprop="url" rel="index"><span itemprop="name">Aics</span></a>
+                </span>
             </span>
 
           
@@ -564,53 +575,13 @@ Connection to 192.168.209.121 123 port [udp/ntp] succeeded!</code></pre><p>实�
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="SPARK-学习之路"><a href="#SPARK-学习之路" class="headerlink" title="SPARK 学习之路"></a>SPARK 学习之路</h1><h2 id="基础了解-amp-Scala"><a href="#基础了解-amp-Scala" class="headerlink" title="基础了解 &amp; Scala"></a>基础了解 &amp; Scala</h2><h3 id="函数式编程与命令式编程"><a href="#函数式编程与命令式编程" class="headerlink" title="函数式编程与命令式编程"></a>函数式编程与命令式编程</h3><p><strong>命令式编程</strong>: 主要用于C++，Java，Python 这一种输入一条命令，然后程序对应执行的这种情况。并发度并不高，由于访存一致性原因，在并发时候，需要考虑加锁，所以效率不高。</p>
-<p><strong>函数式编程</strong>: 用于spark,hadoop等语言。其中内部变量，大部分是不可以更改的，所以就不存在什么访存一致性。并发度更高。特别是由于在CPU天花板之后，CPU转向多核发展，所以这种编程就开始使用广泛了。</p>
-<h3 id="Scala-运行"><a href="#Scala-运行" class="headerlink" title="Scala 运行"></a>Scala 运行</h3><p>在Scala 交互程序内部</p>
-<pre><code>load ./hello.scala</code></pre><p>在shell窗口时候<br><strong>1.编译</strong></p>
-<pre><code>scalac Hello.scala</code></pre><p><strong>2.运行</strong><br>运行生成的.class文件</p>
-<pre><code>scala Hello.class</code></pre><p>因为scalac 编译出来的也是.class文件，所以 也可以用java来运行,但是需要在路径中加入scala包</p>
-<pre><code>java -classpath .:/usr/local/scala/lib/scala.library.jar Hello.class</code></pre><h3 id="Scala-语法"><a href="#Scala-语法" class="headerlink" title="Scala 语法"></a>Scala 语法</h3><table>
-<thead>
-<tr>
-<th>基本类型</th>
-<th>是否可变</th>
-<th>赋初值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>val</td>
-<td>不可变</td>
-<td>val a:Int = 5 (val a = 5)</td>
-</tr>
-<tr>
-<td>var</td>
-<td>可变</td>
-<td>var a:Int = 5 (var a = 5)</td>
-</tr>
-</tbody></table>
-<p>scala 他也会自动的判断数据类型</p>
-<p><strong>scala 的运算实际上是方法的运算</strong>:</p>
-<pre><code>3 + 5   等效与 (3).+ 5
-即 A 方法 B  = A.方法（B）</code></pre><p><strong><em>scala 类与对象</em></strong><br><code>类</code>：</p>
-<pre><code>Class class_dzx {
-    val name_1 = &quot;Hello World&quot;
-}</code></pre><p><code>对象</code>：</p>
-<pre><code>Object object_dzx {
-    val name_2 = &quot;Hello Ting&quot;
-}</code></pre><p>如果 <strong>类与对象</strong> 同名，并且在同一个文件里面，那他们可以相互访问其内部的成员和方法。称之为<strong>伴生</strong>。</p>
-<p>对于类：</p>
-<pre><code>Class class_dzx(var name:String) {
-    val name_1 = &quot;Hello World&quot;
-    def this(num_1:Int) {
-        this()
-        println(&quot;this is the 第一层辅助构造器&quot;)
-    }
-    def this(num_1:Int,num_2:Int) {
-        this(num_1)
-        println(&quot;this is the 第二层辅助构造器&quot;)
-    }
-}</code></pre><p>在类中 用var 定义的name 它会自动的创建读写方法。<br><strong><em>主构造器&lt;–辅助构造器&lt;–辅助构造器</em></strong><br>处于底层构造器主要先引入上一层构造器</p>
+          <h1 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h1><h2 id="课外知识补充"><a href="#课外知识补充" class="headerlink" title="课外知识补充"></a>课外知识补充</h2><ul>
+<li><p>最大似然函数</p>
+<p>  极大似然估计中采样需满足一个重要的假设，就是所有的采样都是<strong>独立同分布</strong>的<br>  <strong>似然函数</strong>：<br>  $f(x_1,x_2|\theta) = f(x_1|\theta) \times f(x_2|\theta)$<br>  $L(\theta|x_1,x_2) = f(x_1,x_2|\theta)$<br>  目的是：<strong>采取的方法是让这个样本结果出现的可能性最大</strong><br>  $ln(L(\theta|x_1,x_2)) = ln(f(x_1,x_2|\theta)) = ln(f(x_1|\theta)) + ln(f(x_2|\theta))$<br>  通过求<strong>对数</strong>，将乘法转变成加法（因为是独立同分布的）<br>  然后再去寻找最大值。</p>
+</li>
+<li><p>激活函数非线性<br>  如果激活函数也是线性的，比如$sign$函数，那么他就不能解决那些线性不可分问题。<br>  PS：虽然然和非线性问题，在某种程度上都可以变成更高维度的线性可分问题。</p>
+</li>
+</ul>
 
       
     </div>
@@ -630,7 +601,7 @@ Connection to 192.168.209.121 123 port [udp/ntp] succeeded!</code></pre><p>实�
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/23/top/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/Aics/chap3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="http://home.ustc.edu.cn/~dzx1/Picture/Aics/derivation.png">
@@ -644,151 +615,7 @@ Connection to 192.168.209.121 123 port [udp/ntp] succeeded!</code></pre><p>实�
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/23/top/" class="post-title-link" itemprop="url">top</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-04-23 16:13:50" itemprop="dateCreated datePublished" datetime="2020-04-23T16:13:50+08:00">2020-04-23</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="top-命令详解"><a href="#top-命令详解" class="headerlink" title="top 命令详解"></a>top 命令详解</h1><h2 id="第一行详解"><a href="#第一行详解" class="headerlink" title="第一行详解"></a>第一行详解</h2><pre><code>01:06:48 当前时间
-up 1:22 系统运行时间，格式为时:分
-1 user 当前登录用户数
-load average: 0.06, 0.60, 0.48 系统负载，即任务队列的平均长度。三个数值分别为 1分钟、5分钟、15分钟前到现在的平均值。</code></pre><h2 id="第二，三行详解"><a href="#第二，三行详解" class="headerlink" title="第二，三行详解"></a>第二，三行详解</h2><pre><code>Tasks: 29 total 进程总数
-1 running 正在运行的进程数
-28 sleeping 睡眠的进程数
-0 stopped 停止的进程数
-0 zombie 僵尸进程数
-Cpu(s): 0.3% us 用户空间占用CPU百分比
-1.0% sy 内核空间占用CPU百分比
-0.0% ni 用户进程空间内改变过优先级的进程占用CPU百分比
-98.7% id 空闲CPU百分比
-0.0% wa 等待输入输出的CPU时间百分比</code></pre><h2 id="进程动态显示属性"><a href="#进程动态显示属性" class="headerlink" title="进程动态显示属性"></a>进程动态显示属性</h2><pre><code>PR 优先级  
-NI nice值。负值表示高优先级，正值表示低优先级  
-TIME 进程使用的CPU时间总计，单位秒  
-TIME+ 进程使用的CPU时间总计，单位1/100秒  
-VIRT 进程使用的虚拟内存总量 VIRT=SWAP+RES  
-SWAP 进程使用的虚拟内存中，被换出的大小  
-RES 进程使用的、未被换出的物理内存大小  
-SHR 共享内存大小，单位kb  </code></pre><p>PRI也还是比较好理解的，即进程的优先级，或者通俗点说就是程序被CPU执行的先后顺序，<strong><em>此值越小进程的优先级别越高。</em></strong> 那NI呢？就是我们所要说的nice值了，其表示进程可被执行的优先级的修正数值。如前面所说，PRI值越小越快被执行，那么加入nice值后，将会使得PRI变为：</p>
-<pre><code>PRI(new)=PRI(old)+nice。</code></pre><p>这样，当nice值为负值的时候，那么该程序将会优先级值将变小，即其优先级会变高，则其越快被执行。<br>到目前为止，更需要强调一点的是，进程的nice值不是进程的优先级，他们不是一个概念，但是进程nice值会影响到进程的优先级变化。  </p>
-<p><strong><em>进程状态</em></strong></p>
-<pre><code>D=不可中断的睡眠状态
-R=运行
-S=睡眠
-T=跟踪/停止
-Z=僵尸进程</code></pre><h2 id="交换分区"><a href="#交换分区" class="headerlink" title="交换分区"></a>交换分区</h2><p>就是当内存不足的时候，把一部分 <strong><em>硬盘空间</em></strong>  虚拟成内存使用,从而解决内存容量不足的情况</p>
-<h2 id="top命令"><a href="#top命令" class="headerlink" title="top命令"></a><strong><em>top命令</em></strong></h2><p>top运行时候可以输入的命令</p>
-<pre><code>i 忽略闲置和僵死进程。这是一个开关式命令
-P 根据CPU使用百分比大小进行排序</code></pre>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/23/unbuntu/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="http://home.ustc.edu.cn/~dzx1/Picture/Aics/derivation.png">
-      <meta itemprop="name" content="douzhi">
-      <meta itemprop="description" content="nice to meet you">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="斗志">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/23/unbuntu/" class="post-title-link" itemprop="url">unbuntu</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-04-23 16:13:50" itemprop="dateCreated datePublished" datetime="2020-04-23T16:13:50+08:00">2020-04-23</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="CMD-IN-UBUNTU"><a href="#CMD-IN-UBUNTU" class="headerlink" title="CMD IN UBUNTU"></a>CMD IN UBUNTU</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get -f install 修复安装”-f = –fix-missing”</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/23/blog-demo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="http://home.ustc.edu.cn/~dzx1/Picture/Aics/derivation.png">
-      <meta itemprop="name" content="douzhi">
-      <meta itemprop="description" content="nice to meet you">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="斗志">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/23/blog-demo/" class="post-title-link" itemprop="url">blog_demo</a>
+            <a href="/2020/06/27/Aics/chap3/" class="post-title-link" itemprop="url">Aics_Chap3</a>
         </h2>
 
         <div class="post-meta">
@@ -799,7 +626,16 @@ P 根据CPU使用百分比大小进行排序</code></pre>
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-04-23 16:09:46 / 修改时间：16:10:32" itemprop="dateCreated datePublished" datetime="2020-04-23T16:09:46+08:00">2020-04-23</time>
+              <time title="创建时间：2020-06-27 12:12:57 / 修改时间：23:59:16" itemprop="dateCreated datePublished" datetime="2020-06-27T12:12:57+08:00">2020-06-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Aics/" itemprop="url" rel="index"><span itemprop="name">Aics</span></a>
+                </span>
             </span>
 
           
@@ -813,7 +649,44 @@ P 根据CPU使用百分比大小进行排序</code></pre>
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>My_blog demo</p>
+          <h1 id="Chap3-知识汇总"><a href="#Chap3-知识汇总" class="headerlink" title="Chap3 知识汇总"></a>Chap3 知识汇总</h1><h2 id="chap3-3"><a href="#chap3-3" class="headerlink" title="chap3.3"></a>chap3.3</h2><h3 id="Alexnet"><a href="#Alexnet" class="headerlink" title="Alexnet"></a>Alexnet</h3><ul>
+<li><p>ReLU 激活函数：训练中收敛速度更快。（比sigmod函数）</p>
+</li>
+<li><p>LRN局部响应归一化：提升较大响应，抑制较小响应 （现在被证明无明显效果）</p>
+</li>
+<li><p>MaxPool: 避免特征值被平均池化，提升代码鲁棒性</p>
+</li>
+<li><p>Dropout: 随机舍弃部分隐层节点，避免过拟合</p>
+</li>
+</ul>
+<h3 id="VGG"><a href="#VGG" class="headerlink" title="VGG"></a>VGG</h3><p>VGG 实现更深的网络<br>VGG16 一共16层，不方便训练。<br>他的实现方法是 先训练<code>一部分层</code>，比如11层，得到的数据中部分作为初始值，然后在初始条件下进行重新训练<code>更深</code>的神经网络。(但不适合更深的神经网络)</p>
+<p>==VGG 使用更小的卷积的原因==:</p>
+<ul>
+<li>5x5的卷积核，可以用两个3x3的卷积核替代</li>
+</ul>
+<p><img src="http://home.ustc.edu.cn/~dzx/Picture/Aics/small_core_1.png" alt="小的卷积可以替代大的卷积"></p>
+<ul>
+<li>干同样的事情所需要更少的参数，计算量存储变小了，还可以防止过拟合</li>
+</ul>
+<p><img src="C:/Users%5Cdzx1%5CDesktop%5C%E7%A0%94%E4%B8%80%E4%B8%8B%5C%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%AF%BC%E8%AE%BA%5Cpicture%5Csmall_core_2.png" alt="更少的参数"></p>
+<h2 id="chap3-4"><a href="#chap3-4" class="headerlink" title="chap3.4"></a>chap3.4</h2><h3 id="Inception"><a href="#Inception" class="headerlink" title="Inception"></a>Inception</h3><p>==1x1的卷积核可以更改通道c的大小==</p>
+<p>辅助神经网络防止过拟合。</p>
+<p><img src="C:/Users%5Cdzx1%5CDesktop%5C%E7%A0%94%E4%B8%80%E4%B8%8B%5C%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%AF%BC%E8%AE%BA%5Cpicture%5Csoftmax_%E8%BE%85%E5%8A%A9%E7%BD%91%E7%BB%9C.png" alt="辅助神经网络"><br>越接近输入的地方，更新权重越小，越不好更新。</p>
+<h3 id="BN-Inception"><a href="#BN-Inception" class="headerlink" title="BN-Inception"></a>BN-Inception</h3><p><strong>BathNorm 函数</strong>：</p>
+<ul>
+<li>normalize</li>
+</ul>
+<p>将激活层输入部分分布在==激活函数的敏感部分==。</p>
+<ul>
+<li>scale and shift(bias)</li>
+</ul>
+<p>归一化后的输入是的网络的表达能力下降。通过增加训练参数提高网络的表达能力</p>
+<p>BathNorm 函数 还可以将训练的学习率提高到5倍，乃至30倍。训练速度可以得到明显加快。</p>
+<h3 id="Inception-v3"><a href="#Inception-v3" class="headerlink" title="Inception-v3"></a>Inception-v3</h3><p><strong>Factorization(因式分解的思想)</strong>（inception-v3）：</p>
+<p>将3x3的卷积拆分成1x3和3x1的卷积，减少了参数数量，同时通过<strong>非对称</strong>的卷积结构拆分增加了特征多样性。</p>
+<h2 id="chap3-5"><a href="#chap3-5" class="headerlink" title="chap3.5"></a>chap3.5</h2><h3 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h3><p>之前遇到的<strong>问题</strong>：更深的卷积神经网络的误差比较大。</p>
+<p><strong>梯度消失？</strong> No！使用BathNorm课有效地缓解梯度消失<br><strong>过拟合？</strong> No！更深的神经网络在训练集的误差同样更高。</p>
+<p>==神经网络退化==：收敛到极值点而非最值点。（陷入局部最优）</p>
 
       
     </div>
@@ -833,7 +706,7 @@ P 根据CPU使用百分比大小进行排序</code></pre>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/23/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/Aics/chap4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="http://home.ustc.edu.cn/~dzx1/Picture/Aics/derivation.png">
@@ -847,7 +720,7 @@ P 根据CPU使用百分比大小进行排序</code></pre>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/23/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+            <a href="/2020/06/27/Aics/chap4/" class="post-title-link" itemprop="url">Aics_Chap4</a>
         </h2>
 
         <div class="post-meta">
@@ -856,8 +729,18 @@ P 根据CPU使用百分比大小进行排序</code></pre>
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-04-23 15:53:30" itemprop="dateCreated datePublished" datetime="2020-04-23T15:53:30+08:00">2020-04-23</time>
+              <time title="创建时间：2020-06-27 12:12:57 / 修改时间：23:59:13" itemprop="dateCreated datePublished" datetime="2020-06-27T12:12:57+08:00">2020-06-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Aics/" itemprop="url" rel="index"><span itemprop="name">Aics</span></a>
+                </span>
             </span>
 
           
@@ -871,19 +754,198 @@ P 根据CPU使用百分比大小进行排序</code></pre>
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+          <h1 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h1>
+      
+    </div>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/Aics/chap5/">
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://home.ustc.edu.cn/~dzx1/Picture/Aics/derivation.png">
+      <meta itemprop="name" content="douzhi">
+      <meta itemprop="description" content="nice to meet you">
+    </span>
 
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="斗志">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/27/Aics/chap5/" class="post-title-link" itemprop="url">Aics_Chap5</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-27 12:12:57 / 修改时间：23:59:06" itemprop="dateCreated datePublished" datetime="2020-06-27T12:12:57+08:00">2020-06-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Aics/" itemprop="url" rel="index"><span itemprop="name">Aics</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="编程框架机理"><a href="#编程框架机理" class="headerlink" title="编程框架机理"></a>编程框架机理</h1><hr>
+<p>==<strong>编程框架的内部运转 具备开发框架的能力</strong>==</p>
+<h2 id="tensorflow-设计原则"><a href="#tensorflow-设计原则" class="headerlink" title="tensorflow 设计原则"></a>tensorflow 设计原则</h2><p>TensorFlow 的目的：</p>
+<ol>
+<li><p><strong>高性能</strong></p>
+<ul>
+<li>算子：每个算子对底层部件已经优化，可以更好的利用硬件性能。</li>
+<li>计算图：优化了计算图，提高了计算图的计算效率（TODO 计算图如何优化）</li>
+<li>并行： 根据计算图，并行没有数据依赖的节点</li>
+</ul>
+</li>
+<li><p><strong>易开发</strong></p>
+<p> 提炼了深度学习的很多共性算子，方便用户调用。</p>
+</li>
+<li><p><strong>可移植</strong></p>
+<p> 可以适用于不同的异构系统，方便代码移植。<br> 表明对于同一个算子，开发了适合同步底层的代码。</p>
+</li>
+</ol>
+<h2 id="TensorFlow-计算图"><a href="#TensorFlow-计算图" class="headerlink" title="TensorFlow 计算图"></a>TensorFlow 计算图</h2><h3 id="计算图求导方法"><a href="#计算图求导方法" class="headerlink" title="计算图求导方法"></a>计算图求导方法</h3><h4 id="手动求解法"><a href="#手动求解法" class="headerlink" title="手动求解法"></a>手动求解法</h4><ul>
+<li>手动编写链式法则求导转化成计算机程序特别困难</li>
+<li>如果更改网络模型，需要改好多梯度求解算法</li>
+</ul>
+<h4 id="数值求导法"><a href="#数值求导法" class="headerlink" title="数值求导法"></a>数值求导法</h4><p>给一个很小的初始值，算出来偏差</p>
+<ul>
+<li>计算量大，求解速度慢</li>
+<li>可能引入舍入误差和截断误差</li>
+</ul>
+<h4 id="符号求导法"><a href="#符号求导法" class="headerlink" title="符号求导法"></a>符号求导法</h4><p>会引起表达式膨胀</p>
+<h4 id="自动求导法"><a href="#自动求导法" class="headerlink" title="自动求导法"></a>自动求导法</h4><p>==自动求导方法是界于数值求导方法和符号求导方法之间==</p>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Aics/Automatic_derivation.png" alt="自动求导方法"></p>
+<p>求导方法对比：</p>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Aics/derivation.png" alt="自动求导方法"></p>
+<h4 id="计算图分配"><a href="#计算图分配" class="headerlink" title="计算图分配"></a>计算图分配</h4><ol>
+<li><p>从起始点开始遍历计算图的每一个节点</p>
+</li>
+<li><p>然后考虑每个节点的可行设备集合</p>
+</li>
+<li><p>采用<strong>贪心算法</strong>，选择最快完成时间的设备分配给该节点。</p>
+</li>
+</ol>
+<blockquote>
+<p>常量折叠：有的常数节点可以被提亲计算，用新生成的节点代替原来的节点。<br>算数优化：对表达式优化<br>布局优化<br>Tensorflow 默认NHWC；GPU默认NCHW。<br>两个连续的GPU计算节点之间的 NCHW2NHWC 与NHWC2NCHE 可以相互抵消。<br>重映射：将出现频率较高的子图用一个单独的算子来替代。<br>消除子图的调度开销<br>不需要在计算过程中将数据调入内存，再调出内存。访存开销减少</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/Aics/chap1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://home.ustc.edu.cn/~dzx1/Picture/Aics/derivation.png">
+      <meta itemprop="name" content="douzhi">
+      <meta itemprop="description" content="nice to meet you">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="斗志">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/27/Aics/chap1/" class="post-title-link" itemprop="url">Aics_Chap1</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-27 12:12:57 / 修改时间：23:59:21" itemprop="dateCreated datePublished" datetime="2020-06-27T12:12:57+08:00">2020-06-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Aics/" itemprop="url" rel="index"><span itemprop="name">Aics</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="人工智能概述"><a href="#人工智能概述" class="headerlink" title="人工智能概述"></a>人工智能概述</h1><h2 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h2><h3 id="人工智能的三大方法"><a href="#人工智能的三大方法" class="headerlink" title="人工智能的三大方法"></a>人工智能的三大方法</h3><ol>
+<li><p>行为主义</p>
+<p> 基于<strong>控制论</strong>构建 <strong><em>感知-动作型</em></strong> 控制系统。<br> 通过<strong>反馈</strong>来进行行为动作。</p>
+</li>
+<li><p>逻辑主义<br> 基于逻辑符号。<br> <code>命题逻辑</code>： 与或非<br> <code>谓词逻辑</code>： X是Y。用0,1来进行输出。比如： 鸟会飞。<br> <code>时态逻辑</code>： 在一阶逻辑上加入时间。<br> <code>计算树逻辑</code>： 表示对不确定未来的判断。<br> <strong>困难</strong>：</p>
+<blockquote>
+<p>1、 逻辑表达式需要常识来进行支撑，但常识太多了无法进行汇总。<br>2、 逻辑求解器，是一个NP完全问题。时间复杂度非常高。  </p>
+</blockquote>
+</li>
+<li><p>连接主义<br> 基于人脑的树突和轴突进行</p>
+<blockquote>
+<p>泛化能力差，需要大量的样本进行学习<br>缺乏推理能力.不擅长解决认知类的问题。<br>缺乏可解释性。重视安全领域比较重视可解释性。比如某个决策是怎么做出来的。深度学习为什么识别错误了。<br>鲁棒性不好。有些很小的图片差别，就导致识别错误。</p>
+</blockquote>
+</li>
+</ol>
 
       
     </div>
@@ -901,6 +963,9 @@ P 根据CPU使用百分比大小进行排序</code></pre>
 
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
 
 
 
@@ -967,9 +1032,21 @@ P 根据CPU使用百分比大小进行排序</code></pre>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
@@ -1053,6 +1130,8 @@ P 根据CPU使用百分比大小进行排序</code></pre>
 
 
 
+
+  
 
   
 

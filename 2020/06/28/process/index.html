@@ -20,19 +20,21 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="WRITE DOCKERFILE ATTENTION1.在Ubuntu的Docker官方镜像中是没有缓存Apt的软件包列表的。因此在做其他任何基础软件的安装前，都需要至少先做一次 apt-get update。2.docker 中安装过程需要判断，用-y来默认表示同意。 apt install -y git -y代表着yes">
+  <meta name="description" content="进程的几种状态  阻塞阻塞是一种被动的方式，由于获取资源获取不到而引起的等待。 睡眠睡眠的确是一种主动的方式 挂起挂起也是一种主动的行为，是系统层面对进程作出的合理操作。挂起的标志就是换出到外存，在外存的进程肯定是不能执行的，所以挂起的目的就很明显，在内存资源不足时，需要把一些进程换出到外存，给着急运行的进程腾地方。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="A&#x2F;attention_dockerfile">
-<meta property="og:url" content="http://yoursite.com/2020/06/27/A/attention_dockerfile/index.html">
+<meta property="og:title" content="process">
+<meta property="og:url" content="http://yoursite.com/2020/06/28/process/index.html">
 <meta property="og:site_name" content="斗志">
-<meta property="og:description" content="WRITE DOCKERFILE ATTENTION1.在Ubuntu的Docker官方镜像中是没有缓存Apt的软件包列表的。因此在做其他任何基础软件的安装前，都需要至少先做一次 apt-get update。2.docker 中安装过程需要判断，用-y来默认表示同意。 apt install -y git -y代表着yes">
+<meta property="og:description" content="进程的几种状态  阻塞阻塞是一种被动的方式，由于获取资源获取不到而引起的等待。 睡眠睡眠的确是一种主动的方式 挂起挂起也是一种主动的行为，是系统层面对进程作出的合理操作。挂起的标志就是换出到外存，在外存的进程肯定是不能执行的，所以挂起的目的就很明显，在内存资源不足时，需要把一些进程换出到外存，给着急运行的进程腾地方。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-06-27T14:33:50.524Z">
-<meta property="article:modified_time" content="2020-04-23T08:13:50.661Z">
+<meta property="og:image" content="https://img-blog.csdn.net/20170820200728157?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcWljaGVuZzc3Nw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="article:published_time" content="2020-06-27T16:06:11.405Z">
+<meta property="article:modified_time" content="2020-06-27T16:06:11.410Z">
 <meta property="article:author" content="douzhi">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20170820200728157?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcWljaGVuZzc3Nw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 
-<link rel="canonical" href="http://yoursite.com/2020/06/27/A/attention_dockerfile/">
+<link rel="canonical" href="http://yoursite.com/2020/06/28/process/">
 
 
 <script id="page-configurations">
@@ -45,7 +47,7 @@
   };
 </script>
 
-  <title>A/attention_dockerfile | 斗志</title>
+  <title>process | 斗志</title>
   
 
 
@@ -125,17 +127,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">0</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">1</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">0</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">10</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">16</span></a>
 
   </li>
   </ul>
@@ -166,7 +168,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/A/attention_dockerfile/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/28/process/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="http://home.ustc.edu.cn/~dzx1/Picture/Aics/derivation.png">
@@ -179,7 +181,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          A/attention_dockerfile
+          process
         </h1>
 
         <div class="post-meta">
@@ -189,15 +191,8 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-06-27 22:33:50" itemprop="dateCreated datePublished" datetime="2020-06-27T22:33:50+08:00">2020-06-27</time>
+              <time title="创建时间：2020-06-28 00:06:11" itemprop="dateCreated datePublished" datetime="2020-06-28T00:06:11+08:00">2020-06-28</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-23 16:13:50" itemprop="dateModified" datetime="2020-04-23T16:13:50+08:00">2020-04-23</time>
-              </span>
 
           
 
@@ -210,9 +205,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="WRITE-DOCKERFILE-ATTENTION"><a href="#WRITE-DOCKERFILE-ATTENTION" class="headerlink" title="WRITE DOCKERFILE ATTENTION"></a>WRITE DOCKERFILE ATTENTION</h1><p>1.在Ubuntu的Docker官方镜像中是没有缓存Apt的软件包列表的。因此在做其他任何基础软件的安装前，都需要至少先做一次</p>
-<pre><code>apt-get update。</code></pre><p>2.docker 中安装过程需要判断，用-y来默认表示同意。</p>
-<pre><code>apt install -y git -y代表着yes</code></pre>
+        <h1 id="进程的几种状态"><a href="#进程的几种状态" class="headerlink" title="进程的几种状态"></a>进程的几种状态</h1><hr>
+<p><img src="https://img-blog.csdn.net/20170820200728157?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcWljaGVuZzc3Nw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="三态模型" title="三态模型"></p>
+<h2 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h2><p>阻塞是一种被动的方式，由于获取资源获取不到而引起的等待。</p>
+<h2 id="睡眠"><a href="#睡眠" class="headerlink" title="睡眠"></a>睡眠</h2><p>睡眠的确是一种主动的方式</p>
+<h2 id="挂起"><a href="#挂起" class="headerlink" title="挂起"></a>挂起</h2><p>挂起也是一种主动的行为，是系统层面对进程作出的合理操作。<br>挂起的标志就是换出到外存，在外存的进程肯定是不能执行的，所以挂起的目的就很明显，在内存资源不足时，需要把一些进程换出到外存，给着急运行的进程腾地方。</p>
+
     </div>
 
     
@@ -227,10 +225,13 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/06/27/A/attention_docker/" rel="prev" title="A/attention_docker">
-      <i class="fa fa-chevron-left"></i> A/attention_docker
+    <a href="/2020/06/28/udp/" rel="prev" title="udp">
+      <i class="fa fa-chevron-left"></i> udp
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/28/docker/attention_docker/" rel="next" title="ATTENTION IN DOCKER">
+      ATTENTION IN DOCKER <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -289,7 +290,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#WRITE-DOCKERFILE-ATTENTION"><span class="nav-number">1.</span> <span class="nav-text">WRITE DOCKERFILE ATTENTION</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#进程的几种状态"><span class="nav-number">1.</span> <span class="nav-text">进程的几种状态</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#阻塞"><span class="nav-number">1.1.</span> <span class="nav-text">阻塞</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#睡眠"><span class="nav-number">1.2.</span> <span class="nav-text">睡眠</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#挂起"><span class="nav-number">1.3.</span> <span class="nav-text">挂起</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -305,9 +306,21 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
@@ -391,6 +404,8 @@
 
 
 
+
+  
 
   
 
