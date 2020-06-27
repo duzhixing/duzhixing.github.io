@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="第二阶段复习chap4 网络层基础面向连接的服务:  建链阶段 1.1 请求分组 从源到终点,确定入端口,入标号以及出端口1.2 确认分组 从从终点到源,确定出标号. 一个路由器的出标号是下一跳路由器的入标号.  拆链阶段   计算机网络层的服务:  分组化处理将上层数据封装到一个数据部中. 添加了一个首部,包含分组的逻辑源地址,逻辑目的地址等. 查找下一跳的逻辑地址咨询路由表,查找下一条的逻辑地">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Advancednetwork_第二阶段复习">
+<meta property="og:url" content="http://yoursite.com/2020/06/28/Advanced_network/chap4_10/index.html">
+<meta property="og:site_name" content="斗志">
+<meta property="og:description" content="第二阶段复习chap4 网络层基础面向连接的服务:  建链阶段 1.1 请求分组 从源到终点,确定入端口,入标号以及出端口1.2 确认分组 从从终点到源,确定出标号. 一个路由器的出标号是下一跳路由器的入标号.  拆链阶段   计算机网络层的服务:  分组化处理将上层数据封装到一个数据部中. 添加了一个首部,包含分组的逻辑源地址,逻辑目的地址等. 查找下一跳的逻辑地址咨询路由表,查找下一条的逻辑地">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap7_1.png">
+<meta property="og:image" content="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap7_2.png">
+<meta property="og:image" content="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap8_1.png">
+<meta property="og:image" content="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap9_1.png">
+<meta property="og:image" content="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap10_1.png">
+<meta property="og:image" content="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap10_2.png">
+<meta property="article:published_time" content="2020-06-27T18:12:57.000Z">
+<meta property="article:modified_time" content="2020-06-27T16:36:10.502Z">
+<meta property="article:author" content="douzhi">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap7_1.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/06/28/Advanced_network/chap4_10/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Advancednetwork_第二阶段复习 | 斗志</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">斗志</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">for me forever</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">1</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">20</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/28/Advanced_network/chap4_10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://123.57.5.52:8080/Firefox_wallpaper.png">
+      <meta itemprop="name" content="douzhi">
+      <meta itemprop="description" content="nice to meet you">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="斗志">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Advancednetwork_第二阶段复习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-28 02:12:57 / 修改时间：00:36:10" itemprop="dateCreated datePublished" datetime="2020-06-28T02:12:57+08:00">2020-06-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Advanced-network/" itemprop="url" rel="index"><span itemprop="name">Advanced_network</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="第二阶段复习"><a href="#第二阶段复习" class="headerlink" title="第二阶段复习"></a>第二阶段复习</h1><h2 id="chap4-网络层基础"><a href="#chap4-网络层基础" class="headerlink" title="chap4 网络层基础"></a>chap4 网络层基础</h2><p>面向连接的服务:</p>
+<ol>
+<li><p>建链阶段</p>
+<p>1.1 请求分组<br> 从源到终点,确定入端口,入标号以及出端口<br>1.2 确认分组<br> 从从终点到源,确定出标号. 一个路由器的出标号是下一跳路由器的入标号.</p>
+</li>
+<li><p>拆链阶段</p>
+</li>
+</ol>
+<p>计算机网络层的服务:</p>
+<ul>
+<li>分组化处理<br>将上层数据封装到一个数据部中. 添加了一个首部,包含分组的逻辑源地址,逻辑目的地址等.</li>
+<li>查找下一跳的逻辑地址<br>咨询路由表,查找下一条的逻辑地址</li>
+<li>查找下一条的物理地址<br>需要数据链路层来进行真正的交付,但数据链路层需要下一跳的MAC地址才能进行真正的交付</li>
+<li>数据报进行必要的分片处理<br>一个帧携带了数据最大长度有限制,所以进行分片处理.</li>
+</ul>
+<h2 id="chap5-IPV4地址"><a href="#chap5-IPV4地址" class="headerlink" title="chap5 IPV4地址"></a>chap5 IPV4地址</h2><p>A类 0 开头 1/2   一个字节的网络标识<br>B类 10 开头 1/4  两个字节的网络标识<br>C类 110 开头 1/8 三个字节的网络标识,每个地址块有256个地址<br>D类 1110 开头 1/16 只有一个地址块<br>E类 1111 开头 1/16 只有一个地址块</p>
+<p>NAT技术 网络地址转换(network address translation),可以用于在专用地址和全球地址之间的相互映射.</p>
+<h3 id="转换表"><a href="#转换表" class="headerlink" title="转换表"></a>转换表</h3><ul>
+<li><p>使用IP地址, 一个专用地址和一个外部地址对应</p>
+</li>
+<li><p>使用IP地址池,多对多,可以同时通信的数量是根据IP地址池里面的地址数量</p>
+</li>
+<li><p>使用IP地址和端口地址.一次性使用的端口地址是唯一的.</p>
+</li>
+</ul>
+<h2 id="chap6-IP分组的交付和转发"><a href="#chap6-IP分组的交付和转发" class="headerlink" title="chap6 IP分组的交付和转发"></a>chap6 IP分组的交付和转发</h2><h3 id="基于目的地址的转发"><a href="#基于目的地址的转发" class="headerlink" title="基于目的地址的转发"></a>基于目的地址的转发</h3><ul>
+<li><p>下一跳方法 只保留下一跳的路由器地址.(如果是基于路由的方法,需要保留整个路径的路由器地址)</p>
+</li>
+<li><p>特定网络方法 把连接在同一个网络的所有主机看成一个唯一的表项</p>
+</li>
+<li><p>默认方法 不必把整个因特网的所有都列出来,而是采用一个默认表项</p>
+</li>
+<li><p>使用分类地址转发</p>
+</li>
+<li><p>使用无分类地址转发 路由表项需要包含掩码(最长掩码匹配)</p>
+</li>
+</ul>
+<h3 id="基于标记的转发"><a href="#基于标记的转发" class="headerlink" title="基于标记的转发"></a>基于标记的转发</h3><p>主要是基于面向连接的网络方式,交换机根据附加在分组上的标记来进行转发分组.</p>
+<h3 id="路由器结构"><a href="#路由器结构" class="headerlink" title="路由器结构"></a>路由器结构</h3><p>输入端口,输出端口,路由选择处理器以及交换结构</p>
+<h2 id="chap7-网际协议版本4-IPV4"><a href="#chap7-网际协议版本4-IPV4" class="headerlink" title="chap7 网际协议版本4 IPV4"></a>chap7 网际协议版本4 IPV4</h2><h3 id="IP数据报"><a href="#IP数据报" class="headerlink" title="IP数据报"></a>IP数据报</h3><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap7_1.png" alt="IP数据报"></p>
+<p>IP数据报总长度字段是16位,因此IP数据报的长度限制在$2^16-1$字节.<br>首部最小长度是20字节.最大长度是60.</p>
+<p>首部 + 数据</p>
+<p>首部长度(HLEN)  以<code>4</code>字节的字为单位</p>
+<p><strong><em>只有数据报中的数据是分片</em></strong><br>MTU 最大传送单元</p>
+<p>分片偏移 以<code>8</code>字节为度量单位<br>标志: D: 不分片; M: 还有分片(1表明后面还有分片)</p>
+<p>IP中的检验和只覆盖首部.不包含数据.</p>
+<h3 id="选项类型"><a href="#选项类型" class="headerlink" title="选项类型"></a>选项类型</h3><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap7_2.png" alt="选项"></p>
+<ul>
+<li><p>无操作选项. 用作不同长度选项之间的填充. <strong>用来进行16位或者32位边界的对齐</strong>.</p>
+</li>
+<li><p>选项结束选项. 一字节,全0.</p>
+</li>
+<li><p>记录路由选项. 用来记录处理数据报的路由器.最多9个</p>
+</li>
+<li><p>严格路由选项. 预先指定数据报在网络中传播时的路由.</p>
+</li>
+<li><p>不严格路由选项. 条件放宽,表中路由器必须通过,但也可以访问其他路由器</p>
+</li>
+<li><p>时间戳. IP地址+时间戳.</p>
+</li>
+</ul>
+<h2 id="chap-8-地址解析协议"><a href="#chap-8-地址解析协议" class="headerlink" title="chap 8 地址解析协议"></a>chap 8 地址解析协议</h2><h3 id="地址映像"><a href="#地址映像" class="headerlink" title="地址映像"></a>地址映像</h3><ul>
+<li><p>静态映射 将逻辑地址和物理地址关联起来</p>
+</li>
+<li><p>动态映射 地址解析协议(ARP) 和 逆地址解析协议(RARP)</p>
+</li>
+</ul>
+<h3 id="ARP协议"><a href="#ARP协议" class="headerlink" title="ARP协议"></a>ARP协议</h3><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap8_1.png" alt="差错报文"></p>
+<p>ARP请求采用广播发送;ARP回答采用单播发送<br>IP -&gt; 物理地址.</p>
+<p>硬件类型:用来定义运行ARP的网络类型.<br>协议类型:用来定义协议类型.<br>硬件长度:用来定义物理地址的长度,以字节为单位<br>协议长度:用来定义逻辑地址的长度,以字节为单位</p>
+<p>ARP分组直接封装在以太网的帧中.(代替之前的数据位置)</p>
+<h3 id="代理ARP"><a href="#代理ARP" class="headerlink" title="代理ARP"></a>代理ARP</h3><p>它是代表一组主机的ARP,可以用于产生一组子网划分的效果.<br>当运行代理ARP的路由器收到一个ARP请求,希望找出这些主机中的某一个主机的物理地址时,路由器就返回一个宣布了他自己硬件得知的ARP回答分组.(就是把代理服务器的硬件地址作为那个硬件地址)</p>
+<h2 id="chap-9-网址控制报文协议-ICMP"><a href="#chap-9-网址控制报文协议-ICMP" class="headerlink" title="chap 9 网址控制报文协议( ICMP)"></a>chap 9 网址控制报文协议( ICMP)</h2><p>由于IP协议有两个不足之处</p>
+<ul>
+<li><p>IP协议没有差错报告或者差错纠正机制</p>
+</li>
+<li><p>IP协议还缺少主机和管理查询所需要的机制</p>
+</li>
+</ul>
+<p>ICMP 首先要封装成IP数据报,然后再传输到下一层</p>
+<h3 id="差错报告报文"><a href="#差错报告报文" class="headerlink" title="差错报告报文"></a>差错报告报文</h3><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap9_1.png" alt="差错报文"></p>
+<p><strong>携带ICMP分组的IP协议字段值为1</strong>.</p>
+<p>ICMP由8字节的首部和可变长度的数据部分组成.<br>差错报文总是发送给最初的信号源.</p>
+<ol>
+<li><p>对于携带ICMP的数据报,不产生ICMP差错报文</p>
+</li>
+<li><p>只有第一个分片产生ICMP差错报文</p>
+</li>
+<li><p>多播地址的数据报,不产生差错报文</p>
+</li>
+<li><p>对于特殊地址的(127.0.0.0;0.0.0.0),不产生差错数据报文</p>
+</li>
+</ol>
+<h3 id="查询报文"><a href="#查询报文" class="headerlink" title="查询报文"></a>查询报文</h3><ol>
+<li><p>回送请求和回送回答. 为了诊断而设计的,组合起来来确定两个系统之间能否彼此通信. 比如:<code>ping</code></p>
+</li>
+<li><p>时间戳请求和回答. 来确定IP数据报在两个机器之间来回往返花费的时间.也可以用来同步两个时钟.</p>
+</li>
+</ol>
+<h2 id="chap-10-移动IP"><a href="#chap-10-移动IP" class="headerlink" title="chap 10 移动IP"></a>chap 10 移动IP</h2><h3 id="归属代理-外地代理"><a href="#归属代理-外地代理" class="headerlink" title="归属代理+外地代理"></a>归属代理+外地代理</h3><p>两个地址: 归属地址(永久) + 转交地址(临时)<br>主机从一个网络转交到另外一个地址,他的转交地址就会发生改变.</p>
+<p>为了让地址改变对于因特网其他部分是透明.<br>所以需要:归属代理 + 外地代理</p>
+<p>归属代理是代收其他主机发给该主机的信息,然后再转发给外地代理<br>外地代理接收,归属代理发来的信息,然后发送给主机.</p>
+<h3 id="远程主机通信的三个阶段"><a href="#远程主机通信的三个阶段" class="headerlink" title="远程主机通信的三个阶段"></a>远程主机通信的三个阶段</h3><h4 id="代理发现"><a href="#代理发现" class="headerlink" title="代理发现"></a>代理发现</h4><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap10_1.png" alt="代理"></p>
+<ol>
+<li><p>移动主机在离开归属网络之前,必须要发现归属代理</p>
+</li>
+<li><p>移动主机移动到外地网络之后要发现外地代理</p>
+</li>
+</ol>
+<h4 id="登记"><a href="#登记" class="headerlink" title="登记"></a>登记</h4><p>登记有四个要素:</p>
+<ul>
+<li><p>移动主机必须要向外地代理登记.</p>
+</li>
+<li><p>移动主机必须要向归属代理登记.(由外地代理代替完成)</p>
+</li>
+<li><p>截止期到了,必须更新登记</p>
+</li>
+<li><p>移动主机回到归属网络,必须取消登记.</p>
+</li>
+</ul>
+<h4 id="数据传送"><a href="#数据传送" class="headerlink" title="数据传送"></a>数据传送</h4><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap10_2.png" alt="数据传送"></p>
+<h3 id="移动IP的低效率"><a href="#移动IP的低效率" class="headerlink" title="移动IP的低效率"></a>移动IP的低效率</h3><ol>
+<li><p>两次穿越.远程主机和移动主机在同一个归属网络.(只有远程主机向移动主机发送分组时候才会发生,移动主机向远程主机发送时候就不会存在低效率问题)</p>
+</li>
+<li><p>三角路由选择. 三角形两边之和大于第三边(路径浪费)</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/28/Advanced_network/chap2_3/" rel="prev" title="Advancednetwork_第一阶段复习">
+      <i class="fa fa-chevron-left"></i> Advancednetwork_第一阶段复习
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/28/Advanced_network/chap11_12/" rel="next" title="Advancednetwork_第三阶段复习">
+      Advancednetwork_第三阶段复习 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第二阶段复习"><span class="nav-number">1.</span> <span class="nav-text">第二阶段复习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#chap4-网络层基础"><span class="nav-number">1.1.</span> <span class="nav-text">chap4 网络层基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chap5-IPV4地址"><span class="nav-number">1.2.</span> <span class="nav-text">chap5 IPV4地址</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#转换表"><span class="nav-number">1.2.1.</span> <span class="nav-text">转换表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chap6-IP分组的交付和转发"><span class="nav-number">1.3.</span> <span class="nav-text">chap6 IP分组的交付和转发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于目的地址的转发"><span class="nav-number">1.3.1.</span> <span class="nav-text">基于目的地址的转发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于标记的转发"><span class="nav-number">1.3.2.</span> <span class="nav-text">基于标记的转发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由器结构"><span class="nav-number">1.3.3.</span> <span class="nav-text">路由器结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chap7-网际协议版本4-IPV4"><span class="nav-number">1.4.</span> <span class="nav-text">chap7 网际协议版本4 IPV4</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IP数据报"><span class="nav-number">1.4.1.</span> <span class="nav-text">IP数据报</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选项类型"><span class="nav-number">1.4.2.</span> <span class="nav-text">选项类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chap-8-地址解析协议"><span class="nav-number">1.5.</span> <span class="nav-text">chap 8 地址解析协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#地址映像"><span class="nav-number">1.5.1.</span> <span class="nav-text">地址映像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ARP协议"><span class="nav-number">1.5.2.</span> <span class="nav-text">ARP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代理ARP"><span class="nav-number">1.5.3.</span> <span class="nav-text">代理ARP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chap-9-网址控制报文协议-ICMP"><span class="nav-number">1.6.</span> <span class="nav-text">chap 9 网址控制报文协议( ICMP)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#差错报告报文"><span class="nav-number">1.6.1.</span> <span class="nav-text">差错报告报文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询报文"><span class="nav-number">1.6.2.</span> <span class="nav-text">查询报文</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chap-10-移动IP"><span class="nav-number">1.7.</span> <span class="nav-text">chap 10 移动IP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#归属代理-外地代理"><span class="nav-number">1.7.1.</span> <span class="nav-text">归属代理+外地代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程主机通信的三个阶段"><span class="nav-number">1.7.2.</span> <span class="nav-text">远程主机通信的三个阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代理发现"><span class="nav-number">1.7.2.1.</span> <span class="nav-text">代理发现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登记"><span class="nav-number">1.7.2.2.</span> <span class="nav-text">登记</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据传送"><span class="nav-number">1.7.2.3.</span> <span class="nav-text">数据传送</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移动IP的低效率"><span class="nav-number">1.7.3.</span> <span class="nav-text">移动IP的低效率</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="douzhi"
+      src="http://123.57.5.52:8080/Firefox_wallpaper.png">
+  <p class="site-author-name" itemprop="name">douzhi</p>
+  <div class="site-description" itemprop="description">nice to meet you</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">douzhi</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
