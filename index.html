@@ -145,7 +145,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/29/spark_1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/A/attention_docker/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -159,7 +159,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/29/spark_1/" class="post-title-link" itemprop="url">spark_1</a>
+            <a href="/2020/06/27/A/attention_docker/" class="post-title-link" itemprop="url">A/attention_docker</a>
         </h2>
 
         <div class="post-meta">
@@ -169,8 +169,15 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-04-29 18:23:47" itemprop="dateCreated datePublished" datetime="2020-04-29T18:23:47+08:00">2020-04-29</time>
+              <time title="Created: 2020-06-27 22:33:50" itemprop="dateCreated datePublished" datetime="2020-06-27T22:33:50+08:00">2020-06-27</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-23 16:13:50" itemprop="dateModified" datetime="2020-04-23T16:13:50+08:00">2020-04-23</time>
+              </span>
 
           
 
@@ -183,39 +190,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="SPARK-学习之路"><a href="#SPARK-学习之路" class="headerlink" title="SPARK 学习之路"></a>SPARK 学习之路</h1><h2 id="基础了解-amp-Scala"><a href="#基础了解-amp-Scala" class="headerlink" title="基础了解 &amp; Scala"></a>基础了解 &amp; Scala</h2><h3 id="函数式编程与命令式编程"><a href="#函数式编程与命令式编程" class="headerlink" title="函数式编程与命令式编程"></a>函数式编程与命令式编程</h3><p><strong>命令式编程</strong>: 主要用于C++，Java，Python 这一种输入一条命令，然后程序对应执行的这种情况。并发度并不高，由于访存一致性原因，在并发时候，需要考虑加锁，所以效率不高。</p>
-<p><strong>函数式编程</strong>: 用于spark,hadoop等语言。其中内部变量，大部分是不可以更改的，所以就不存在什么访存一致性。并发度更高。特别是由于在CPU天花板之后，CPU转向多核发展，所以这种编程就开始使用广泛了。</p>
-<h3 id="Scala-运行"><a href="#Scala-运行" class="headerlink" title="Scala 运行"></a>Scala 运行</h3><p>在Scala 交互程序内部</p>
-<pre><code>load ./hello.scala</code></pre><p>在shell窗口时候<br><strong>1.编译</strong></p>
-<pre><code>scalac Hello.scala</code></pre><p><strong>2.运行</strong><br>运行生成的.class文件</p>
-<pre><code>scala Hello.class</code></pre><p>因为scalac 编译出来的也是.class文件，所以 也可以用java来运行,但是需要在路径中加入scala包</p>
-<pre><code>java -classpath .:/usr/local/scala/lib/scala.library.jar Hello.class</code></pre><h3 id="Scala-语法"><a href="#Scala-语法" class="headerlink" title="Scala 语法"></a>Scala 语法</h3><table>
-<thead>
-<tr>
-<th>基本类型</th>
-<th>是否可变</th>
-<th>赋初值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>val</td>
-<td>不可变</td>
-<td>val a:Int = 5 (val a = 5)</td>
-</tr>
-<tr>
-<td>var</td>
-<td>可变</td>
-<td>var a:Int = 5 (var a = 5)</td>
-</tr>
-<tr>
-<td>scala 他也会自动的判断数据类型</td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<p><strong>scala 的运算实际上是方法的运算</strong>:</p>
-<pre><code>3 + 5   等效与 (3).+ 5
-即 A 方法 B  = A.方法（B）</code></pre>
+          <h1 id="ATTENTION-IN-DOCKER"><a href="#ATTENTION-IN-DOCKER" class="headerlink" title="ATTENTION IN DOCKER"></a>ATTENTION IN DOCKER</h1><h2 id="1-在docker删除image中"><a href="#1-在docker删除image中" class="headerlink" title="1.在docker删除image中"></a>1.在docker删除image中</h2><p><strong>有一部分容器使用的是相同的ID，因此不能通过删除ID来实现。</strong><br>比如 :  </p>
+<pre><code>docker  rmi 111111   // 111111代表着容器ID</code></pre><p>必须要通过删除容器名字来实现 如 ：</p>
+<pre><code>docker rmi hello   // hello代表着容器名字</code></pre><h2 id="2-在删除镜像前，需要先删除容器"><a href="#2-在删除镜像前，需要先删除容器" class="headerlink" title="2.在删除镜像前，需要先删除容器"></a>2.在删除镜像前，需要先删除容器</h2><pre><code>docker rm $(docker ps -aq)  </code></pre><p>-a 列出本地所有镜像，-q 只显示镜像ID</p>
+<h2 id="3-正确退出容器"><a href="#3-正确退出容器" class="headerlink" title="3.正确退出容器"></a>3.正确退出容器</h2><pre><code>ctrl+p                    +                        ctrl+q</code></pre><p>绝对不能使用exit或者ctrl+d来退出，这样整个系统就退出了！！</p>
+<h2 id="4-宿主机和容器之间的文件传输"><a href="#4-宿主机和容器之间的文件传输" class="headerlink" title="4.宿主机和容器之间的文件传输"></a>4.<a href="https://blog.csdn.net/xtfge0915/article/details/52169445" target="_blank" rel="noopener">宿主机和容器之间的文件传输</a></h2><p>从主机复制到容器</p>
+<pre><code>sudo docker cp host_path containerID:container_path</code></pre><p>从容器复制到主机</p>
+<pre><code>sudo docker cp containerID:container_path host_path</code></pre>
       
     </div>
 
@@ -234,7 +215,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/23/auto-docker/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/A/auto-docker/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -248,7 +229,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/23/auto-docker/" class="post-title-link" itemprop="url">auto-docker</a>
+            <a href="/2020/06/27/A/auto-docker/" class="post-title-link" itemprop="url">A/auto-docker</a>
         </h2>
 
         <div class="post-meta">
@@ -258,8 +239,15 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-04-23 16:13:50" itemprop="dateCreated datePublished" datetime="2020-04-23T16:13:50+08:00">2020-04-23</time>
+              <time title="Created: 2020-06-27 22:33:50" itemprop="dateCreated datePublished" datetime="2020-06-27T22:33:50+08:00">2020-06-27</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-23 16:13:50" itemprop="dateModified" datetime="2020-04-23T16:13:50+08:00">2020-04-23</time>
+              </span>
 
           
 
@@ -318,7 +306,7 @@ ENTRYPOINT command param1 param2（shell中执行。</code></pre><p>配置容器
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/23/attention_docker/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/A/attention_dockerfile/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -332,7 +320,7 @@ ENTRYPOINT command param1 param2（shell中执行。</code></pre><p>配置容器
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/23/attention_docker/" class="post-title-link" itemprop="url">attention_docker</a>
+            <a href="/2020/06/27/A/attention_dockerfile/" class="post-title-link" itemprop="url">A/attention_dockerfile</a>
         </h2>
 
         <div class="post-meta">
@@ -342,71 +330,15 @@ ENTRYPOINT command param1 param2（shell中执行。</code></pre><p>配置容器
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-04-23 16:13:50" itemprop="dateCreated datePublished" datetime="2020-04-23T16:13:50+08:00">2020-04-23</time>
+              <time title="Created: 2020-06-27 22:33:50" itemprop="dateCreated datePublished" datetime="2020-06-27T22:33:50+08:00">2020-06-27</time>
             </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="ATTENTION-IN-DOCKER"><a href="#ATTENTION-IN-DOCKER" class="headerlink" title="ATTENTION IN DOCKER"></a>ATTENTION IN DOCKER</h1><h2 id="1-在docker删除image中"><a href="#1-在docker删除image中" class="headerlink" title="1.在docker删除image中"></a>1.在docker删除image中</h2><p><strong>有一部分容器使用的是相同的ID，因此不能通过删除ID来实现。</strong><br>比如 :  </p>
-<pre><code>docker  rmi 111111   // 111111代表着容器ID</code></pre><p>必须要通过删除容器名字来实现 如 ：</p>
-<pre><code>docker rmi hello   // hello代表着容器名字</code></pre><h2 id="2-在删除镜像前，需要先删除容器"><a href="#2-在删除镜像前，需要先删除容器" class="headerlink" title="2.在删除镜像前，需要先删除容器"></a>2.在删除镜像前，需要先删除容器</h2><pre><code>docker rm $(docker ps -aq)  </code></pre><p>-a 列出本地所有镜像，-q 只显示镜像ID</p>
-<h2 id="3-正确退出容器"><a href="#3-正确退出容器" class="headerlink" title="3.正确退出容器"></a>3.正确退出容器</h2><pre><code>ctrl+p                    +                        ctrl+q</code></pre><p>绝对不能使用exit或者ctrl+d来退出，这样整个系统就退出了！！</p>
-<h2 id="4-宿主机和容器之间的文件传输"><a href="#4-宿主机和容器之间的文件传输" class="headerlink" title="4.宿主机和容器之间的文件传输"></a>4.<a href="https://blog.csdn.net/xtfge0915/article/details/52169445" target="_blank" rel="noopener">宿主机和容器之间的文件传输</a></h2><p>从主机复制到容器</p>
-<pre><code>sudo docker cp host_path containerID:container_path</code></pre><p>从容器复制到主机</p>
-<pre><code>sudo docker cp containerID:container_path host_path</code></pre>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/23/attention_dockerfile/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/23/attention_dockerfile/" class="post-title-link" itemprop="url">attention_dockerfile</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-23 16:13:50" itemprop="dateModified" datetime="2020-04-23T16:13:50+08:00">2020-04-23</time>
               </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-23 16:13:50" itemprop="dateCreated datePublished" datetime="2020-04-23T16:13:50+08:00">2020-04-23</time>
-            </span>
 
           
 
@@ -440,7 +372,7 @@ ENTRYPOINT command param1 param2（shell中执行。</code></pre><p>配置容器
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/23/process/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/A/process/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -454,7 +386,7 @@ ENTRYPOINT command param1 param2（shell中执行。</code></pre><p>配置容器
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/23/process/" class="post-title-link" itemprop="url">process</a>
+            <a href="/2020/06/27/A/process/" class="post-title-link" itemprop="url">A/process</a>
         </h2>
 
         <div class="post-meta">
@@ -464,8 +396,15 @@ ENTRYPOINT command param1 param2（shell中执行。</code></pre><p>配置容器
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-04-23 16:13:50" itemprop="dateCreated datePublished" datetime="2020-04-23T16:13:50+08:00">2020-04-23</time>
+              <time title="Created: 2020-06-27 22:33:50" itemprop="dateCreated datePublished" datetime="2020-06-27T22:33:50+08:00">2020-06-27</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-23 16:13:50" itemprop="dateModified" datetime="2020-04-23T16:13:50+08:00">2020-04-23</time>
+              </span>
 
           
 
@@ -483,6 +422,177 @@ ENTRYPOINT command param1 param2（shell中执行。</code></pre><p>配置容器
 <h2 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h2><p>阻塞是一种被动的方式，由于获取资源获取不到而引起的等待。</p>
 <h2 id="睡眠"><a href="#睡眠" class="headerlink" title="睡眠"></a>睡眠</h2><p>睡眠的确是一种主动的方式</p>
 <h2 id="挂起"><a href="#挂起" class="headerlink" title="挂起"></a>挂起</h2><p>挂起也是一种主动的行为，是系统层面对进程作出的合理操作。<br>挂起的标志就是换出到外存，在外存的进程肯定是不能执行的，所以挂起的目的就很明显，在内存资源不足时，需要把一些进程换出到外存，给着急运行的进程腾地方。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/A/udp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/27/A/udp/" class="post-title-link" itemprop="url">A/udp</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-27 22:33:50" itemprop="dateCreated datePublished" datetime="2020-06-27T22:33:50+08:00">2020-06-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-23 16:13:50" itemprop="dateModified" datetime="2020-04-23T16:13:50+08:00">2020-04-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="UDP-for-VPN"><a href="#UDP-for-VPN" class="headerlink" title="UDP for VPN"></a>UDP for VPN</h1><h2 id="nc"><a href="#nc" class="headerlink" title="nc"></a>nc</h2><pre><code>dzx@dzx-N8xEJEK:~$ nc -vuz 192.168.209.121 123
+Connection to 192.168.209.121 123 port [udp/ntp] succeeded!</code></pre><p>实际使用时可以只用-u参数，-u代表udp协议 ，-v代表详细模式，-z代表只监测端口不发送数据</p>
+<p>##</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/06/spark_1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/06/spark_1/" class="post-title-link" itemprop="url">spark_1</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-06 15:54:47" itemprop="dateCreated datePublished" datetime="2020-05-06T15:54:47+08:00">2020-05-06</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="SPARK-学习之路"><a href="#SPARK-学习之路" class="headerlink" title="SPARK 学习之路"></a>SPARK 学习之路</h1><h2 id="基础了解-amp-Scala"><a href="#基础了解-amp-Scala" class="headerlink" title="基础了解 &amp; Scala"></a>基础了解 &amp; Scala</h2><h3 id="函数式编程与命令式编程"><a href="#函数式编程与命令式编程" class="headerlink" title="函数式编程与命令式编程"></a>函数式编程与命令式编程</h3><p><strong>命令式编程</strong>: 主要用于C++，Java，Python 这一种输入一条命令，然后程序对应执行的这种情况。并发度并不高，由于访存一致性原因，在并发时候，需要考虑加锁，所以效率不高。</p>
+<p><strong>函数式编程</strong>: 用于spark,hadoop等语言。其中内部变量，大部分是不可以更改的，所以就不存在什么访存一致性。并发度更高。特别是由于在CPU天花板之后，CPU转向多核发展，所以这种编程就开始使用广泛了。</p>
+<h3 id="Scala-运行"><a href="#Scala-运行" class="headerlink" title="Scala 运行"></a>Scala 运行</h3><p>在Scala 交互程序内部</p>
+<pre><code>load ./hello.scala</code></pre><p>在shell窗口时候<br><strong>1.编译</strong></p>
+<pre><code>scalac Hello.scala</code></pre><p><strong>2.运行</strong><br>运行生成的.class文件</p>
+<pre><code>scala Hello.class</code></pre><p>因为scalac 编译出来的也是.class文件，所以 也可以用java来运行,但是需要在路径中加入scala包</p>
+<pre><code>java -classpath .:/usr/local/scala/lib/scala.library.jar Hello.class</code></pre><h3 id="Scala-语法"><a href="#Scala-语法" class="headerlink" title="Scala 语法"></a>Scala 语法</h3><table>
+<thead>
+<tr>
+<th>基本类型</th>
+<th>是否可变</th>
+<th>赋初值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>val</td>
+<td>不可变</td>
+<td>val a:Int = 5 (val a = 5)</td>
+</tr>
+<tr>
+<td>var</td>
+<td>可变</td>
+<td>var a:Int = 5 (var a = 5)</td>
+</tr>
+</tbody></table>
+<p>scala 他也会自动的判断数据类型</p>
+<p><strong>scala 的运算实际上是方法的运算</strong>:</p>
+<pre><code>3 + 5   等效与 (3).+ 5
+即 A 方法 B  = A.方法（B）</code></pre><p><strong><em>scala 类与对象</em></strong><br><code>类</code>：</p>
+<pre><code>Class class_dzx {
+    val name_1 = &quot;Hello World&quot;
+}</code></pre><p><code>对象</code>：</p>
+<pre><code>Object object_dzx {
+    val name_2 = &quot;Hello Ting&quot;
+}</code></pre><p>如果 <strong>类与对象</strong> 同名，并且在同一个文件里面，那他们可以相互访问其内部的成员和方法。称之为<strong>伴生</strong>。</p>
+<p>对于类：</p>
+<pre><code>Class class_dzx(var name:String) {
+    val name_1 = &quot;Hello World&quot;
+    def this(num_1:Int) {
+        this()
+        println(&quot;this is the 第一层辅助构造器&quot;)
+    }
+    def this(num_1:Int,num_2:Int) {
+        this(num_1)
+        println(&quot;this is the 第二层辅助构造器&quot;)
+    }
+}</code></pre><p>在类中 用var 定义的name 它会自动的创建读写方法。<br><strong><em>主构造器&lt;–辅助构造器&lt;–辅助构造器</em></strong><br>处于底层构造器主要先引入上一层构造器</p>
 
       
     </div>
@@ -570,66 +680,6 @@ Z=僵尸进程</code></pre><h2 id="交换分区"><a href="#交换分区" class="
 <h2 id="top命令"><a href="#top命令" class="headerlink" title="top命令"></a><strong><em>top命令</em></strong></h2><p>top运行时候可以输入的命令</p>
 <pre><code>i 忽略闲置和僵死进程。这是一个开关式命令
 P 根据CPU使用百分比大小进行排序</code></pre>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/23/udp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/23/udp/" class="post-title-link" itemprop="url">udp</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-23 16:13:50" itemprop="dateCreated datePublished" datetime="2020-04-23T16:13:50+08:00">2020-04-23</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="UDP-for-VPN"><a href="#UDP-for-VPN" class="headerlink" title="UDP for VPN"></a>UDP for VPN</h1><h2 id="nc"><a href="#nc" class="headerlink" title="nc"></a>nc</h2><pre><code>dzx@dzx-N8xEJEK:~$ nc -vuz 192.168.209.121 123
-Connection to 192.168.209.121 123 port [udp/ntp] succeeded!</code></pre><p>实际使用时可以只用-u参数，-u代表udp协议 ，-v代表详细模式，-z代表只监测端口不发送数据</p>
-<p>##</p>
-
       
     </div>
 

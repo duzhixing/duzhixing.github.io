@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="ATTENTION IN DOCKER1.在docker删除image中有一部分容器使用的是相同的ID，因此不能通过删除ID来实现。比如 :   docker  rmi 111111   &#x2F;&#x2F; 111111代表着容器ID必须要通过删除容器名字来实现 如 ： docker rmi hello   &#x2F;&#x2F; hello代表着容器名字2.在删除镜像前，需要先删除容器docker rm $(docker ps">
+  <meta name="description" content="SPARK 学习之路基础了解 &amp; Scala函数式编程与命令式编程命令式编程: 主要用于C++，Java，Python 这一种输入一条命令，然后程序对应执行的这种情况。并发度并不高，由于访存一致性原因，在并发时候，需要考虑加锁，所以效率不高。 函数式编程: 用于spark,hadoop等语言。其中内部变量，大部分是不可以更改的，所以就不存在什么访存一致性。并发度更高。特别是由于在CPU天花">
 <meta property="og:type" content="article">
-<meta property="og:title" content="attention_docker">
-<meta property="og:url" content="http://yoursite.com/2020/04/23/attention_docker/index.html">
+<meta property="og:title" content="spark_1">
+<meta property="og:url" content="http://yoursite.com/2020/05/06/spark_1/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="ATTENTION IN DOCKER1.在docker删除image中有一部分容器使用的是相同的ID，因此不能通过删除ID来实现。比如 :   docker  rmi 111111   &#x2F;&#x2F; 111111代表着容器ID必须要通过删除容器名字来实现 如 ： docker rmi hello   &#x2F;&#x2F; hello代表着容器名字2.在删除镜像前，需要先删除容器docker rm $(docker ps">
+<meta property="og:description" content="SPARK 学习之路基础了解 &amp; Scala函数式编程与命令式编程命令式编程: 主要用于C++，Java，Python 这一种输入一条命令，然后程序对应执行的这种情况。并发度并不高，由于访存一致性原因，在并发时候，需要考虑加锁，所以效率不高。 函数式编程: 用于spark,hadoop等语言。其中内部变量，大部分是不可以更改的，所以就不存在什么访存一致性。并发度更高。特别是由于在CPU天花">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-23T08:13:50.661Z">
-<meta property="article:modified_time" content="2020-04-23T08:13:50.661Z">
+<meta property="article:published_time" content="2020-05-06T07:54:47.644Z">
+<meta property="article:modified_time" content="2020-05-06T07:54:47.644Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/04/23/attention_docker/">
+<link rel="canonical" href="http://yoursite.com/2020/05/06/spark_1/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>attention_docker | Hexo</title>
+  <title>spark_1 | Hexo</title>
   
 
 
@@ -150,7 +150,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/23/attention_docker/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/06/spark_1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -163,7 +163,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          attention_docker
+          spark_1
         </h1>
 
         <div class="post-meta">
@@ -173,7 +173,7 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-04-23 16:13:50" itemprop="dateCreated datePublished" datetime="2020-04-23T16:13:50+08:00">2020-04-23</time>
+              <time title="Created: 2020-05-06 15:54:47" itemprop="dateCreated datePublished" datetime="2020-05-06T15:54:47+08:00">2020-05-06</time>
             </span>
 
           
@@ -187,13 +187,54 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="ATTENTION-IN-DOCKER"><a href="#ATTENTION-IN-DOCKER" class="headerlink" title="ATTENTION IN DOCKER"></a>ATTENTION IN DOCKER</h1><h2 id="1-在docker删除image中"><a href="#1-在docker删除image中" class="headerlink" title="1.在docker删除image中"></a>1.在docker删除image中</h2><p><strong>有一部分容器使用的是相同的ID，因此不能通过删除ID来实现。</strong><br>比如 :  </p>
-<pre><code>docker  rmi 111111   // 111111代表着容器ID</code></pre><p>必须要通过删除容器名字来实现 如 ：</p>
-<pre><code>docker rmi hello   // hello代表着容器名字</code></pre><h2 id="2-在删除镜像前，需要先删除容器"><a href="#2-在删除镜像前，需要先删除容器" class="headerlink" title="2.在删除镜像前，需要先删除容器"></a>2.在删除镜像前，需要先删除容器</h2><pre><code>docker rm $(docker ps -aq)  </code></pre><p>-a 列出本地所有镜像，-q 只显示镜像ID</p>
-<h2 id="3-正确退出容器"><a href="#3-正确退出容器" class="headerlink" title="3.正确退出容器"></a>3.正确退出容器</h2><pre><code>ctrl+p                    +                        ctrl+q</code></pre><p>绝对不能使用exit或者ctrl+d来退出，这样整个系统就退出了！！</p>
-<h2 id="4-宿主机和容器之间的文件传输"><a href="#4-宿主机和容器之间的文件传输" class="headerlink" title="4.宿主机和容器之间的文件传输"></a>4.<a href="https://blog.csdn.net/xtfge0915/article/details/52169445" target="_blank" rel="noopener">宿主机和容器之间的文件传输</a></h2><p>从主机复制到容器</p>
-<pre><code>sudo docker cp host_path containerID:container_path</code></pre><p>从容器复制到主机</p>
-<pre><code>sudo docker cp containerID:container_path host_path</code></pre>
+        <h1 id="SPARK-学习之路"><a href="#SPARK-学习之路" class="headerlink" title="SPARK 学习之路"></a>SPARK 学习之路</h1><h2 id="基础了解-amp-Scala"><a href="#基础了解-amp-Scala" class="headerlink" title="基础了解 &amp; Scala"></a>基础了解 &amp; Scala</h2><h3 id="函数式编程与命令式编程"><a href="#函数式编程与命令式编程" class="headerlink" title="函数式编程与命令式编程"></a>函数式编程与命令式编程</h3><p><strong>命令式编程</strong>: 主要用于C++，Java，Python 这一种输入一条命令，然后程序对应执行的这种情况。并发度并不高，由于访存一致性原因，在并发时候，需要考虑加锁，所以效率不高。</p>
+<p><strong>函数式编程</strong>: 用于spark,hadoop等语言。其中内部变量，大部分是不可以更改的，所以就不存在什么访存一致性。并发度更高。特别是由于在CPU天花板之后，CPU转向多核发展，所以这种编程就开始使用广泛了。</p>
+<h3 id="Scala-运行"><a href="#Scala-运行" class="headerlink" title="Scala 运行"></a>Scala 运行</h3><p>在Scala 交互程序内部</p>
+<pre><code>load ./hello.scala</code></pre><p>在shell窗口时候<br><strong>1.编译</strong></p>
+<pre><code>scalac Hello.scala</code></pre><p><strong>2.运行</strong><br>运行生成的.class文件</p>
+<pre><code>scala Hello.class</code></pre><p>因为scalac 编译出来的也是.class文件，所以 也可以用java来运行,但是需要在路径中加入scala包</p>
+<pre><code>java -classpath .:/usr/local/scala/lib/scala.library.jar Hello.class</code></pre><h3 id="Scala-语法"><a href="#Scala-语法" class="headerlink" title="Scala 语法"></a>Scala 语法</h3><table>
+<thead>
+<tr>
+<th>基本类型</th>
+<th>是否可变</th>
+<th>赋初值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>val</td>
+<td>不可变</td>
+<td>val a:Int = 5 (val a = 5)</td>
+</tr>
+<tr>
+<td>var</td>
+<td>可变</td>
+<td>var a:Int = 5 (var a = 5)</td>
+</tr>
+</tbody></table>
+<p>scala 他也会自动的判断数据类型</p>
+<p><strong>scala 的运算实际上是方法的运算</strong>:</p>
+<pre><code>3 + 5   等效与 (3).+ 5
+即 A 方法 B  = A.方法（B）</code></pre><p><strong><em>scala 类与对象</em></strong><br><code>类</code>：</p>
+<pre><code>Class class_dzx {
+    val name_1 = &quot;Hello World&quot;
+}</code></pre><p><code>对象</code>：</p>
+<pre><code>Object object_dzx {
+    val name_2 = &quot;Hello Ting&quot;
+}</code></pre><p>如果 <strong>类与对象</strong> 同名，并且在同一个文件里面，那他们可以相互访问其内部的成员和方法。称之为<strong>伴生</strong>。</p>
+<p>对于类：</p>
+<pre><code>Class class_dzx(var name:String) {
+    val name_1 = &quot;Hello World&quot;
+    def this(num_1:Int) {
+        this()
+        println(&quot;this is the 第一层辅助构造器&quot;)
+    }
+    def this(num_1:Int,num_2:Int) {
+        this(num_1)
+        println(&quot;this is the 第二层辅助构造器&quot;)
+    }
+}</code></pre><p>在类中 用var 定义的name 它会自动的创建读写方法。<br><strong><em>主构造器&lt;–辅助构造器&lt;–辅助构造器</em></strong><br>处于底层构造器主要先引入上一层构造器</p>
+
     </div>
 
     
@@ -208,12 +249,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/04/23/attention_dockerfile/" rel="prev" title="attention_dockerfile">
-      <i class="fa fa-chevron-left"></i> attention_dockerfile
+    <a href="/2020/04/23/top/" rel="prev" title="top">
+      <i class="fa fa-chevron-left"></i> top
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/04/23/auto-docker/" rel="next" title="auto-docker">
-      auto-docker <i class="fa fa-chevron-right"></i>
+    <a href="/2020/06/27/A/udp/" rel="next" title="A/udp">
+      A/udp <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -273,7 +314,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ATTENTION-IN-DOCKER"><span class="nav-number">1.</span> <span class="nav-text">ATTENTION IN DOCKER</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-在docker删除image中"><span class="nav-number">1.1.</span> <span class="nav-text">1.在docker删除image中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-在删除镜像前，需要先删除容器"><span class="nav-number">1.2.</span> <span class="nav-text">2.在删除镜像前，需要先删除容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-正确退出容器"><span class="nav-number">1.3.</span> <span class="nav-text">3.正确退出容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-宿主机和容器之间的文件传输"><span class="nav-number">1.4.</span> <span class="nav-text">4.宿主机和容器之间的文件传输</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SPARK-学习之路"><span class="nav-number">1.</span> <span class="nav-text">SPARK 学习之路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础了解-amp-Scala"><span class="nav-number">1.1.</span> <span class="nav-text">基础了解 &amp; Scala</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数式编程与命令式编程"><span class="nav-number">1.1.1.</span> <span class="nav-text">函数式编程与命令式编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scala-运行"><span class="nav-number">1.1.2.</span> <span class="nav-text">Scala 运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scala-语法"><span class="nav-number">1.1.3.</span> <span class="nav-text">Scala 语法</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
