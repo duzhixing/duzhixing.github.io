@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Chap3 知识汇总chap3.3Alexnet ReLU 激活函数：训练中收敛速度更快。（比sigmod函数）  LRN局部响应归一化：提升较大响应，抑制较小响应 （现在被证明无明显效果）  MaxPool: 避免特征值被平均池化，提升代码鲁棒性  Dropout: 随机舍弃部分隐层节点，避免过拟合   VGGVGG 实现更深的网络VGG16 一共16层，不方便训练。他的实现方法是 先训练一部分">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/Aics/chap3.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Chap3 知识汇总chap3.3Alexnet ReLU 激活函数：训练中收敛速度更快。（比sigmod函数）  LRN局部响应归一化：提升较大响应，抑制较小响应 （现在被证明无明显效果）  MaxPool: 避免特征值被平均池化，提升代码鲁棒性  Dropout: 随机舍弃部分隐层节点，避免过拟合   VGGVGG 实现更深的网络VGG16 一共16层，不方便训练。他的实现方法是 先训练一部分">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://home.ustc.edu.cn/~dzx/Picture/Aics/small_core_1.png">
+<meta property="og:image" content="c:/Users%5Cdzx1%5CDesktop%5C%E7%A0%94%E4%B8%80%E4%B8%8B%5C%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%AF%BC%E8%AE%BA%5Cpicture%5Csmall_core_2.png">
+<meta property="og:image" content="c:/Users%5Cdzx1%5CDesktop%5C%E7%A0%94%E4%B8%80%E4%B8%8B%5C%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%AF%BC%E8%AE%BA%5Cpicture%5Csoftmax_%E8%BE%85%E5%8A%A9%E7%BD%91%E7%BB%9C.png">
+<meta property="article:published_time" content="2020-06-27T14:40:46.045Z">
+<meta property="article:modified_time" content="2020-06-27T14:40:46.045Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://home.ustc.edu.cn/~dzx/Picture/Aics/small_core_1.png">
+
+<link rel="canonical" href="http://yoursite.com/Aics/chap3">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : false,
+    lang   : 'en'
+  };
+</script>
+
+  <title> | Hexo
+</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content page posts-expand">
+            
+
+    
+    
+    
+    <div class="post-block" lang="en">
+      <header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">
+</h1>
+
+<div class="post-meta">
+  
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <h1 id="Chap3-知识汇总"><a href="#Chap3-知识汇总" class="headerlink" title="Chap3 知识汇总"></a>Chap3 知识汇总</h1><h2 id="chap3-3"><a href="#chap3-3" class="headerlink" title="chap3.3"></a>chap3.3</h2><h3 id="Alexnet"><a href="#Alexnet" class="headerlink" title="Alexnet"></a>Alexnet</h3><ul>
+<li><p>ReLU 激活函数：训练中收敛速度更快。（比sigmod函数）</p>
+</li>
+<li><p>LRN局部响应归一化：提升较大响应，抑制较小响应 （现在被证明无明显效果）</p>
+</li>
+<li><p>MaxPool: 避免特征值被平均池化，提升代码鲁棒性</p>
+</li>
+<li><p>Dropout: 随机舍弃部分隐层节点，避免过拟合</p>
+</li>
+</ul>
+<h3 id="VGG"><a href="#VGG" class="headerlink" title="VGG"></a>VGG</h3><p>VGG 实现更深的网络<br>VGG16 一共16层，不方便训练。<br>他的实现方法是 先训练<code>一部分层</code>，比如11层，得到的数据中部分作为初始值，然后在初始条件下进行重新训练<code>更深</code>的神经网络。(但不适合更深的神经网络)</p>
+<p>==VGG 使用更小的卷积的原因==:</p>
+<ul>
+<li>5x5的卷积核，可以用两个3x3的卷积核替代</li>
+</ul>
+<p><img src="http://home.ustc.edu.cn/~dzx/Picture/Aics/small_core_1.png" alt="小的卷积可以替代大的卷积"></p>
+<ul>
+<li>干同样的事情所需要更少的参数，计算量存储变小了，还可以防止过拟合</li>
+</ul>
+<p><img src="C:/Users%5Cdzx1%5CDesktop%5C%E7%A0%94%E4%B8%80%E4%B8%8B%5C%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%AF%BC%E8%AE%BA%5Cpicture%5Csmall_core_2.png" alt="更少的参数"></p>
+<h2 id="chap3-4"><a href="#chap3-4" class="headerlink" title="chap3.4"></a>chap3.4</h2><h3 id="Inception"><a href="#Inception" class="headerlink" title="Inception"></a>Inception</h3><p>==1x1的卷积核可以更改通道c的大小==</p>
+<p>辅助神经网络防止过拟合。</p>
+<p><img src="C:/Users%5Cdzx1%5CDesktop%5C%E7%A0%94%E4%B8%80%E4%B8%8B%5C%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%AF%BC%E8%AE%BA%5Cpicture%5Csoftmax_%E8%BE%85%E5%8A%A9%E7%BD%91%E7%BB%9C.png" alt="辅助神经网络"><br>越接近输入的地方，更新权重越小，越不好更新。</p>
+<h3 id="BN-Inception"><a href="#BN-Inception" class="headerlink" title="BN-Inception"></a>BN-Inception</h3><p><strong>BathNorm 函数</strong>：</p>
+<ul>
+<li>normalize</li>
+</ul>
+<p>将激活层输入部分分布在==激活函数的敏感部分==。</p>
+<ul>
+<li>scale and shift(bias)</li>
+</ul>
+<p>归一化后的输入是的网络的表达能力下降。通过增加训练参数提高网络的表达能力</p>
+<p>BathNorm 函数 还可以将训练的学习率提高到5倍，乃至30倍。训练速度可以得到明显加快。</p>
+<h3 id="Inception-v3"><a href="#Inception-v3" class="headerlink" title="Inception-v3"></a>Inception-v3</h3><p><strong>Factorization(因式分解的思想)</strong>（inception-v3）：</p>
+<p>将3x3的卷积拆分成1x3和3x1的卷积，减少了参数数量，同时通过<strong>非对称</strong>的卷积结构拆分增加了特征多样性。</p>
+<h2 id="chap3-5"><a href="#chap3-5" class="headerlink" title="chap3.5"></a>chap3.5</h2><h3 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h3><p>之前遇到的<strong>问题</strong>：更深的卷积神经网络的误差比较大。</p>
+<p><strong>梯度消失？</strong> No！使用BathNorm课有效地缓解梯度消失<br><strong>过拟合？</strong> No！更深的神经网络在训练集的误差同样更高。</p>
+<p>==神经网络退化==：收敛到极值点而非最值点。（陷入局部最优）</p>
+
+      </div>
+      
+      
+      
+    </div>
+    
+
+    
+    
+    
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Chap3-知识汇总"><span class="nav-number">1.</span> <span class="nav-text">Chap3 知识汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#chap3-3"><span class="nav-number">1.1.</span> <span class="nav-text">chap3.3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Alexnet"><span class="nav-number">1.1.1.</span> <span class="nav-text">Alexnet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VGG"><span class="nav-number">1.1.2.</span> <span class="nav-text">VGG</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chap3-4"><span class="nav-number">1.2.</span> <span class="nav-text">chap3.4</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Inception"><span class="nav-number">1.2.1.</span> <span class="nav-text">Inception</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BN-Inception"><span class="nav-number">1.2.2.</span> <span class="nav-text">BN-Inception</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Inception-v3"><span class="nav-number">1.2.3.</span> <span class="nav-text">Inception-v3</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chap3-5"><span class="nav-number">1.3.</span> <span class="nav-text">chap3.5</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ResNet"><span class="nav-number">1.3.1.</span> <span class="nav-text">ResNet</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
