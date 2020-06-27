@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Auto-Docker-Build1. 新建文件Dockerfile写入如下内容，构建命令非常简单：从谷歌的镜像开始构建，然后加上维护人信息 From ubuntu:v1.1.1 MAINTAINER dzx &lt;dzx@qq.com&gt;2. 提交版本git add Dockerfile   git commit -m &quot;add Dockerfile&quot;一定要打上tag，">
+  <meta name="description" content="WRITE DOCKERFILE ATTENTION1.在Ubuntu的Docker官方镜像中是没有缓存Apt的软件包列表的。因此在做其他任何基础软件的安装前，都需要至少先做一次 apt-get update。2.docker 中安装过程需要判断，用-y来默认表示同意。 apt install -y git -y代表着yes">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Auto-Docker-Build">
-<meta property="og:url" content="http://yoursite.com/2020/06/28/docker/auto-docker/index.html">
+<meta property="og:title" content="WRITE DOCKERFILE ATTENTION">
+<meta property="og:url" content="http://yoursite.com/2020/06/26/docker/attention_dockerfile/index.html">
 <meta property="og:site_name" content="斗志">
-<meta property="og:description" content="Auto-Docker-Build1. 新建文件Dockerfile写入如下内容，构建命令非常简单：从谷歌的镜像开始构建，然后加上维护人信息 From ubuntu:v1.1.1 MAINTAINER dzx &lt;dzx@qq.com&gt;2. 提交版本git add Dockerfile   git commit -m &quot;add Dockerfile&quot;一定要打上tag，">
+<meta property="og:description" content="WRITE DOCKERFILE ATTENTION1.在Ubuntu的Docker官方镜像中是没有缓存Apt的软件包列表的。因此在做其他任何基础软件的安装前，都需要至少先做一次 apt-get update。2.docker 中安装过程需要判断，用-y来默认表示同意。 apt install -y git -y代表着yes">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-06-28T04:12:57.000Z">
-<meta property="article:modified_time" content="2020-06-27T16:08:14.681Z">
+<meta property="article:published_time" content="2020-06-26T04:12:57.000Z">
+<meta property="article:modified_time" content="2020-06-27T16:44:38.581Z">
 <meta property="article:author" content="douzhi">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/06/28/docker/auto-docker/">
+<link rel="canonical" href="http://yoursite.com/2020/06/26/docker/attention_dockerfile/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>Auto-Docker-Build | 斗志</title>
+  <title>WRITE DOCKERFILE ATTENTION | 斗志</title>
   
 
 
@@ -166,7 +166,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/28/docker/auto-docker/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/26/docker/attention_dockerfile/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="http://123.57.5.52:8080/Firefox_wallpaper.png">
@@ -179,7 +179,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Auto-Docker-Build
+          WRITE DOCKERFILE ATTENTION
         </h1>
 
         <div class="post-meta">
@@ -188,10 +188,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-06-28 12:12:57 / 修改时间：00:08:14" itemprop="dateCreated datePublished" datetime="2020-06-28T12:12:57+08:00">2020-06-28</time>
+              <time title="创建时间：2020-06-26 12:12:57" itemprop="dateCreated datePublished" datetime="2020-06-26T12:12:57+08:00">2020-06-26</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-28 00:44:38" itemprop="dateModified" datetime="2020-06-28T00:44:38+08:00">2020-06-28</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -213,34 +219,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Auto-Docker-Build"><a href="#Auto-Docker-Build" class="headerlink" title="Auto-Docker-Build"></a><a href="https://www.jianshu.com/p/21cd9aeee12b" target="_blank" rel="noopener">Auto-Docker-Build</a></h1><h2 id="1-新建文件Dockerfile"><a href="#1-新建文件Dockerfile" class="headerlink" title="1. 新建文件Dockerfile"></a>1. 新建文件Dockerfile</h2><p>写入如下内容，构建命令非常简单：从谷歌的镜像开始构建，然后加上维护人信息</p>
-<pre><code>From ubuntu:v1.1.1
-MAINTAINER dzx &lt;dzx@qq.com&gt;</code></pre><h2 id="2-提交版本"><a href="#2-提交版本" class="headerlink" title="2. 提交版本"></a>2. 提交版本</h2><pre><code>git add Dockerfile  
-git commit -m &quot;add Dockerfile&quot;</code></pre><h3 id="一定要打上tag，并按照如下格式"><a href="#一定要打上tag，并按照如下格式" class="headerlink" title="一定要打上tag，并按照如下格式"></a>一定要打上tag，并按照如下格式</h3><pre><code>git tag -a release-v1.12.3 -m &quot;version 1.12.3&quot;</code></pre><h2 id="3-将tag对应版本，push到仓库，就会开始自动构建过程"><a href="#3-将tag对应版本，push到仓库，就会开始自动构建过程" class="headerlink" title="3. 将tag对应版本，push到仓库，就会开始自动构建过程"></a>3. 将tag对应版本，push到仓库，就会开始自动构建过程</h2><pre><code>git push origin release-v1.12.3</code></pre><p>通常的git push不会将标签对象提交到git服务器，我们需要进行显式的操作</p>
-<pre><code>git push origin v0.1.2 # 将v0.1.2标签提交到git服务器
-git push origin –tags # 将本地所有标签一次性提交到git服务器</code></pre><h1 id="Dockefile-Grammar"><a href="#Dockefile-Grammar" class="headerlink" title="Dockefile Grammar"></a><a href="https://www.jianshu.com/p/5f4b1ade9dfc" target="_blank" rel="noopener">Dockefile Grammar</a></h1><h2 id="RUN"><a href="#RUN" class="headerlink" title="RUN"></a>RUN</h2><p>RUN命令是Dockerfile执行命令的核心部分。它接受命令作为参数并用于创建镜像。不像CMD命令，RUN命令用于创建镜像（在之前commit的层之上形成新的层）<br>格式为Run 或者  </p>
-<pre><code>Run [“executable” ,”Param1”, “param2”]</code></pre><p>前者在shell终端上运行，即/bin/sh -C，后者使用exec运行。<br>例如：</p>
-<pre><code>RUN [“/bin/bash”, “-c”,”echo hello”]</code></pre><h2 id="USER"><a href="#USER" class="headerlink" title="USER"></a>USER</h2><p>格式为 USER daemon 。<br>指定运行容器时的用户名或UID，后续的 RUN 也会使用指定用户。<br>当服务不需要管理员权限时，可以通过该命令指定运行用户。并且可以在之前创建所需要的用户。<br>例如：</p>
-<pre><code>RUN groupadd -r postgres &amp;&amp; useradd -r -g postgres postgres 。</code></pre><p>要临时获取管理员权限可以使用 gosu ，而不推荐 sudo</p>
-<h2 id="VOLUME"><a href="#VOLUME" class="headerlink" title="VOLUME"></a>VOLUME</h2><p>VOLUME命令用于让你的容器访问宿主机上的目录。<br>格式为</p>
-<pre><code>VOLUME [“/data”] </code></pre><p>创建一个可以从本地主机或其他容器挂载的挂载点，一般用来存放数据库和需要保持的数据等。</p>
-<h2 id="WORKDIR"><a href="#WORKDIR" class="headerlink" title="WORKDIR"></a>WORKDIR</h2><p>WORKDIR命令用于设置CMD指明的命令的运行目录。<br>格式为 WORKDIR /path/to/workdir 。<br>为后续的 RUN 、 CMD 、 ENTRYPOINT 指令配置工作目录。<br>可以使用多个 WORKDIR 指令，后续命令如果参数是相对路径，则会基于之前命令指定的路径</p>
-<pre><code>WORKDIR /a
-WORKDIR b
-WORKDIR c
-RUN pwd</code></pre><p>最终路径为 <code>/a/b/c</code></p>
-<h2 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a>CMD</h2><p>CMD 是容器运行时候开始的命令<br>CMD [“executable” ,”Param1”, “param2”]使用exec执行，推荐<br>CMD command param1 param2，在/bin/sh上执行<br>CMD [“Param1”, “param2”] 提供给ENTRYPOINT做默认参数。<br>每个容器只能执行一条CMD命令，多个CMD命令时，只最后一条被执行。</p>
-<h2 id="ENV"><a href="#ENV" class="headerlink" title="ENV"></a>ENV</h2><p>格式为 ENV 。 指定一个环境变量，会被后续 RUN 指令使用，并在容器运行时保持</p>
-<pre><code>ADD /my_app_folder /my_app_folder 
-ENV TZ &quot;Asia/Shanghai&quot;
-ENV LANG en_US.UTF-8
-ENV LC_ALL en_US.UTF-8</code></pre><h2 id="ADD"><a href="#ADD" class="headerlink" title="ADD"></a>ADD</h2><p>ADD命令有两个参数，源和目标。它的基本作用是从源系统的文件系统上复制文件到目标容器的文件系统。如果源是一个URL，那该URL的内容将被下载并复制到容器中。如果文件是可识别的压缩格式，则docker会帮忙解压缩。</p>
-<pre><code> Usage: ADD [source directory or URL] [destination directory]
-ADD /my_app_folder /my_app_folder </code></pre><h2 id="EXPOSE"><a href="#EXPOSE" class="headerlink" title="EXPOSE"></a>EXPOSE</h2><p>指定在docker允许时指定的端口进行转发</p>
-<h2 id="ENTRYPOINT"><a href="#ENTRYPOINT" class="headerlink" title="ENTRYPOINT"></a>ENTRYPOINT</h2><pre><code>ENTRYPOINT [&quot;executable&quot;, &quot;param1&quot;, &quot;param2&quot;]
-ENTRYPOINT command param1 param2（shell中执行。</code></pre><p>配置容器启动后执行的命令，并且不可被 docker run 提供的参数覆盖。</p>
-<p>每个 Dockerfile 中只能有一个 ENTRYPOINT，当指定多个时,”只有最后一个起效”</p>
-
+        <h1 id="WRITE-DOCKERFILE-ATTENTION"><a href="#WRITE-DOCKERFILE-ATTENTION" class="headerlink" title="WRITE DOCKERFILE ATTENTION"></a>WRITE DOCKERFILE ATTENTION</h1><p>1.在Ubuntu的Docker官方镜像中是没有缓存Apt的软件包列表的。因此在做其他任何基础软件的安装前，都需要至少先做一次</p>
+<pre><code>apt-get update。</code></pre><p>2.docker 中安装过程需要判断，用-y来默认表示同意。</p>
+<pre><code>apt install -y git -y代表着yes</code></pre>
     </div>
 
     
@@ -255,12 +236,12 @@ ENTRYPOINT command param1 param2（shell中执行。</code></pre><p>配置容器
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/06/28/docker/attention_docker/" rel="prev" title="ATTENTION IN DOCKER">
+    <a href="/2020/06/26/docker/attention_docker/" rel="prev" title="ATTENTION IN DOCKER">
       <i class="fa fa-chevron-left"></i> ATTENTION IN DOCKER
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/06/28/docker/attention_dockerfile/" rel="next" title="WRITE DOCKERFILE ATTENTION">
-      WRITE DOCKERFILE ATTENTION <i class="fa fa-chevron-right"></i>
+    <a href="/2020/06/27/Aics/chap1/" rel="next" title="Aics_Chap1">
+      Aics_Chap1 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -320,7 +301,7 @@ ENTRYPOINT command param1 param2（shell中执行。</code></pre><p>配置容器
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Auto-Docker-Build"><span class="nav-number">1.</span> <span class="nav-text">Auto-Docker-Build</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-新建文件Dockerfile"><span class="nav-number">1.1.</span> <span class="nav-text">1. 新建文件Dockerfile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-提交版本"><span class="nav-number">1.2.</span> <span class="nav-text">2. 提交版本</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一定要打上tag，并按照如下格式"><span class="nav-number">1.2.1.</span> <span class="nav-text">一定要打上tag，并按照如下格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-将tag对应版本，push到仓库，就会开始自动构建过程"><span class="nav-number">1.3.</span> <span class="nav-text">3. 将tag对应版本，push到仓库，就会开始自动构建过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dockefile-Grammar"><span class="nav-number">2.</span> <span class="nav-text">Dockefile Grammar</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RUN"><span class="nav-number">2.1.</span> <span class="nav-text">RUN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#USER"><span class="nav-number">2.2.</span> <span class="nav-text">USER</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VOLUME"><span class="nav-number">2.3.</span> <span class="nav-text">VOLUME</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WORKDIR"><span class="nav-number">2.4.</span> <span class="nav-text">WORKDIR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CMD"><span class="nav-number">2.5.</span> <span class="nav-text">CMD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ENV"><span class="nav-number">2.6.</span> <span class="nav-text">ENV</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ADD"><span class="nav-number">2.7.</span> <span class="nav-text">ADD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EXPOSE"><span class="nav-number">2.8.</span> <span class="nav-text">EXPOSE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ENTRYPOINT"><span class="nav-number">2.9.</span> <span class="nav-text">ENTRYPOINT</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#WRITE-DOCKERFILE-ATTENTION"><span class="nav-number">1.</span> <span class="nav-text">WRITE DOCKERFILE ATTENTION</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
