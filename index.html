@@ -133,7 +133,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">20</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">22</span></a>
 
   </li>
   </ul>
@@ -159,6 +159,242 @@
 
           <div class="content index posts-expand">
             
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/05/Advanced_network/algorithm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://123.57.5.52:8080/Firefox_wallpaper.png">
+      <meta itemprop="name" content="douzhi">
+      <meta itemprop="description" content="nice to meet you">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="斗志">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/05/Advanced_network/algorithm/" class="post-title-link" itemprop="url">Advanced_network 网络中使用的各种算法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-07-05 20:12:52 / 修改时间：19:06:11" itemprop="dateCreated datePublished" datetime="2020-07-05T20:12:52+08:00">2020-07-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Advanced-network/" itemprop="url" rel="index"><span itemprop="name">Advanced_network</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="网络中使用的各种算法"><a href="#网络中使用的各种算法" class="headerlink" title="网络中使用的各种算法"></a>网络中使用的各种算法</h1><h2 id="Dijkstra算法-又名最小生成树算法"><a href="#Dijkstra算法-又名最小生成树算法" class="headerlink" title="Dijkstra算法,又名最小生成树算法"></a>Dijkstra算法,又名最小生成树算法</h2><p>贪婪算法<br>时间复杂度是 O(V^2), V为顶点的数量</p>
+<ol>
+<li><p><code>目的</code>: 在无向图 G=(V,E) 中，假设每条边 E[i] 的长度为 w[i]，找到由顶点 V0 到其余各点的最短路径。（单源最短路径)</p>
+</li>
+<li><p><code>思想</code>: 设G=(V,E)是一个带权有向图，把图中顶点集合V分成两组，第一组为已求出最短路径的顶点集合（用S表示，初始时S中只有一个源点，以后每求得一条最短路径 , 就将加入到集合S中，直到全部顶点都加入到S中，算法就结束了），第二组为其余未确定最短路径的顶点集合（用U表示），按最短路径长度的递增次序依次把第二组的顶点加入S中。在加入的过程中，总保持从源点v到S中各顶点的最短路径长度不大于从源点v到U中任何顶点的最短路径长度。此外，每个顶点对应一个距离，S中的顶点的距离就是从v到此顶点的最短路径长度，U中的顶点的距离，是从v到此顶点只包括S中的顶点为中间顶点的当前最短路径长度。</p>
+</li>
+<li><p><code>重点</code>: 每次从 U 集合中选取那个<strong>最小的距离</strong>,加入到 S 中.</p>
+</li>
+</ol>
+<h2 id="Bellman-Ford-单源最短路径算法"><a href="#Bellman-Ford-单源最短路径算法" class="headerlink" title="Bellman-Ford 单源最短路径算法"></a>Bellman-Ford 单源最短路径算法</h2><p>这种<strong>用于路径矢量算法</strong><br>时间复杂度 O(V * E),V 为顶点数量,E为边数量</p>
+<ol>
+<li>创建源顶点 v 到图中所有顶点的距离的集合 distSet，为图中的所有顶点指定一个距离值，初始均为 Infinite，源顶点距离为 0；</li>
+<li>计算最短路径，执行 V - 1 次遍历；<br>对于图中的每条边：如果起点 u 的距离 d 加上边的权值 w 小于终点 v 的距离 d，则更新终点 v 的距离值 d；</li>
+<li>检测图中是否有负权边形成了环，遍历图中的所有边，计算 u 至 v 的距离，如果对于 v 存在更小的距离，则说明存在环；</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">BELLMAN-FORD(_G_, _w_, _s_)</span><br><span class="line"><span class="number">1</span>  INITIALIZE-SINGLE-SOURCE(_G_, _s_)</span><br><span class="line"><span class="number">2</span>  **<span class="keyword">for</span>** _i_ ← **<span class="number">1</span> to** |_V_[_G_]| - <span class="number">1</span></span><br><span class="line">3       **do for** each edge (_u_, _v_) ∈ _E_[_G_]</span><br><span class="line"><span class="number">4</span>              **<span class="function"><span class="keyword">do</span>** <span class="title">RELAX</span><span class="params">(_u_, _v_, _w_)</span></span></span><br><span class="line">5  **for** each edge (_u_, _v_) ∈ _E_[_G_]</span><br><span class="line"><span class="number">6</span>       **<span class="keyword">do</span> <span class="keyword">if</span>** _d_[_v_] &gt; _d_[_u_] + _w_(_u_, _v_)</span><br><span class="line"><span class="number">7</span>             **then <span class="keyword">return</span>** FALSE</span><br><span class="line"><span class="number">8</span>  **<span class="keyword">return</span>** TRUE</span><br></pre></td></tr></table></figure>
+<h2 id="Ford-Fulkerson-最大流算法"><a href="#Ford-Fulkerson-最大流算法" class="headerlink" title="Ford-Fulkerson 最大流算法"></a>Ford-Fulkerson 最大流算法</h2><p>(是一种贪婪算法)</p>
+<p><strong>最大流算法是解决如下问题:</strong> 在一个流里，有着每条边的运载能力限制，我最多能从源头运输多少数量到目的地。</p>
+<ol>
+<li><p>思想: 使用标号的方法不断寻找一个图上的 可<code>增广路径</code>并且进行调整，直到找不到可增广路径为止。距离矢量路由算法号召每个路由器在每次更新时发送它 的整个路由表，但仅仅给它的邻居。距离矢量路由算法倾向于路由循环，但比链路状态路由算法计算更简单。</p>
+</li>
+<li><p>考虑路径P：s-&gt;v0-&gt;v1-&gt;v2-&gt;… -&gt;vn -&gt;t，把它叫<code>增广路径</code>。在增广路径中找最大的流.</p>
+</li>
+<li><p>左边是残差网络,右边是更新后的原图.<br><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/algorithm_1.png" alt="algorithm"></p>
+</li>
+</ol>
+<p>另外一种增广路经:</p>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/algorithm_2.png" alt="algorithm_2"></p>
+<p>增广路径选取不同，过程可能不一样，但是最大流都是一样的，就是23.<br>采用Ford-Fulkerson算法，<strong>从0流量开始</strong>，生成残存网络，找到增广路径，从增广路径中找到最小的残存容量F，用F来更新原图，<br>得到新的原图后，<strong>循环</strong>上述过程直到残存网络中找不到增广路径。此时的原图中，就有了我们想求的最大流。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/04/Advanced_network/review/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="http://123.57.5.52:8080/Firefox_wallpaper.png">
+      <meta itemprop="name" content="douzhi">
+      <meta itemprop="description" content="nice to meet you">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="斗志">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/04/Advanced_network/review/" class="post-title-link" itemprop="url">Advanced_network 往年试卷解答纠错</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-04 20:12:52" itemprop="dateCreated datePublished" datetime="2020-07-04T20:12:52+08:00">2020-07-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-05 19:09:56" itemprop="dateModified" datetime="2020-07-05T19:09:56+08:00">2020-07-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Advanced-network/" itemprop="url" rel="index"><span itemprop="name">Advanced_network</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="往年试卷解答纠错"><a href="#往年试卷解答纠错" class="headerlink" title="往年试卷解答纠错"></a>往年试卷解答纠错</h1><h2 id="卷1"><a href="#卷1" class="headerlink" title="卷1"></a>卷1</h2><ul>
+<li><p>TCP/IP协议4层.不是五层.分别是: 应用层, 运输层, 网络层, 网络接口层</p>
+</li>
+<li><p>以太网:<br>  标准以太网: 10Mbps, IEEE 802.3<br>  快速以太网: 100Mbps, IEEE 802.3u</p>
+</li>
+<li><p>现在以太网都是采用: CSMA/CD 技术,无限网络采用CSMA/CA技术</p>
+</li>
+<li><p>IPv6 的格式是 128 比特. 用<code>:</code>分成八段, 然后用16进制表示, XXXX:XXXX…<br>IPv4 的格式是 32 比特 (4 * 8)</p>
+</li>
+<li><p>任意子网的 主机号 全1 为 这个网络的广播,<br>全0表示了 这个 网段.</p>
+<blockquote>
+<p>以 192.168.0.0/255.255.0.0 为例<br>192.168.255.255 表示 在这个网络的广播<br>192.168.0.0 代表着这个子网的网段</p>
+</blockquote>
+</li>
+<li><p>集线器不可以分割碰撞域<br>网桥可以分割碰撞域<br>路由器可以分割碰撞域,广播域</p>
+</li>
+<li><p>三种基本的数据交换方式</p>
+<blockquote>
+<p>电路交换：整个报文的比特流连续的从源点直达终点，好像在一个管道中传送。<br>报文交换：整个报文先传输到相邻的结点，全部存储下来后查找转发表，转发到下一个结点。<br>分组交换：单个分组(报文的一部分)传送到相邻结点，传送到相邻结点，存储下来后查找转发表，转发到下一个结点</p>
+</blockquote>
+</li>
+<li><p>香农定理给出了信道信息传送速率的上限（比特每秒）和信道信噪比及带宽的关系<br>信道容量Rmax与信道带宽W，信噪比S/N关系为： Rmax=W*log2(1+S/N)。注意这里的log2是以2为底的对数</p>
+</li>
+<li><p>曼彻斯特编码: 0: 低-&gt;高, 1: 高-&gt;低<br>差分曼彻斯特编码: 0: 表示有跳变, 1: 表示无跳变.(跳变指的是每个周期的起始位)</p>
+</li>
+<li><p>距离矢量名称的由来是因为路由是以矢量（距离，方向）的方式被通告出去的，这里的距离是根据度量来决定的。通俗点就是：往某个方向上的距离.<br>距离矢量路由算法是动态路由算法。它是这样工作的：每个路由器维护一张矢量表，<br>表中列出了当前已知的到 每个目标的最佳距离，以及所使用的线路。通过在邻居之间相互交换信息，路由器不断地更新它们内部的表</p>
+</li>
+<li><p>链路状态路由选择协议又称为最短路径优先协议或分布式数据库协议,它基于Edsger Dijkstra的最短路径优先（SPF）算法。<br>算法易理解。链路状态协议从网络或者网络的限定区域内的所有其他路由器处收集信息，<br>最终每个链路状态路由器上都有一个相同的有关网络的信息。并且每台路由器都可以独立的计算各自的最优路径。</p>
+</li>
+<li><p>TCP 首部有长度字段的原因是, TCP首部由于选项,导致长度不定.</p>
+</li>
+<li><p>无限局域网使用CSMA/CA,而不是用CSMA/CD的原因:</p>
+<blockquote>
+<ol>
+<li>CSMA/CD要求站点在发送数据的同时,也要不间断的检测信道,这种功能在无限局域网中花费巨大</li>
+<li>无限电波向所有方向传输数据,且传播距离受限,在接收端仍然有冲突可能,从而产生隐藏站问题和暴露站问题.(冲突检测不完全)</li>
+</ol>
+</blockquote>
+<ol>
+<li><p><code>隐藏站</code>问题:<br>假设有3无线通信站ABC如下所示：<br>A        B         C<br>其中B在C的无线电波范围内，但A不在C的无线电波范围内。此时C正在向B传送数据，而A也试图向B传送数据。此时，A不能够监听到B正在忙（因为A在监听信道的时候什么也听不到，所以它会错误的认为此时可以向B传送数据了）。如果A向B传送数据，则将导致错误。此即隐藏站问题。其中C是A的隐藏站</p>
+</li>
+<li><p><code>暴露站</code>问题:<br>假设有3无线通信站ABC如下所示：<br>A        B          C<br>其中B在A的无线电波范围内，但C不在A的无线电波范围内。此时A正在传送数据（向除B以外的某通信站），而B希望给C发送数据，但是错误地认为该传送过程将会失败（因为B会监听到一次传输，所以它会错误地认为此时不能向C发送数据）。此即暴露站问题。其中A是B的暴露站</p>
+</li>
+</ol>
+</li>
+<li><p>CSMA/CD 信道空闲立即发送. 如果信道忙，则按照一定的退避算法进行延时监听。<br>CSMA/CA 信道空闲随机发送. 先发送一个很小的信道侦测帧RTS，如果收到最近的接入点返回的CTS，就认为信道是空闲的，然后再发送数据</p>
+</li>
+<li><p><strong>网桥没有Mac地址</strong>,因为网桥并不对转发的数据帧进行拆包重封装。所以对于交换机来说，如果只是完成数据帧交换，则可以不要MAC地址.<br><strong>标准路由器上，每个端口有个一个自己的MAC地址</strong>，以进行各网段的通信.</p>
+</li>
+<li><p>MTU大小</p>
+<blockquote>
+<p>大型MTU的优点：适合长距离传输大量数据无需分段；传输速度更快，无需重组,丢失的数据报更少,效率更高（开销更少）<br>小型MTU的优点：<br>适用于传输对时间敏感的数据，例如音频或视频<br>更适合多路复用</p>
+</blockquote>
+</li>
+<li><p>隧道技术是一种通过使用互联网络的基础设施在网络之间传递数据的方式。使用隧道传递的数据(或负载)可以是<strong>不同协议</strong>的数据帧或包。隧道协议将这些其他协议的数据帧或包重新封装在新的包头中发送。新的包头提供了路由信息，从而使封装的负载数据能够通过互联网络传递.</p>
+</li>
+<li><p>路由问题</p>
+<ol>
+<li>在距离矢量路由中，每个路由器都会发送有关自动路由的所有信息。定期将其与相邻网络上的所有路由器连接。它使用相当简单的算法来更新路由表，但会导致大量不必要的网络流量。</li>
+<li>在链路状态路由中，路由器仅在发生更改时才向自治系统发送有关网络更改的信息。与距离矢量路由相比，它使用的网络资源更少，因为它在网络上发送的流量更少，但是它使用复杂得多的Dijkstra算法从链路状态数据库计算路由表。</li>
+</ol>
+</li>
+<li><p>OSPF报文传播的比RIP报文的快,原因是: OSPF消息的传播速度更快，因为使用OSPF的路由器会立即向其网络传播有关其邻居发生任何更改的消息; RIP消息的分发速度较慢，因为使用RIP的网络需要每30秒进行一次定期更新来携带来自某个站点的任何消息路由到下一个路由器。此过程可能需要很多时间。</p>
+</li>
+<li><p>rwnd 接收窗口, cwnd: 拥塞窗口.</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -656,10 +892,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-06-28 01:12:57 / 修改时间：00:36:04" itemprop="dateCreated datePublished" datetime="2020-06-28T01:12:57+08:00">2020-06-28</time>
+              <time title="创建时间：2020-06-28 01:12:57" itemprop="dateCreated datePublished" datetime="2020-06-28T01:12:57+08:00">2020-06-28</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-05 19:06:34" itemprop="dateModified" datetime="2020-07-05T19:06:34+08:00">2020-07-05</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -681,50 +923,54 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="第一阶段复习"><a href="#第一阶段复习" class="headerlink" title="第一阶段复习"></a>第一阶段复习</h1><h2 id="chap2"><a href="#chap2" class="headerlink" title="chap2"></a>chap2</h2><h3 id="OSI-模型-open-systemed-internet"><a href="#OSI-模型-open-systemed-internet" class="headerlink" title="OSI 模型 open systemed internet"></a>OSI 模型 open systemed internet</h3><table>
+          <h1 id="第一阶段复习"><a href="#第一阶段复习" class="headerlink" title="第一阶段复习"></a>第一阶段复习</h1><h2 id="chap2"><a href="#chap2" class="headerlink" title="chap2"></a>chap2</h2><h3 id="OSI-模型-open-systemed-internet"><a href="#OSI-模型-open-systemed-internet" class="headerlink" title="OSI 模型 open systemed internet"></a>OSI 模型 open systemed internet</h3><div class="table-container">
+<table>
 <thead>
 <tr>
-<th align="center">层次</th>
-<th align="center">作用</th>
-<th align="center">传输内容</th>
+<th style="text-align:center">层次</th>
+<th style="text-align:center">作用</th>
+<th style="text-align:center">传输内容</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">应用层</td>
-<td align="center">使用户允许访问网络资源</td>
-<td align="center"></td>
+<tbody>
+<tr>
+<td style="text-align:center">应用层</td>
+<td style="text-align:center">使用户允许访问网络资源</td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
-<td align="center">表示层</td>
-<td align="center">数据的转换，加密和压缩(将数据转化成公认的比特)</td>
-<td align="center"></td>
+<td style="text-align:center">表示层</td>
+<td style="text-align:center">数据的转换，加密和压缩(将数据转化成公认的比特)</td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
-<td align="center">会话层</td>
-<td align="center">建立,管理,终止会话</td>
-<td align="center"></td>
+<td style="text-align:center">会话层</td>
+<td style="text-align:center">建立,管理,终止会话</td>
+<td style="text-align:center"></td>
 </tr>
 <tr>
-<td align="center">运输层</td>
-<td align="center">提供可靠的进程到进程的交付和差错恢复</td>
-<td align="center">TCP,UDP,SCTP(报文段,用户数据报或者分组)</td>
+<td style="text-align:center">运输层</td>
+<td style="text-align:center">提供可靠的进程到进程的交付和差错恢复</td>
+<td style="text-align:center">TCP,UDP,SCTP(报文段,用户数据报或者分组)</td>
 </tr>
 <tr>
-<td align="center">网络层</td>
-<td align="center">从源到终点传送分组,提供网络互联</td>
-<td align="center">IP数据报 帧的分组</td>
+<td style="text-align:center">网络层</td>
+<td style="text-align:center">从源到终点传送分组,提供网络互联</td>
+<td style="text-align:center">IP数据报 帧的分组</td>
 </tr>
 <tr>
-<td align="center">数据链路层</td>
-<td align="center">将比特组成帧结构,提供逐跳交付</td>
-<td align="center">帧的分组+首部(说明帧的源地址和目的地址)</td>
+<td style="text-align:center">数据链路层</td>
+<td style="text-align:center">将比特组成帧结构,提供逐跳交付</td>
+<td style="text-align:center">帧的分组+首部(说明帧的源地址和目的地址)</td>
 </tr>
 <tr>
-<td align="center">物理层</td>
-<td align="center">经过媒体传送比特,提供机械和电气规约</td>
-<td align="center">在帧首部加入前同步码,提醒接收站有数据到来(可以允许错过几个比特)SFD(帧首定界符)</td>
+<td style="text-align:center">物理层</td>
+<td style="text-align:center">经过媒体传送比特,提供机械和电气规约</td>
+<td style="text-align:center">在帧首部加入前同步码,提醒接收站有数据到来(可以允许错过几个比特)SFD(帧首定界符)</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p><strong><em>如果使用五层模型,则将应用层,表示层,会话层统一合并成应用层</em></strong>  传输内容是 <strong>报文</strong></p>
 <h3 id="编址"><a href="#编址" class="headerlink" title="编址"></a>编址</h3><p><strong>物理地址是逐跳改变的,逻辑地址和端口地址保持不变.</strong></p>
 <p>每经过一个路由器,物理地址就被更新,如果该计算机的逻辑地址和目的逻辑地址不一致,则继续进行传递.</p>
@@ -1068,194 +1314,10 @@ Connection to 192.168.209.121 123 port [udp/ntp] succeeded!</code></pre><p>实�
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/Aics/chap4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="http://123.57.5.52:8080/Firefox_wallpaper.png">
-      <meta itemprop="name" content="douzhi">
-      <meta itemprop="description" content="nice to meet you">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="斗志">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/27/Aics/chap4/" class="post-title-link" itemprop="url">Aics_Chap4</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-27 04:12:57" itemprop="dateCreated datePublished" datetime="2020-06-27T04:12:57+08:00">2020-06-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-28 00:31:19" itemprop="dateModified" datetime="2020-06-28T00:31:19+08:00">2020-06-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Aics/" itemprop="url" rel="index"><span itemprop="name">Aics</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h1>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/Aics/chap3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="http://123.57.5.52:8080/Firefox_wallpaper.png">
-      <meta itemprop="name" content="douzhi">
-      <meta itemprop="description" content="nice to meet you">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="斗志">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/27/Aics/chap3/" class="post-title-link" itemprop="url">Aics_Chap3</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-27 03:12:57" itemprop="dateCreated datePublished" datetime="2020-06-27T03:12:57+08:00">2020-06-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-28 00:31:09" itemprop="dateModified" datetime="2020-06-28T00:31:09+08:00">2020-06-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Aics/" itemprop="url" rel="index"><span itemprop="name">Aics</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Chap3-知识汇总"><a href="#Chap3-知识汇总" class="headerlink" title="Chap3 知识汇总"></a>Chap3 知识汇总</h1><h2 id="chap3-3"><a href="#chap3-3" class="headerlink" title="chap3.3"></a>chap3.3</h2><h3 id="Alexnet"><a href="#Alexnet" class="headerlink" title="Alexnet"></a>Alexnet</h3><ul>
-<li><p>ReLU 激活函数：训练中收敛速度更快。（比sigmod函数）</p>
-</li>
-<li><p>LRN局部响应归一化：提升较大响应，抑制较小响应 （现在被证明无明显效果）</p>
-</li>
-<li><p>MaxPool: 避免特征值被平均池化，提升代码鲁棒性</p>
-</li>
-<li><p>Dropout: 随机舍弃部分隐层节点，避免过拟合</p>
-</li>
-</ul>
-<h3 id="VGG"><a href="#VGG" class="headerlink" title="VGG"></a>VGG</h3><p>VGG 实现更深的网络<br>VGG16 一共16层，不方便训练。<br>他的实现方法是 先训练<code>一部分层</code>，比如11层，得到的数据中部分作为初始值，然后在初始条件下进行重新训练<code>更深</code>的神经网络。(但不适合更深的神经网络)</p>
-<p>==VGG 使用更小的卷积的原因==:</p>
-<ul>
-<li>5x5的卷积核，可以用两个3x3的卷积核替代</li>
-</ul>
-<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Aics/small_core_1.png" alt="小的卷积可以替代大的卷积"></p>
-<ul>
-<li>干同样的事情所需要更少的参数，计算量存储变小了，还可以防止过拟合</li>
-</ul>
-<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Aics/small_core_2.png" alt="更少的参数"></p>
-<h2 id="chap3-4"><a href="#chap3-4" class="headerlink" title="chap3.4"></a>chap3.4</h2><h3 id="Inception"><a href="#Inception" class="headerlink" title="Inception"></a>Inception</h3><p>==1x1的卷积核可以更改通道c的大小==</p>
-<p>辅助神经网络防止过拟合。</p>
-<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Aics/softmax_assit_net.png" alt="辅助神经网络"><br>越接近输入的地方，更新权重越小，越不好更新。</p>
-<h3 id="BN-Inception"><a href="#BN-Inception" class="headerlink" title="BN-Inception"></a>BN-Inception</h3><p><strong>BathNorm 函数</strong>：</p>
-<ul>
-<li>normalize</li>
-</ul>
-<p>将激活层输入部分分布在==激活函数的敏感部分==。</p>
-<ul>
-<li>scale and shift(bias)</li>
-</ul>
-<p>归一化后的输入是的网络的表达能力下降。通过增加训练参数提高网络的表达能力</p>
-<p>BathNorm 函数 还可以将训练的学习率提高到5倍，乃至30倍。训练速度可以得到明显加快。</p>
-<h3 id="Inception-v3"><a href="#Inception-v3" class="headerlink" title="Inception-v3"></a>Inception-v3</h3><p><strong>Factorization(因式分解的思想)</strong>（inception-v3）：</p>
-<p>将3x3的卷积拆分成1x3和3x1的卷积，减少了参数数量，同时通过<strong>非对称</strong>的卷积结构拆分增加了特征多样性。</p>
-<h2 id="chap3-5"><a href="#chap3-5" class="headerlink" title="chap3.5"></a>chap3.5</h2><h3 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h3><p>之前遇到的<strong>问题</strong>：更深的卷积神经网络的误差比较大。</p>
-<p><strong>梯度消失？</strong> No！使用BathNorm课有效地缓解梯度消失<br><strong>过拟合？</strong> No！更深的神经网络在训练集的误差同样更高。</p>
-<p>==神经网络退化==：收敛到极值点而非最值点。（陷入局部最优）</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1323,7 +1385,7 @@ Connection to 192.168.209.121 123 port [udp/ntp] succeeded!</code></pre><p>实�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
