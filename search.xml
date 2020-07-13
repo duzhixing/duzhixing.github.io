@@ -1,419 +1,867 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-  
-    
-    <entry>
-      <title>Advanced_network 网络中使用的各种算法</title>
-      <link href="/2020/07/05/Advanced_network/algorithm/"/>
-      <url>/2020/07/05/Advanced_network/algorithm/</url>
-      
-        <content type="html"><![CDATA[<h1 id="网络中使用的各种算法"><a href="#网络中使用的各种算法" class="headerlink" title="网络中使用的各种算法"></a>网络中使用的各种算法</h1><h2 id="Dijkstra算法-又名最小生成树算法"><a href="#Dijkstra算法-又名最小生成树算法" class="headerlink" title="Dijkstra算法,又名最小生成树算法"></a>Dijkstra算法,又名最小生成树算法</h2><p>贪婪算法<br>时间复杂度是 O(V^2), V为顶点的数量</p><ol><li><p><code>目的</code>: 在无向图 G=(V,E) 中，假设每条边 E[i] 的长度为 w[i]，找到由顶点 V0 到其余各点的最短路径。（单源最短路径)</p></li><li><p><code>思想</code>: 设G=(V,E)是一个带权有向图，把图中顶点集合V分成两组，第一组为已求出最短路径的顶点集合（用S表示，初始时S中只有一个源点，以后每求得一条最短路径 , 就将加入到集合S中，直到全部顶点都加入到S中，算法就结束了），第二组为其余未确定最短路径的顶点集合（用U表示），按最短路径长度的递增次序依次把第二组的顶点加入S中。在加入的过程中，总保持从源点v到S中各顶点的最短路径长度不大于从源点v到U中任何顶点的最短路径长度。此外，每个顶点对应一个距离，S中的顶点的距离就是从v到此顶点的最短路径长度，U中的顶点的距离，是从v到此顶点只包括S中的顶点为中间顶点的当前最短路径长度。</p></li><li><p><code>重点</code>: 每次从 U 集合中选取那个<strong>最小的距离</strong>,加入到 S 中.</p></li></ol><h2 id="Bellman-Ford-单源最短路径算法"><a href="#Bellman-Ford-单源最短路径算法" class="headerlink" title="Bellman-Ford 单源最短路径算法"></a>Bellman-Ford 单源最短路径算法</h2><p>这种<strong>用于路径矢量算法</strong><br>时间复杂度 O(V * E),V 为顶点数量,E为边数量</p><ol><li>创建源顶点 v 到图中所有顶点的距离的集合 distSet，为图中的所有顶点指定一个距离值，初始均为 Infinite，源顶点距离为 0；</li><li>计算最短路径，执行 V - 1 次遍历；<br>对于图中的每条边：如果起点 u 的距离 d 加上边的权值 w 小于终点 v 的距离 d，则更新终点 v 的距离值 d；</li><li>检测图中是否有负权边形成了环，遍历图中的所有边，计算 u 至 v 的距离，如果对于 v 存在更小的距离，则说明存在环；</li></ol><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">BELLMAN-FORD(_G_, _w_, _s_)</span><br><span class="line"><span class="number">1</span>  INITIALIZE-SINGLE-SOURCE(_G_, _s_)</span><br><span class="line"><span class="number">2</span>  **<span class="keyword">for</span>** _i_ ← **<span class="number">1</span> to** |_V_[_G_]| - <span class="number">1</span></span><br><span class="line">3       **do for** each edge (_u_, _v_) ∈ _E_[_G_]</span><br><span class="line"><span class="number">4</span>              **<span class="function"><span class="keyword">do</span>** <span class="title">RELAX</span><span class="params">(_u_, _v_, _w_)</span></span></span><br><span class="line">5  **for** each edge (_u_, _v_) ∈ _E_[_G_]</span><br><span class="line"><span class="number">6</span>       **<span class="keyword">do</span> <span class="keyword">if</span>** _d_[_v_] &gt; _d_[_u_] + _w_(_u_, _v_)</span><br><span class="line"><span class="number">7</span>             **then <span class="keyword">return</span>** FALSE</span><br><span class="line"><span class="number">8</span>  **<span class="keyword">return</span>** TRUE</span><br></pre></td></tr></table></figure><h2 id="Ford-Fulkerson-最大流算法"><a href="#Ford-Fulkerson-最大流算法" class="headerlink" title="Ford-Fulkerson 最大流算法"></a>Ford-Fulkerson 最大流算法</h2><p>(是一种贪婪算法)</p><p><strong>最大流算法是解决如下问题:</strong> 在一个流里，有着每条边的运载能力限制，我最多能从源头运输多少数量到目的地。</p><ol><li><p>思想: 使用标号的方法不断寻找一个图上的 可<code>增广路径</code>并且进行调整，直到找不到可增广路径为止。距离矢量路由算法号召每个路由器在每次更新时发送它 的整个路由表，但仅仅给它的邻居。距离矢量路由算法倾向于路由循环，但比链路状态路由算法计算更简单。</p></li><li><p>考虑路径P：s-&gt;v0-&gt;v1-&gt;v2-&gt;… -&gt;vn -&gt;t，把它叫<code>增广路径</code>。在增广路径中找最大的流.</p></li><li><p>左边是残差网络,右边是更新后的原图.<br><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/algorithm_1.png" alt="algorithm"></p></li></ol><p>另外一种增广路经:</p><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/algorithm_2.png" alt="algorithm_2"></p><p>增广路径选取不同，过程可能不一样，但是最大流都是一样的，就是23.<br>采用Ford-Fulkerson算法，<strong>从0流量开始</strong>，生成残存网络，找到增广路径，从增广路径中找到最小的残存容量F，用F来更新原图，<br>得到新的原图后，<strong>循环</strong>上述过程直到残存网络中找不到增广路径。此时的原图中，就有了我们想求的最大流。</p>]]></content>
-      
-      
+<search>
+  <entry>
+    <title>blog_demo</title>
+    <url>/2020/04/23/blog-demo/</url>
+    <content><![CDATA[<p>My_blog demo</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/04/23/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>process</title>
+    <url>/2020/04/23/process/</url>
+    <content><![CDATA[<h1 id="进程的几种状态"><a href="#进程的几种状态" class="headerlink" title="进程的几种状态"></a>进程的几种状态</h1><hr>
+<p><img src="https://img-blog.csdn.net/20170820200728157?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcWljaGVuZzc3Nw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="三态模型" title="三态模型"></p>
+<h2 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h2><p>阻塞是一种被动的方式，由于获取资源获取不到而引起的等待。</p>
+<h2 id="睡眠"><a href="#睡眠" class="headerlink" title="睡眠"></a>睡眠</h2><p>睡眠的确是一种主动的方式</p>
+<h2 id="挂起"><a href="#挂起" class="headerlink" title="挂起"></a>挂起</h2><p>挂起也是一种主动的行为，是系统层面对进程作出的合理操作。<br>挂起的标志就是换出到外存，在外存的进程肯定是不能执行的，所以挂起的目的就很明显，在内存资源不足时，需要把一些进程换出到外存，给着急运行的进程腾地方。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>spark_1</title>
+    <url>/2020/04/29/spark_1/</url>
+    <content><![CDATA[<h1 id="SPARK-学习之路"><a href="#SPARK-学习之路" class="headerlink" title="SPARK 学习之路"></a>SPARK 学习之路</h1><h2 id="基础了解-amp-Scala"><a href="#基础了解-amp-Scala" class="headerlink" title="基础了解 &amp; Scala"></a>基础了解 &amp; Scala</h2><h3 id="函数式编程与命令式编程"><a href="#函数式编程与命令式编程" class="headerlink" title="函数式编程与命令式编程"></a>函数式编程与命令式编程</h3><p><strong>命令式编程</strong>: 主要用于C++，Java，Python 这一种输入一条命令，然后程序对应执行的这种情况。并发度并不高，由于访存一致性原因，在并发时候，需要考虑加锁，所以效率不高。</p>
+<p><strong>函数式编程</strong>: 用于spark,hadoop等语言。其中内部变量，大部分是不可以更改的，所以就不存在什么访存一致性。并发度更高。特别是由于在CPU天花板之后，CPU转向多核发展，所以这种编程就开始使用广泛了。</p>
+<h3 id="Scala-运行"><a href="#Scala-运行" class="headerlink" title="Scala 运行"></a>Scala 运行</h3><p>在Scala 交互程序内部</p>
+<pre><code>load ./hello.scala
+</code></pre><p>在shell窗口时候<br><strong>1.编译</strong></p>
+<pre><code>scalac Hello.scala
+</code></pre><p><strong>2.运行</strong><br>运行生成的.class文件</p>
+<pre><code>scala Hello.class
+</code></pre><p>因为scalac 编译出来的也是.class文件，所以 也可以用java来运行,但是需要在路径中加入scala包</p>
+<pre><code>java -classpath .:/usr/local/scala/lib/scala.library.jar Hello.class
+</code></pre><h3 id="Scala-语法"><a href="#Scala-语法" class="headerlink" title="Scala 语法"></a>Scala 语法</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>基本类型</th>
+<th>是否可变</th>
+<th>赋初值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val</td>
+<td>不可变</td>
+<td>val a:Int = 5 (val a = 5)</td>
+</tr>
+<tr>
+<td>var</td>
+<td>可变</td>
+<td>var a:Int = 5 (var a = 5)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>scala 他也会自动的判断数据类型</p>
+<p><strong>scala 的运算实际上是方法的运算</strong>:</p>
+<pre><code>3 + 5   等效与 (3).+ 5
+即 A 方法 B  = A.方法（B）
+</code></pre><p><strong><em>scala 类与对象</em></strong><br><code>类</code>：</p>
+<pre><code>Class class_dzx {
+    val name_1 = &quot;Hello World&quot;
+}
+</code></pre><p><code>对象</code>：</p>
+<pre><code>Object object_dzx {
+    val name_2 = &quot;Hello Ting&quot;
+}
+</code></pre><p>如果 <strong>类与对象</strong> 同名，并且在同一个文件里面，那他们可以相互访问其内部的成员和方法。称之为<strong>伴生</strong>。</p>
+<p>对于类：</p>
+<pre><code>Class class_dzx(var name:String) {
+    val name_1 = &quot;Hello World&quot;
+    def this(num_1:Int) {
+        this()
+        println(&quot;this is the 第一层辅助构造器&quot;)
+    }
+    def this(num_1:Int,num_2:Int) {
+        this(num_1)
+        println(&quot;this is the 第二层辅助构造器&quot;)
+    }
+}
+</code></pre><p>在类中 用var 定义的name 它会自动的创建读写方法。<br><strong><em>主构造器&lt;—辅助构造器&lt;—辅助构造器</em></strong><br>处于底层构造器主要先引入上一层构造器</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>top</title>
+    <url>/2020/04/23/top/</url>
+    <content><![CDATA[<h1 id="top-命令详解"><a href="#top-命令详解" class="headerlink" title="top 命令详解"></a>top 命令详解</h1><h2 id="第一行详解"><a href="#第一行详解" class="headerlink" title="第一行详解"></a>第一行详解</h2><pre><code>01:06:48 当前时间
+up 1:22 系统运行时间，格式为时:分
+1 user 当前登录用户数
+load average: 0.06, 0.60, 0.48 系统负载，即任务队列的平均长度。三个数值分别为 1分钟、5分钟、15分钟前到现在的平均值。
+</code></pre><h2 id="第二，三行详解"><a href="#第二，三行详解" class="headerlink" title="第二，三行详解"></a>第二，三行详解</h2><pre><code>Tasks: 29 total 进程总数
+1 running 正在运行的进程数
+28 sleeping 睡眠的进程数
+0 stopped 停止的进程数
+0 zombie 僵尸进程数
+Cpu(s): 0.3% us 用户空间占用CPU百分比
+1.0% sy 内核空间占用CPU百分比
+0.0% ni 用户进程空间内改变过优先级的进程占用CPU百分比
+98.7% id 空闲CPU百分比
+0.0% wa 等待输入输出的CPU时间百分比
+</code></pre><h2 id="进程动态显示属性"><a href="#进程动态显示属性" class="headerlink" title="进程动态显示属性"></a>进程动态显示属性</h2><pre><code>PR 优先级  
+NI nice值。负值表示高优先级，正值表示低优先级  
+TIME 进程使用的CPU时间总计，单位秒  
+TIME+ 进程使用的CPU时间总计，单位1/100秒  
+VIRT 进程使用的虚拟内存总量 VIRT=SWAP+RES  
+SWAP 进程使用的虚拟内存中，被换出的大小  
+RES 进程使用的、未被换出的物理内存大小  
+SHR 共享内存大小，单位kb  
+</code></pre><p>PRI也还是比较好理解的，即进程的优先级，或者通俗点说就是程序被CPU执行的先后顺序，<strong><em>此值越小进程的优先级别越高。</em></strong> 那NI呢？就是我们所要说的nice值了，其表示进程可被执行的优先级的修正数值。如前面所说，PRI值越小越快被执行，那么加入nice值后，将会使得PRI变为：</p>
+<pre><code>PRI(new)=PRI(old)+nice。
+</code></pre><p>这样，当nice值为负值的时候，那么该程序将会优先级值将变小，即其优先级会变高，则其越快被执行。<br>到目前为止，更需要强调一点的是，进程的nice值不是进程的优先级，他们不是一个概念，但是进程nice值会影响到进程的优先级变化。  </p>
+<p><strong><em>进程状态</em></strong></p>
+<pre><code>D=不可中断的睡眠状态
+R=运行
+S=睡眠
+T=跟踪/停止
+Z=僵尸进程
+</code></pre><h2 id="交换分区"><a href="#交换分区" class="headerlink" title="交换分区"></a>交换分区</h2><p>就是当内存不足的时候，把一部分 <strong><em>硬盘空间</em></strong>  虚拟成内存使用,从而解决内存容量不足的情况</p>
+<h2 id="top命令"><a href="#top命令" class="headerlink" title="top命令"></a><strong><em>top命令</em></strong></h2><p>top运行时候可以输入的命令</p>
+<pre><code>i 忽略闲置和僵死进程。这是一个开关式命令
+P 根据CPU使用百分比大小进行排序
+</code></pre>]]></content>
+  </entry>
+  <entry>
+    <title>udp</title>
+    <url>/2020/04/23/udp/</url>
+    <content><![CDATA[<h1 id="UDP-for-VPN"><a href="#UDP-for-VPN" class="headerlink" title="UDP for VPN"></a>UDP for VPN</h1><h2 id="nc"><a href="#nc" class="headerlink" title="nc"></a>nc</h2><pre><code>dzx@dzx-N8xEJEK:~$ nc -vuz 192.168.209.121 123
+Connection to 192.168.209.121 123 port [udp/ntp] succeeded!
+</code></pre><p>实际使用时可以只用-u参数，-u代表udp协议 ，-v代表详细模式，-z代表只监测端口不发送数据</p>
+<h1 id=""><a href="#" class="headerlink" title="#"></a>#</h1>]]></content>
+  </entry>
+  <entry>
+    <title>unbuntu</title>
+    <url>/2020/04/23/unbuntu/</url>
+    <content><![CDATA[<h1 id="CMD-IN-UBUNTU"><a href="#CMD-IN-UBUNTU" class="headerlink" title="CMD IN UBUNTU"></a>CMD IN UBUNTU</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">apt-get -f install 修复安装”-f = –fix-missing”</span><br></pre></td></tr></table></figure>
+]]></content>
+  </entry>
+  <entry>
+    <title>Advanced_network 网络中使用的各种算法</title>
+    <url>/2020/07/05/Advanced_network/algorithm/</url>
+    <content><![CDATA[<h1 id="网络中使用的各种算法"><a href="#网络中使用的各种算法" class="headerlink" title="网络中使用的各种算法"></a>网络中使用的各种算法</h1><h2 id="Dijkstra算法-又名最小生成树算法"><a href="#Dijkstra算法-又名最小生成树算法" class="headerlink" title="Dijkstra算法,又名最小生成树算法"></a>Dijkstra算法,又名最小生成树算法</h2><p>贪婪算法<br>时间复杂度是 O(V^2), V为顶点的数量</p>
+<ol>
+<li><p><code>目的</code>: 在无向图 G=(V,E) 中，假设每条边 E[i] 的长度为 w[i]，找到由顶点 V0 到其余各点的最短路径。（单源最短路径)</p>
+</li>
+<li><p><code>思想</code>: 设G=(V,E)是一个带权有向图，把图中顶点集合V分成两组，第一组为已求出最短路径的顶点集合（用S表示，初始时S中只有一个源点，以后每求得一条最短路径 , 就将加入到集合S中，直到全部顶点都加入到S中，算法就结束了），第二组为其余未确定最短路径的顶点集合（用U表示），按最短路径长度的递增次序依次把第二组的顶点加入S中。在加入的过程中，总保持从源点v到S中各顶点的最短路径长度不大于从源点v到U中任何顶点的最短路径长度。此外，每个顶点对应一个距离，S中的顶点的距离就是从v到此顶点的最短路径长度，U中的顶点的距离，是从v到此顶点只包括S中的顶点为中间顶点的当前最短路径长度。</p>
+</li>
+<li><p><code>重点</code>: 每次从 U 集合中选取那个<strong>最小的距离</strong>,加入到 S 中.</p>
+</li>
+</ol>
+<h2 id="Bellman-Ford-单源最短路径算法"><a href="#Bellman-Ford-单源最短路径算法" class="headerlink" title="Bellman-Ford 单源最短路径算法"></a>Bellman-Ford 单源最短路径算法</h2><p>这种<strong>用于路径矢量算法</strong><br>时间复杂度 O(V * E),V 为顶点数量,E为边数量</p>
+<ol>
+<li>创建源顶点 v 到图中所有顶点的距离的集合 distSet，为图中的所有顶点指定一个距离值，初始均为 Infinite，源顶点距离为 0；</li>
+<li>计算最短路径，执行 V - 1 次遍历；<br>对于图中的每条边：如果起点 u 的距离 d 加上边的权值 w 小于终点 v 的距离 d，则更新终点 v 的距离值 d；</li>
+<li>检测图中是否有负权边形成了环，遍历图中的所有边，计算 u 至 v 的距离，如果对于 v 存在更小的距离，则说明存在环；</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">BELLMAN-FORD(_G_, _w_, _s_)</span><br><span class="line"><span class="number">1</span>  INITIALIZE-SINGLE-SOURCE(_G_, _s_)</span><br><span class="line"><span class="number">2</span>  **<span class="keyword">for</span>** _i_ ← **<span class="number">1</span> to** |_V_[_G_]| - <span class="number">1</span></span><br><span class="line">3       **do for** each edge (_u_, _v_) ∈ _E_[_G_]</span><br><span class="line"><span class="number">4</span>              **<span class="function"><span class="keyword">do</span>** <span class="title">RELAX</span><span class="params">(_u_, _v_, _w_)</span></span></span><br><span class="line">5  **for** each edge (_u_, _v_) ∈ _E_[_G_]</span><br><span class="line"><span class="number">6</span>       **<span class="keyword">do</span> <span class="keyword">if</span>** _d_[_v_] &gt; _d_[_u_] + _w_(_u_, _v_)</span><br><span class="line"><span class="number">7</span>             **then <span class="keyword">return</span>** FALSE</span><br><span class="line"><span class="number">8</span>  **<span class="keyword">return</span>** TRUE</span><br></pre></td></tr></table></figure>
+<h2 id="Ford-Fulkerson-最大流算法"><a href="#Ford-Fulkerson-最大流算法" class="headerlink" title="Ford-Fulkerson 最大流算法"></a>Ford-Fulkerson 最大流算法</h2><p>(是一种贪婪算法)</p>
+<p><strong>最大流算法是解决如下问题:</strong> 在一个流里，有着每条边的运载能力限制，我最多能从源头运输多少数量到目的地。</p>
+<ol>
+<li><p>思想: 使用标号的方法不断寻找一个图上的 可<code>增广路径</code>并且进行调整，直到找不到可增广路径为止。距离矢量路由算法号召每个路由器在每次更新时发送它 的整个路由表，但仅仅给它的邻居。距离矢量路由算法倾向于路由循环，但比链路状态路由算法计算更简单。</p>
+</li>
+<li><p>考虑路径P：s-&gt;v0-&gt;v1-&gt;v2-&gt;… -&gt;vn -&gt;t，把它叫<code>增广路径</code>。在增广路径中找最大的流.</p>
+</li>
+<li><p>左边是残差网络,右边是更新后的原图.<br><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/algorithm_1.png" alt="algorithm"></p>
+</li>
+</ol>
+<p>另外一种增广路经:</p>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/algorithm_2.png" alt="algorithm_2"></p>
+<p>增广路径选取不同，过程可能不一样，但是最大流都是一样的，就是23.<br>采用Ford-Fulkerson算法，<strong>从0流量开始</strong>，生成残存网络，找到增广路径，从增广路径中找到最小的残存容量F，用F来更新原图，<br>得到新的原图后，<strong>循环</strong>上述过程直到残存网络中找不到增广路径。此时的原图中，就有了我们想求的最大流。</p>
+]]></content>
       <categories>
-          
-          <category> Advanced_network </category>
-          
+        <category>Advanced_network</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Advanced_network 往年试卷解答纠错</title>
-      <link href="/2020/07/04/Advanced_network/review/"/>
-      <url>/2020/07/04/Advanced_network/review/</url>
-      
-        <content type="html"><![CDATA[<h1 id="往年试卷解答纠错"><a href="#往年试卷解答纠错" class="headerlink" title="往年试卷解答纠错"></a>往年试卷解答纠错</h1><h2 id="卷1"><a href="#卷1" class="headerlink" title="卷1"></a>卷1</h2><ul><li><p>TCP/IP协议4层.不是五层.分别是: 应用层, 运输层, 网络层, 网络接口层</p></li><li><p>以太网:<br>  标准以太网: 10Mbps, IEEE 802.3<br>  快速以太网: 100Mbps, IEEE 802.3u</p></li><li><p>现在以太网都是采用: CSMA/CD 技术,无限网络采用CSMA/CA技术</p></li><li><p>IPv6 的格式是 128 比特. 用<code>:</code>分成八段, 然后用16进制表示, XXXX:XXXX…<br>IPv4 的格式是 32 比特 (4 * 8)</p></li><li><p>任意子网的 主机号 全1 为 这个网络的广播,<br>全0表示了 这个 网段.</p><blockquote><p>以 192.168.0.0/255.255.0.0 为例<br>192.168.255.255 表示 在这个网络的广播<br>192.168.0.0 代表着这个子网的网段</p></blockquote></li><li><p>集线器不可以分割碰撞域<br>网桥可以分割碰撞域<br>路由器可以分割碰撞域,广播域</p></li><li><p>三种基本的数据交换方式</p><blockquote><p>电路交换：整个报文的比特流连续的从源点直达终点，好像在一个管道中传送。<br>报文交换：整个报文先传输到相邻的结点，全部存储下来后查找转发表，转发到下一个结点。<br>分组交换：单个分组(报文的一部分)传送到相邻结点，传送到相邻结点，存储下来后查找转发表，转发到下一个结点</p></blockquote></li><li><p>香农定理给出了信道信息传送速率的上限（比特每秒）和信道信噪比及带宽的关系<br>信道容量Rmax与信道带宽W，信噪比S/N关系为： Rmax=W*log2(1+S/N)。注意这里的log2是以2为底的对数</p></li><li><p>曼彻斯特编码: 0: 低-&gt;高, 1: 高-&gt;低<br>差分曼彻斯特编码: 0: 表示有跳变, 1: 表示无跳变.(跳变指的是每个周期的起始位)</p></li><li><p>距离矢量名称的由来是因为路由是以矢量（距离，方向）的方式被通告出去的，这里的距离是根据度量来决定的。通俗点就是：往某个方向上的距离.<br>距离矢量路由算法是动态路由算法。它是这样工作的：每个路由器维护一张矢量表，<br>表中列出了当前已知的到 每个目标的最佳距离，以及所使用的线路。通过在邻居之间相互交换信息，路由器不断地更新它们内部的表</p></li><li><p>链路状态路由选择协议又称为最短路径优先协议或分布式数据库协议,它基于Edsger Dijkstra的最短路径优先（SPF）算法。<br>算法易理解。链路状态协议从网络或者网络的限定区域内的所有其他路由器处收集信息，<br>最终每个链路状态路由器上都有一个相同的有关网络的信息。并且每台路由器都可以独立的计算各自的最优路径。</p></li><li><p>TCP 首部有长度字段的原因是, TCP首部由于选项,导致长度不定.</p></li><li><p>无限局域网使用CSMA/CA,而不是用CSMA/CD的原因:</p><blockquote><ol><li>CSMA/CD要求站点在发送数据的同时,也要不间断的检测信道,这种功能在无限局域网中花费巨大</li><li>无限电波向所有方向传输数据,且传播距离受限,在接收端仍然有冲突可能,从而产生隐藏站问题和暴露站问题.(冲突检测不完全)</li></ol></blockquote><ol><li><p><code>隐藏站</code>问题:<br>假设有3无线通信站ABC如下所示：<br>A        B         C<br>其中B在C的无线电波范围内，但A不在C的无线电波范围内。此时C正在向B传送数据，而A也试图向B传送数据。此时，A不能够监听到B正在忙（因为A在监听信道的时候什么也听不到，所以它会错误的认为此时可以向B传送数据了）。如果A向B传送数据，则将导致错误。此即隐藏站问题。其中C是A的隐藏站</p></li><li><p><code>暴露站</code>问题:<br>假设有3无线通信站ABC如下所示：<br>A        B          C<br>其中B在A的无线电波范围内，但C不在A的无线电波范围内。此时A正在传送数据（向除B以外的某通信站），而B希望给C发送数据，但是错误地认为该传送过程将会失败（因为B会监听到一次传输，所以它会错误地认为此时不能向C发送数据）。此即暴露站问题。其中A是B的暴露站</p></li></ol></li><li><p>CSMA/CD 信道空闲立即发送. 如果信道忙，则按照一定的退避算法进行延时监听。<br>CSMA/CA 信道空闲随机发送. 先发送一个很小的信道侦测帧RTS，如果收到最近的接入点返回的CTS，就认为信道是空闲的，然后再发送数据</p></li><li><p><strong>网桥没有Mac地址</strong>,因为网桥并不对转发的数据帧进行拆包重封装。所以对于交换机来说，如果只是完成数据帧交换，则可以不要MAC地址.<br><strong>标准路由器上，每个端口有个一个自己的MAC地址</strong>，以进行各网段的通信.</p></li><li><p>MTU大小</p><blockquote><p>大型MTU的优点：适合长距离传输大量数据无需分段；传输速度更快，无需重组,丢失的数据报更少,效率更高（开销更少）<br>小型MTU的优点：<br>适用于传输对时间敏感的数据，例如音频或视频<br>更适合多路复用</p></blockquote></li><li><p>隧道技术是一种通过使用互联网络的基础设施在网络之间传递数据的方式。使用隧道传递的数据(或负载)可以是<strong>不同协议</strong>的数据帧或包。隧道协议将这些其他协议的数据帧或包重新封装在新的包头中发送。新的包头提供了路由信息，从而使封装的负载数据能够通过互联网络传递.</p></li><li><p>路由问题</p><ol><li>在距离矢量路由中，每个路由器都会发送有关自动路由的所有信息。定期将其与相邻网络上的所有路由器连接。它使用相当简单的算法来更新路由表，但会导致大量不必要的网络流量。</li><li>在链路状态路由中，路由器仅在发生更改时才向自治系统发送有关网络更改的信息。与距离矢量路由相比，它使用的网络资源更少，因为它在网络上发送的流量更少，但是它使用复杂得多的Dijkstra算法从链路状态数据库计算路由表。</li></ol></li><li><p>OSPF报文传播的比RIP报文的快,原因是: OSPF消息的传播速度更快，因为使用OSPF的路由器会立即向其网络传播有关其邻居发生任何更改的消息; RIP消息的分发速度较慢，因为使用RIP的网络需要每30秒进行一次定期更新来携带来自某个站点的任何消息路由到下一个路由器。此过程可能需要很多时间。</p></li><li><p>rwnd 接收窗口, cwnd: 拥塞窗口.</p></li></ul>]]></content>
-      
-      
+  </entry>
+  <entry>
+    <title>Advancednetwork_第四阶段复习</title>
+    <url>/2020/06/28/Advanced_network/chap13_15/</url>
+    <content><![CDATA[<h1 id="第四阶段"><a href="#第四阶段" class="headerlink" title="第四阶段"></a>第四阶段</h1><h2 id="chap-13-运输层"><a href="#chap-13-运输层" class="headerlink" title="chap 13 运输层"></a>chap 13 运输层</h2><h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><p>端口号 0~65535 之间的整数.<br>客户端-&gt;临时端口号(生存时间较短)<br>服务器端-&gt;熟知端口号(让客户端知道,才能进行访问)</p>
+<p>熟知端口号-&gt;0~1023</p>
+<ul>
+<li>流量控制:<br>  &gt;<blockquote>
+<p>推送:不管接收方响应,发送方直接发送<br>拉取:发送方在接收方请求之后才发送数据</p>
+</blockquote>
+</li>
+</ul>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap13_1.png" alt="运输层通信"></p>
+<ul>
+<li><p>差错控制:</p>
+<ul>
+<li><p>检查并丢弃损坏的分组</p>
+</li>
+<li><p>跟踪丢失和丢弃的分组并重传他们</p>
+</li>
+<li><p>识别重复的分组并丢弃他们</p>
+</li>
+<li><p>识别失序到达的分组,直至缺失的分组全部抵达</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="运输层协议"><a href="#运输层协议" class="headerlink" title="运输层协议"></a>运输层协议</h3><h4 id="停止等待协议"><a href="#停止等待协议" class="headerlink" title="停止等待协议"></a>停止等待协议</h4><p>每次让一个分组处于等待确认状态.</p>
+<p>&gt;</p>
+<blockquote>
+<p>流量控制通过迫使发送发等待确认来实现.</p>
+<p>差错控制通过丢失损坏的分组,并且让发送方在计时器超时后重传未确认的分组来实现</p>
+</blockquote>
+<p>停止等待协议中,所有的序号都是模2的. 0,1,0,1,0,1</p>
+<h4 id="返回N协议-GBN"><a href="#返回N协议-GBN" class="headerlink" title="返回N协议(GBN)"></a>返回N协议(GBN)</h4><p>让多个分组处于等待确认状态.</p>
+<p>返回N协议中,序号必须是模$2^m$的,其中m为序号字段的比特长度.</p>
+<ul>
+<li>发送窗口:定义了一个想象的方框.最大是$2^m$</li>
+</ul>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap13_2.png" alt="发送窗口"></p>
+<ul>
+<li>接收窗口:定义了一个大小为1,且只有一个变量Rn的想象的方框</li>
+</ul>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap13_3.png" alt="发送窗口"></p>
+<p>当第一个未确认的分组计时器超时,就重传<strong>所有</strong>待确认的分组.<br>在GBN协议中,<strong>确认号定义了下一个希望接收到的分组序号</strong></p>
+<h4 id="选择重传协议"><a href="#选择重传协议" class="headerlink" title="选择重传协议"></a>选择重传协议</h4><p>只重传真正丢失的分组</p>
+<ul>
+<li><p>窗口</p>
+<ul>
+<li>发送窗口, 最大值要小的多,是$2^m-1$,其中m为序号字段的比特长度.</li>
+<li>接受窗口,它和发送窗口一样大</li>
+</ul>
+</li>
+<li><p>计时器:每一个待确认的分组使用一个计时器.当某一个计时器超时后,只有相应的分组被重传</p>
+</li>
+</ul>
+<p>在选择重传协议中,<strong>确认号定义了无差错的接收到的那个分组的序号</strong>(并不是下一个希望接收到的分组序号)</p>
+<h2 id="chap14-用户数据报协议-UDP"><a href="#chap14-用户数据报协议-UDP" class="headerlink" title="chap14 用户数据报协议(UDP)"></a>chap14 用户数据报协议(UDP)</h2><p>UDP在运输层.是一种<strong>无连接的,不可靠</strong>的传输协议.</p>
+<p><code>差错控制</code>:检测出由差错的分组,就悄悄的丢弃他.</p>
+<p>没有<code>流量控制</code>.</p>
+<p>8个字节的首部.</p>
+<p>源端口号 + 目的端口号 + 总长度(UDP的总长度,包括首部) + 检验和.(各占2个字节)</p>
+<h2 id="chap15-传输控制协议-TCP"><a href="#chap15-传输控制协议-TCP" class="headerlink" title="chap15 传输控制协议(TCP)"></a>chap15 传输控制协议(TCP)</h2><p>TCP首部<br><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap15_1.png" alt="发送窗口"></p>
+<p>窗口大小: 以字节为单位,指的是接收窗口,由接收方来决定.</p>
+<p>检验和: 需要附加相同的伪首部</p>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap15_2.png" alt="发送窗口"></p>
+<p>TCP的检验和是强制性的,UDP的检验和是可选的.</p>
+<p><strong>封装结构</strong>:</p>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap15_3.png" alt="发送窗口"></p>
+<p>SYN报文段不携带任何数据,但是要消耗一个序号.</p>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap15_4.png" alt="发送窗口"></p>
+<p>不携带数据,但要消耗一个序号的有<br>SYN报文段, SYN报文段+ACK报文段,<br>ACK报文段.</p>
+<h3 id="拥塞策略"><a href="#拥塞策略" class="headerlink" title="拥塞策略"></a>拥塞策略</h3><ul>
+<li><p>慢开始:指数增大</p>
+</li>
+<li><p>拥塞避免:指数加大</p>
+</li>
+<li><p>拥塞检测: 乘法减小(门限值降到一半)</p>
+</li>
+</ul>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap15_5.png" alt="发送窗口"></p>
+]]></content>
       <categories>
-          
-          <category> Advanced_network </category>
-          
+        <category>Advanced_network</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Advancednetwork_第四阶段复习</title>
-      <link href="/2020/06/28/Advanced_network/chap13_15/"/>
-      <url>/2020/06/28/Advanced_network/chap13_15/</url>
-      
-        <content type="html"><![CDATA[<h1 id="第四阶段"><a href="#第四阶段" class="headerlink" title="第四阶段"></a>第四阶段</h1><h2 id="chap-13-运输层"><a href="#chap-13-运输层" class="headerlink" title="chap 13 运输层"></a>chap 13 运输层</h2><h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><p>端口号 0~65535 之间的整数.<br>客户端-&gt;临时端口号(生存时间较短)<br>服务器端-&gt;熟知端口号(让客户端知道,才能进行访问)</p><p>熟知端口号-&gt;0~1023</p><ul><li>流量控制:<br>  &gt;<blockquote><p>推送:不管接收方响应,发送方直接发送<br>拉取:发送方在接收方请求之后才发送数据</p></blockquote></li></ul><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap13_1.png" alt="运输层通信"></p><ul><li><p>差错控制:</p><ul><li><p>检查并丢弃损坏的分组</p></li><li><p>跟踪丢失和丢弃的分组并重传他们</p></li><li><p>识别重复的分组并丢弃他们</p></li><li><p>识别失序到达的分组,直至缺失的分组全部抵达</p></li></ul></li></ul><h3 id="运输层协议"><a href="#运输层协议" class="headerlink" title="运输层协议"></a>运输层协议</h3><h4 id="停止等待协议"><a href="#停止等待协议" class="headerlink" title="停止等待协议"></a>停止等待协议</h4><p>每次让一个分组处于等待确认状态.</p><p>&gt;</p><blockquote><p>流量控制通过迫使发送发等待确认来实现.</p><p>差错控制通过丢失损坏的分组,并且让发送方在计时器超时后重传未确认的分组来实现</p></blockquote><p>停止等待协议中,所有的序号都是模2的. 0,1,0,1,0,1</p><h4 id="返回N协议-GBN"><a href="#返回N协议-GBN" class="headerlink" title="返回N协议(GBN)"></a>返回N协议(GBN)</h4><p>让多个分组处于等待确认状态.</p><p>返回N协议中,序号必须是模$2^m$的,其中m为序号字段的比特长度.</p><ul><li>发送窗口:定义了一个想象的方框.最大是$2^m$</li></ul><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap13_2.png" alt="发送窗口"></p><ul><li>接收窗口:定义了一个大小为1,且只有一个变量Rn的想象的方框</li></ul><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap13_3.png" alt="发送窗口"></p><p>当第一个未确认的分组计时器超时,就重传<strong>所有</strong>待确认的分组.<br>在GBN协议中,<strong>确认号定义了下一个希望接收到的分组序号</strong></p><h4 id="选择重传协议"><a href="#选择重传协议" class="headerlink" title="选择重传协议"></a>选择重传协议</h4><p>只重传真正丢失的分组</p><ul><li><p>窗口</p><ul><li>发送窗口, 最大值要小的多,是$2^m-1$,其中m为序号字段的比特长度.</li><li>接受窗口,它和发送窗口一样大</li></ul></li><li><p>计时器:每一个待确认的分组使用一个计时器.当某一个计时器超时后,只有相应的分组被重传</p></li></ul><p>在选择重传协议中,<strong>确认号定义了无差错的接收到的那个分组的序号</strong>(并不是下一个希望接收到的分组序号)</p><h2 id="chap14-用户数据报协议-UDP"><a href="#chap14-用户数据报协议-UDP" class="headerlink" title="chap14 用户数据报协议(UDP)"></a>chap14 用户数据报协议(UDP)</h2><p>UDP在运输层.是一种<strong>无连接的,不可靠</strong>的传输协议.</p><p><code>差错控制</code>:检测出由差错的分组,就悄悄的丢弃他.</p><p>没有<code>流量控制</code>.</p><p>8个字节的首部.</p><p>源端口号 + 目的端口号 + 总长度(UDP的总长度,包括首部) + 检验和.(各占2个字节)</p><h2 id="chap15-传输控制协议-TCP"><a href="#chap15-传输控制协议-TCP" class="headerlink" title="chap15 传输控制协议(TCP)"></a>chap15 传输控制协议(TCP)</h2><p>TCP首部<br><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap15_1.png" alt="发送窗口"></p><p>窗口大小: 以字节为单位,指的是接收窗口,由接收方来决定.</p><p>检验和: 需要附加相同的伪首部</p><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap15_2.png" alt="发送窗口"></p><p>TCP的检验和是强制性的,UDP的检验和是可选的.</p><p><strong>封装结构</strong>:</p><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap15_3.png" alt="发送窗口"></p><p>SYN报文段不携带任何数据,但是要消耗一个序号.</p><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap15_4.png" alt="发送窗口"></p><p>不携带数据,但要消耗一个序号的有<br>SYN报文段, SYN报文段+ACK报文段,<br>ACK报文段.</p><h3 id="拥塞策略"><a href="#拥塞策略" class="headerlink" title="拥塞策略"></a>拥塞策略</h3><ul><li><p>慢开始:指数增大</p></li><li><p>拥塞避免:指数加大</p></li><li><p>拥塞检测: 乘法减小(门限值降到一半)</p></li></ul><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap15_5.png" alt="发送窗口"></p>]]></content>
-      
-      
+  </entry>
+  <entry>
+    <title>Advancednetwork_第三阶段复习</title>
+    <url>/2020/06/28/Advanced_network/chap11_12/</url>
+    <content><![CDATA[<h1 id="第三阶段"><a href="#第三阶段" class="headerlink" title="第三阶段"></a>第三阶段</h1><h2 id="chap-11-单播路由选择协议"><a href="#chap-11-单播路由选择协议" class="headerlink" title="chap 11 单播路由选择协议"></a>chap 11 单播路由选择协议</h2><p>RIP OSPF BGP</p>
+<p>RIP 路由信息协议是对距离向量协议的实现<br>OSPF 开放最短路径优先协议是对链路状态协议的实现<br>BGP 边界网关协议是对路径向量协议的实现</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">digraph A &#123;</span><br><span class="line">    路由选择协议-&gt;域内</span><br><span class="line">    路由选择协议-&gt;域间</span><br><span class="line">    域内-&gt;距离向量RIP</span><br><span class="line">    域内-&gt;链路状态OSPF</span><br><span class="line">    域间-&gt;路径向量BGP</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="距离向量路由选择"><a href="#距离向量路由选择" class="headerlink" title="距离向量路由选择"></a>距离向量路由选择</h3><ul>
+<li><p>Bellman-Ford 算法.<br>  可以找出任意两个节点之间的最小代价</p>
+</li>
+<li><p>距离向量路由选择算法</p>
+</li>
+<li><p>计数到无穷大</p>
+<ul>
+<li><p>二结点循环:</p>
+<pre><code>定义无穷大,分割范围,分割范围和毒性逆转
+</code></pre></li>
+<li><p>三结点的不稳定性</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="RIP"><a href="#RIP" class="headerlink" title="RIP"></a>RIP</h3><p>路由信息协议(Routing Information Protocol).RIP 度量称为跳数.(无穷大被定义为16)</p>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap11_1.png" alt="RIP"></p>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap11_2.png" alt="RIP_2"></p>
+<h3 id="OSPF"><a href="#OSPF" class="headerlink" title="OSPF"></a>OSPF</h3><p>开放最短路径优先.</p>
+<p>链路状态路由协议使用SPF最短路经优先算法（shortest path first spf）计算和选择路由，这类路由协议只关心网络中链路或接口的状态（up down ip地址，掩码带宽，利用率和时延等），<strong>每个路由器将已知的链路状态信息向该区域的其他路由器通告</strong>，通过这种方式，网络上的每台路由器对网络结构都会有相同的认识，随后路由器以其为依据，使用spf算法计算和选择路由</p>
+<p>spf算法是以自身为根节点计算出一棵最短路径树，在这棵树上由根到各节点的累计开销最小</p>
+<ol>
+<li><p>邻居表：记录所有建立了邻居关系的路由器，包括相关描述和邻居状态。会定期的相互发送hello报文来维护，若在一定的周期内没有收到领居回应的hello报文，则认为邻居路由器失效，将它从邻居表中删除</p>
+</li>
+<li><p>链路状态数据库表（LSDB）：此表里包含了网络拓扑中链路状态的通告。。每台路由器在同一个区域内LSDB表一样</p>
+</li>
+<li><p>路由表：在获得完整LSDB表后，进行SPF算法，形成最优路由加入路由表</p>
+</li>
+</ol>
+<h3 id="BGP"><a href="#BGP" class="headerlink" title="BGP"></a>BGP</h3><p>几个相关概念</p>
+<ul>
+<li><p><code>AS</code>（Autonomous system）：自治系统，指在一个（有时是多个）组织管辖下的所有IP网络和路由器的全体，它们对互联网执行共同的路由策略。也就是说，对于互联网来说，一个AS是一个独立的整体网络。而BGP实现的网络自治也是指各个AS自治。每个AS有自己唯一的编号。</p>
+</li>
+<li><p><code>IGP</code>（Interior Gateway Protocol）：内部网关协议，在一个AS内部所使用的一种路由协议。一个AS内部也可以有多个路由器管理多个网络。各个路由器之间需要路由信息以知道子网络的可达信息。IGP就是用来管理这些路由。代表的实现有RIP和OSPF。</p>
+</li>
+</ul>
+<p>由于BGP就是为了替换EGP而创建，它的地位与EGP相似。但是BGP也可以应用在一个AS内部。因此BGP又可以分为<code>IBGP</code>（Interior BGP ：同一个AS之间的连接）和<code>EBGP</code>（Exterior BGP：不同AS之间的BGP连接）。既然EGP已经被替代了，那EBGP的存在比较好理解，但是IGP协议都还活得好好的（这里指的是OSPF），那IBGP的意义何在？IGP的协议是针对同一个AS网络来设计的，一个自治网络的规模一般都不大，所以设计的时候就没有考虑大规模网络的情况。而当一个自治网络足够大时，OSPF存在性能瓶颈（后面会说明）。BGP本身就是为了在Internet工作，其设计就是为了满足大型网络的要求，所以大型私有IP网络内部可以使用IBGP。总的来说，这几类路由协议，小规模私有网络IGP，大规模私有网络IBGP，互联网EBGP。</p>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap11_3.png" alt="BGP"></p>
+<h2 id="chap-12-多播和多播路由选择协议"><a href="#chap-12-多播和多播路由选择协议" class="headerlink" title="chap 12 多播和多播路由选择协议"></a>chap 12 多播和多播路由选择协议</h2><p>单播: 路由器仅通过一个接口转发分组</p>
+<p>多播: 路由器通过多个接口转发收到的分组</p>
+<p>IPV4中的多播地址: 占据了D类地址唯一的地址块.</p>
+<p>比如: 224.0.0.1/24 称为本地网络控制地址块.</p>
+<p>以太网物理多播地址的范围: 01:00:5E:00:00:00 ~ 01:00:5E:7F:FF:FF</p>
+<p>将IP多播地址转换成MAC多播地址.</p>
+<ol>
+<li><p>将IP多播地址的最右边23位转换成16进制,然后16进制的最左边如果大于8则减去8.</p>
+</li>
+<li><p>然后将这个地址 加上 01:00:5E:00:00:00</p>
+</li>
+</ol>
+<p>IGMP: (Internet group management protocol) 网际组管理协议</p>
+]]></content>
       <categories>
-          
-          <category> Advanced_network </category>
-          
+        <category>Advanced_network</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Advancednetwork_第三阶段复习</title>
-      <link href="/2020/06/28/Advanced_network/chap11_12/"/>
-      <url>/2020/06/28/Advanced_network/chap11_12/</url>
-      
-        <content type="html"><![CDATA[<h1 id="第三阶段"><a href="#第三阶段" class="headerlink" title="第三阶段"></a>第三阶段</h1><h2 id="chap-11-单播路由选择协议"><a href="#chap-11-单播路由选择协议" class="headerlink" title="chap 11 单播路由选择协议"></a>chap 11 单播路由选择协议</h2><p>RIP OSPF BGP</p><p>RIP 路由信息协议是对距离向量协议的实现<br>OSPF 开放最短路径优先协议是对链路状态协议的实现<br>BGP 边界网关协议是对路径向量协议的实现</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">digraph A &#123;</span><br><span class="line">    路由选择协议-&gt;域内</span><br><span class="line">    路由选择协议-&gt;域间</span><br><span class="line">    域内-&gt;距离向量RIP</span><br><span class="line">    域内-&gt;链路状态OSPF</span><br><span class="line">    域间-&gt;路径向量BGP</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="距离向量路由选择"><a href="#距离向量路由选择" class="headerlink" title="距离向量路由选择"></a>距离向量路由选择</h3><ul><li><p>Bellman-Ford 算法.<br>  可以找出任意两个节点之间的最小代价</p></li><li><p>距离向量路由选择算法</p></li><li><p>计数到无穷大</p><ul><li><p>二结点循环:</p><pre><code>定义无穷大,分割范围,分割范围和毒性逆转</code></pre></li><li><p>三结点的不稳定性</p></li></ul></li></ul><h3 id="RIP"><a href="#RIP" class="headerlink" title="RIP"></a>RIP</h3><p>路由信息协议(Routing Information Protocol).RIP 度量称为跳数.(无穷大被定义为16)</p><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap11_1.png" alt="RIP"></p><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap11_2.png" alt="RIP_2"></p><h3 id="OSPF"><a href="#OSPF" class="headerlink" title="OSPF"></a>OSPF</h3><p>开放最短路径优先.</p><p>链路状态路由协议使用SPF最短路经优先算法（shortest path first spf）计算和选择路由，这类路由协议只关心网络中链路或接口的状态（up down ip地址，掩码带宽，利用率和时延等），<strong>每个路由器将已知的链路状态信息向该区域的其他路由器通告</strong>，通过这种方式，网络上的每台路由器对网络结构都会有相同的认识，随后路由器以其为依据，使用spf算法计算和选择路由</p><p>spf算法是以自身为根节点计算出一棵最短路径树，在这棵树上由根到各节点的累计开销最小</p><ol><li><p>邻居表：记录所有建立了邻居关系的路由器，包括相关描述和邻居状态。会定期的相互发送hello报文来维护，若在一定的周期内没有收到领居回应的hello报文，则认为邻居路由器失效，将它从邻居表中删除</p></li><li><p>链路状态数据库表（LSDB）：此表里包含了网络拓扑中链路状态的通告。。每台路由器在同一个区域内LSDB表一样</p></li><li><p>路由表：在获得完整LSDB表后，进行SPF算法，形成最优路由加入路由表</p></li></ol><h3 id="BGP"><a href="#BGP" class="headerlink" title="BGP"></a>BGP</h3><p>几个相关概念</p><ul><li><p><code>AS</code>（Autonomous system）：自治系统，指在一个（有时是多个）组织管辖下的所有IP网络和路由器的全体，它们对互联网执行共同的路由策略。也就是说，对于互联网来说，一个AS是一个独立的整体网络。而BGP实现的网络自治也是指各个AS自治。每个AS有自己唯一的编号。</p></li><li><p><code>IGP</code>（Interior Gateway Protocol）：内部网关协议，在一个AS内部所使用的一种路由协议。一个AS内部也可以有多个路由器管理多个网络。各个路由器之间需要路由信息以知道子网络的可达信息。IGP就是用来管理这些路由。代表的实现有RIP和OSPF。</p></li></ul><p>由于BGP就是为了替换EGP而创建，它的地位与EGP相似。但是BGP也可以应用在一个AS内部。因此BGP又可以分为<code>IBGP</code>（Interior BGP ：同一个AS之间的连接）和<code>EBGP</code>（Exterior BGP：不同AS之间的BGP连接）。既然EGP已经被替代了，那EBGP的存在比较好理解，但是IGP协议都还活得好好的（这里指的是OSPF），那IBGP的意义何在？IGP的协议是针对同一个AS网络来设计的，一个自治网络的规模一般都不大，所以设计的时候就没有考虑大规模网络的情况。而当一个自治网络足够大时，OSPF存在性能瓶颈（后面会说明）。BGP本身就是为了在Internet工作，其设计就是为了满足大型网络的要求，所以大型私有IP网络内部可以使用IBGP。总的来说，这几类路由协议，小规模私有网络IGP，大规模私有网络IBGP，互联网EBGP。</p><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap11_3.png" alt="BGP"></p><h2 id="chap-12-多播和多播路由选择协议"><a href="#chap-12-多播和多播路由选择协议" class="headerlink" title="chap 12 多播和多播路由选择协议"></a>chap 12 多播和多播路由选择协议</h2><p>单播: 路由器仅通过一个接口转发分组</p><p>多播: 路由器通过多个接口转发收到的分组</p><p>IPV4中的多播地址: 占据了D类地址唯一的地址块.</p><p>比如: 224.0.0.1/24 称为本地网络控制地址块.</p><p>以太网物理多播地址的范围: 01:00:5E:00:00:00 ~ 01:00:5E:7F:FF:FF</p><p>将IP多播地址转换成MAC多播地址.</p><ol><li><p>将IP多播地址的最右边23位转换成16进制,然后16进制的最左边如果大于8则减去8.</p></li><li><p>然后将这个地址 加上 01:00:5E:00:00:00</p></li></ol><p>IGMP: (Internet group management protocol) 网际组管理协议</p>]]></content>
-      
-      
+  </entry>
+  <entry>
+    <title>Advancednetwork_第一阶段复习</title>
+    <url>/2020/06/28/Advanced_network/chap2_3/</url>
+    <content><![CDATA[<h1 id="第一阶段复习"><a href="#第一阶段复习" class="headerlink" title="第一阶段复习"></a>第一阶段复习</h1><h2 id="chap2"><a href="#chap2" class="headerlink" title="chap2"></a>chap2</h2><h3 id="OSI-模型-open-systemed-internet"><a href="#OSI-模型-open-systemed-internet" class="headerlink" title="OSI 模型 open systemed internet"></a>OSI 模型 open systemed internet</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">层次</th>
+<th style="text-align:center">作用</th>
+<th style="text-align:center">传输内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">应用层</td>
+<td style="text-align:center">使用户允许访问网络资源</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">表示层</td>
+<td style="text-align:center">数据的转换，加密和压缩(将数据转化成公认的比特)</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">会话层</td>
+<td style="text-align:center">建立,管理,终止会话</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">运输层</td>
+<td style="text-align:center">提供可靠的进程到进程的交付和差错恢复</td>
+<td style="text-align:center">TCP,UDP,SCTP(报文段,用户数据报或者分组)</td>
+</tr>
+<tr>
+<td style="text-align:center">网络层</td>
+<td style="text-align:center">从源到终点传送分组,提供网络互联</td>
+<td style="text-align:center">IP数据报 帧的分组</td>
+</tr>
+<tr>
+<td style="text-align:center">数据链路层</td>
+<td style="text-align:center">将比特组成帧结构,提供逐跳交付</td>
+<td style="text-align:center">帧的分组+首部(说明帧的源地址和目的地址)</td>
+</tr>
+<tr>
+<td style="text-align:center">物理层</td>
+<td style="text-align:center">经过媒体传送比特,提供机械和电气规约</td>
+<td style="text-align:center">在帧首部加入前同步码,提醒接收站有数据到来(可以允许错过几个比特)SFD(帧首定界符)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong><em>如果使用五层模型,则将应用层,表示层,会话层统一合并成应用层</em></strong>  传输内容是 <strong>报文</strong></p>
+<h3 id="编址"><a href="#编址" class="headerlink" title="编址"></a>编址</h3><p><strong>物理地址是逐跳改变的,逻辑地址和端口地址保持不变.</strong></p>
+<p>每经过一个路由器,物理地址就被更新,如果该计算机的逻辑地址和目的逻辑地址不一致,则继续进行传递.</p>
+<h2 id="chap-3"><a href="#chap-3" class="headerlink" title="chap 3"></a>chap 3</h2><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap3_1.png" alt="帧"></p>
+<p>帧最小长度是64字节,最大长度是1518字节(不算前同步码和SFD)</p>
+<p>目的地址的第一个字节的最低位指定了传播类型.<br>0 代表单播,1代表多播<br>目的地址全为1,代表广播</p>
+<p>地址是从左往右,逐字节发送.<br>而每个字节是从右往左,逐位发送</p>
+<p>最小帧长的目的是为了让CSMA/CA正常工作:因为如果一个帧发完之后是不会留有该帧副本,所以必须在帧发完之前,检测出来是否发成冲突.而冲突检测时间是两倍的最大传播时间,所以帧长等于冲突检测时间乘以帧发射速率.</p>
+<ul>
+<li><p><code>转发器</code>(一层交换机)相当于一个信号放大器(是信号保持),防止信号衰减</p>
+</li>
+<li><p><code>网桥</code>(两层交换机)的表项中需要存MAC地址对应的端口,而他的更新一般是自动的.通过传输帧中的<code>目的地址</code>来<strong>查找相应的端口</strong>,通过<code>源地址</code>来进行<strong>更新或者新添表项</strong>,网桥不改变MAC地址</p>
+</li>
+<li><p><code>路由器</code>(三层交换机).转发器和网桥是连接一个局域网的各个网段,路由器是将多个局域网连接在一起. 路由器的每个接口都对应着一个逻辑地址和物理地址,在传输过程中改变,帧的MAC地址(目的+源).</p>
+</li>
+</ul>
+]]></content>
       <categories>
-          
-          <category> Advanced_network </category>
-          
+        <category>Advanced_network</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Advancednetwork_第二阶段复习</title>
-      <link href="/2020/06/28/Advanced_network/chap4_10/"/>
-      <url>/2020/06/28/Advanced_network/chap4_10/</url>
-      
-        <content type="html"><![CDATA[<h1 id="第二阶段复习"><a href="#第二阶段复习" class="headerlink" title="第二阶段复习"></a>第二阶段复习</h1><h2 id="chap4-网络层基础"><a href="#chap4-网络层基础" class="headerlink" title="chap4 网络层基础"></a>chap4 网络层基础</h2><p>面向连接的服务:</p><ol><li><p>建链阶段</p><p>1.1 请求分组<br> 从源到终点,确定入端口,入标号以及出端口<br>1.2 确认分组<br> 从从终点到源,确定出标号. 一个路由器的出标号是下一跳路由器的入标号.</p></li><li><p>拆链阶段</p></li></ol><p>计算机网络层的服务:</p><ul><li>分组化处理<br>将上层数据封装到一个数据部中. 添加了一个首部,包含分组的逻辑源地址,逻辑目的地址等.</li><li>查找下一跳的逻辑地址<br>咨询路由表,查找下一条的逻辑地址</li><li>查找下一条的物理地址<br>需要数据链路层来进行真正的交付,但数据链路层需要下一跳的MAC地址才能进行真正的交付</li><li>数据报进行必要的分片处理<br>一个帧携带了数据最大长度有限制,所以进行分片处理.</li></ul><h2 id="chap5-IPV4地址"><a href="#chap5-IPV4地址" class="headerlink" title="chap5 IPV4地址"></a>chap5 IPV4地址</h2><p>A类 0 开头 1/2   一个字节的网络标识<br>B类 10 开头 1/4  两个字节的网络标识<br>C类 110 开头 1/8 三个字节的网络标识,每个地址块有256个地址<br>D类 1110 开头 1/16 只有一个地址块<br>E类 1111 开头 1/16 只有一个地址块</p><p>NAT技术 网络地址转换(network address translation),可以用于在专用地址和全球地址之间的相互映射.</p><h3 id="转换表"><a href="#转换表" class="headerlink" title="转换表"></a>转换表</h3><ul><li><p>使用IP地址, 一个专用地址和一个外部地址对应</p></li><li><p>使用IP地址池,多对多,可以同时通信的数量是根据IP地址池里面的地址数量</p></li><li><p>使用IP地址和端口地址.一次性使用的端口地址是唯一的.</p></li></ul><h2 id="chap6-IP分组的交付和转发"><a href="#chap6-IP分组的交付和转发" class="headerlink" title="chap6 IP分组的交付和转发"></a>chap6 IP分组的交付和转发</h2><h3 id="基于目的地址的转发"><a href="#基于目的地址的转发" class="headerlink" title="基于目的地址的转发"></a>基于目的地址的转发</h3><ul><li><p>下一跳方法 只保留下一跳的路由器地址.(如果是基于路由的方法,需要保留整个路径的路由器地址)</p></li><li><p>特定网络方法 把连接在同一个网络的所有主机看成一个唯一的表项</p></li><li><p>默认方法 不必把整个因特网的所有都列出来,而是采用一个默认表项</p></li><li><p>使用分类地址转发</p></li><li><p>使用无分类地址转发 路由表项需要包含掩码(最长掩码匹配)</p></li></ul><h3 id="基于标记的转发"><a href="#基于标记的转发" class="headerlink" title="基于标记的转发"></a>基于标记的转发</h3><p>主要是基于面向连接的网络方式,交换机根据附加在分组上的标记来进行转发分组.</p><h3 id="路由器结构"><a href="#路由器结构" class="headerlink" title="路由器结构"></a>路由器结构</h3><p>输入端口,输出端口,路由选择处理器以及交换结构</p><h2 id="chap7-网际协议版本4-IPV4"><a href="#chap7-网际协议版本4-IPV4" class="headerlink" title="chap7 网际协议版本4 IPV4"></a>chap7 网际协议版本4 IPV4</h2><h3 id="IP数据报"><a href="#IP数据报" class="headerlink" title="IP数据报"></a>IP数据报</h3><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap7_1.png" alt="IP数据报"></p><p>IP数据报总长度字段是16位,因此IP数据报的长度限制在$2^16-1$字节.<br>首部最小长度是20字节.最大长度是60.</p><p>首部 + 数据</p><p>首部长度(HLEN)  以<code>4</code>字节的字为单位</p><p><strong><em>只有数据报中的数据是分片</em></strong><br>MTU 最大传送单元</p><p>分片偏移 以<code>8</code>字节为度量单位<br>标志: D: 不分片; M: 还有分片(1表明后面还有分片)</p><p>IP中的检验和只覆盖首部.不包含数据.</p><h3 id="选项类型"><a href="#选项类型" class="headerlink" title="选项类型"></a>选项类型</h3><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap7_2.png" alt="选项"></p><ul><li><p>无操作选项. 用作不同长度选项之间的填充. <strong>用来进行16位或者32位边界的对齐</strong>.</p></li><li><p>选项结束选项. 一字节,全0.</p></li><li><p>记录路由选项. 用来记录处理数据报的路由器.最多9个</p></li><li><p>严格路由选项. 预先指定数据报在网络中传播时的路由.</p></li><li><p>不严格路由选项. 条件放宽,表中路由器必须通过,但也可以访问其他路由器</p></li><li><p>时间戳. IP地址+时间戳.</p></li></ul><h2 id="chap-8-地址解析协议"><a href="#chap-8-地址解析协议" class="headerlink" title="chap 8 地址解析协议"></a>chap 8 地址解析协议</h2><h3 id="地址映像"><a href="#地址映像" class="headerlink" title="地址映像"></a>地址映像</h3><ul><li><p>静态映射 将逻辑地址和物理地址关联起来</p></li><li><p>动态映射 地址解析协议(ARP) 和 逆地址解析协议(RARP)</p></li></ul><h3 id="ARP协议"><a href="#ARP协议" class="headerlink" title="ARP协议"></a>ARP协议</h3><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap8_1.png" alt="差错报文"></p><p>ARP请求采用广播发送;ARP回答采用单播发送<br>IP -&gt; 物理地址.</p><p>硬件类型:用来定义运行ARP的网络类型.<br>协议类型:用来定义协议类型.<br>硬件长度:用来定义物理地址的长度,以字节为单位<br>协议长度:用来定义逻辑地址的长度,以字节为单位</p><p>ARP分组直接封装在以太网的帧中.(代替之前的数据位置)</p><h3 id="代理ARP"><a href="#代理ARP" class="headerlink" title="代理ARP"></a>代理ARP</h3><p>它是代表一组主机的ARP,可以用于产生一组子网划分的效果.<br>当运行代理ARP的路由器收到一个ARP请求,希望找出这些主机中的某一个主机的物理地址时,路由器就返回一个宣布了他自己硬件得知的ARP回答分组.(就是把代理服务器的硬件地址作为那个硬件地址)</p><h2 id="chap-9-网址控制报文协议-ICMP"><a href="#chap-9-网址控制报文协议-ICMP" class="headerlink" title="chap 9 网址控制报文协议( ICMP)"></a>chap 9 网址控制报文协议( ICMP)</h2><p>由于IP协议有两个不足之处</p><ul><li><p>IP协议没有差错报告或者差错纠正机制</p></li><li><p>IP协议还缺少主机和管理查询所需要的机制</p></li></ul><p>ICMP 首先要封装成IP数据报,然后再传输到下一层</p><h3 id="差错报告报文"><a href="#差错报告报文" class="headerlink" title="差错报告报文"></a>差错报告报文</h3><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap9_1.png" alt="差错报文"></p><p><strong>携带ICMP分组的IP协议字段值为1</strong>.</p><p>ICMP由8字节的首部和可变长度的数据部分组成.<br>差错报文总是发送给最初的信号源.</p><ol><li><p>对于携带ICMP的数据报,不产生ICMP差错报文</p></li><li><p>只有第一个分片产生ICMP差错报文</p></li><li><p>多播地址的数据报,不产生差错报文</p></li><li><p>对于特殊地址的(127.0.0.0;0.0.0.0),不产生差错数据报文</p></li></ol><h3 id="查询报文"><a href="#查询报文" class="headerlink" title="查询报文"></a>查询报文</h3><ol><li><p>回送请求和回送回答. 为了诊断而设计的,组合起来来确定两个系统之间能否彼此通信. 比如:<code>ping</code></p></li><li><p>时间戳请求和回答. 来确定IP数据报在两个机器之间来回往返花费的时间.也可以用来同步两个时钟.</p></li></ol><h2 id="chap-10-移动IP"><a href="#chap-10-移动IP" class="headerlink" title="chap 10 移动IP"></a>chap 10 移动IP</h2><h3 id="归属代理-外地代理"><a href="#归属代理-外地代理" class="headerlink" title="归属代理+外地代理"></a>归属代理+外地代理</h3><p>两个地址: 归属地址(永久) + 转交地址(临时)<br>主机从一个网络转交到另外一个地址,他的转交地址就会发生改变.</p><p>为了让地址改变对于因特网其他部分是透明.<br>所以需要:归属代理 + 外地代理</p><p>归属代理是代收其他主机发给该主机的信息,然后再转发给外地代理<br>外地代理接收,归属代理发来的信息,然后发送给主机.</p><h3 id="远程主机通信的三个阶段"><a href="#远程主机通信的三个阶段" class="headerlink" title="远程主机通信的三个阶段"></a>远程主机通信的三个阶段</h3><h4 id="代理发现"><a href="#代理发现" class="headerlink" title="代理发现"></a>代理发现</h4><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap10_1.png" alt="代理"></p><ol><li><p>移动主机在离开归属网络之前,必须要发现归属代理</p></li><li><p>移动主机移动到外地网络之后要发现外地代理</p></li></ol><h4 id="登记"><a href="#登记" class="headerlink" title="登记"></a>登记</h4><p>登记有四个要素:</p><ul><li><p>移动主机必须要向外地代理登记.</p></li><li><p>移动主机必须要向归属代理登记.(由外地代理代替完成)</p></li><li><p>截止期到了,必须更新登记</p></li><li><p>移动主机回到归属网络,必须取消登记.</p></li></ul><h4 id="数据传送"><a href="#数据传送" class="headerlink" title="数据传送"></a>数据传送</h4><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap10_2.png" alt="数据传送"></p><h3 id="移动IP的低效率"><a href="#移动IP的低效率" class="headerlink" title="移动IP的低效率"></a>移动IP的低效率</h3><ol><li><p>两次穿越.远程主机和移动主机在同一个归属网络.(只有远程主机向移动主机发送分组时候才会发生,移动主机向远程主机发送时候就不会存在低效率问题)</p></li><li><p>三角路由选择. 三角形两边之和大于第三边(路径浪费)</p></li></ol>]]></content>
-      
-      
+  </entry>
+  <entry>
+    <title>Advancednetwork_第二阶段复习</title>
+    <url>/2020/06/28/Advanced_network/chap4_10/</url>
+    <content><![CDATA[<h1 id="第二阶段复习"><a href="#第二阶段复习" class="headerlink" title="第二阶段复习"></a>第二阶段复习</h1><h2 id="chap4-网络层基础"><a href="#chap4-网络层基础" class="headerlink" title="chap4 网络层基础"></a>chap4 网络层基础</h2><p>面向连接的服务:</p>
+<ol>
+<li><p>建链阶段</p>
+<p>1.1 请求分组<br> 从源到终点,确定入端口,入标号以及出端口<br>1.2 确认分组<br> 从从终点到源,确定出标号. 一个路由器的出标号是下一跳路由器的入标号.</p>
+</li>
+<li><p>拆链阶段</p>
+</li>
+</ol>
+<p>计算机网络层的服务:</p>
+<ul>
+<li>分组化处理<br>将上层数据封装到一个数据部中. 添加了一个首部,包含分组的逻辑源地址,逻辑目的地址等.</li>
+<li>查找下一跳的逻辑地址<br>咨询路由表,查找下一条的逻辑地址</li>
+<li>查找下一条的物理地址<br>需要数据链路层来进行真正的交付,但数据链路层需要下一跳的MAC地址才能进行真正的交付</li>
+<li>数据报进行必要的分片处理<br>一个帧携带了数据最大长度有限制,所以进行分片处理.</li>
+</ul>
+<h2 id="chap5-IPV4地址"><a href="#chap5-IPV4地址" class="headerlink" title="chap5 IPV4地址"></a>chap5 IPV4地址</h2><p>A类 0 开头 1/2   一个字节的网络标识<br>B类 10 开头 1/4  两个字节的网络标识<br>C类 110 开头 1/8 三个字节的网络标识,每个地址块有256个地址<br>D类 1110 开头 1/16 只有一个地址块<br>E类 1111 开头 1/16 只有一个地址块</p>
+<p>NAT技术 网络地址转换(network address translation),可以用于在专用地址和全球地址之间的相互映射.</p>
+<h3 id="转换表"><a href="#转换表" class="headerlink" title="转换表"></a>转换表</h3><ul>
+<li><p>使用IP地址, 一个专用地址和一个外部地址对应</p>
+</li>
+<li><p>使用IP地址池,多对多,可以同时通信的数量是根据IP地址池里面的地址数量</p>
+</li>
+<li><p>使用IP地址和端口地址.一次性使用的端口地址是唯一的.</p>
+</li>
+</ul>
+<h2 id="chap6-IP分组的交付和转发"><a href="#chap6-IP分组的交付和转发" class="headerlink" title="chap6 IP分组的交付和转发"></a>chap6 IP分组的交付和转发</h2><h3 id="基于目的地址的转发"><a href="#基于目的地址的转发" class="headerlink" title="基于目的地址的转发"></a>基于目的地址的转发</h3><ul>
+<li><p>下一跳方法 只保留下一跳的路由器地址.(如果是基于路由的方法,需要保留整个路径的路由器地址)</p>
+</li>
+<li><p>特定网络方法 把连接在同一个网络的所有主机看成一个唯一的表项</p>
+</li>
+<li><p>默认方法 不必把整个因特网的所有都列出来,而是采用一个默认表项</p>
+</li>
+<li><p>使用分类地址转发</p>
+</li>
+<li><p>使用无分类地址转发 路由表项需要包含掩码(最长掩码匹配)</p>
+</li>
+</ul>
+<h3 id="基于标记的转发"><a href="#基于标记的转发" class="headerlink" title="基于标记的转发"></a>基于标记的转发</h3><p>主要是基于面向连接的网络方式,交换机根据附加在分组上的标记来进行转发分组.</p>
+<h3 id="路由器结构"><a href="#路由器结构" class="headerlink" title="路由器结构"></a>路由器结构</h3><p>输入端口,输出端口,路由选择处理器以及交换结构</p>
+<h2 id="chap7-网际协议版本4-IPV4"><a href="#chap7-网际协议版本4-IPV4" class="headerlink" title="chap7 网际协议版本4 IPV4"></a>chap7 网际协议版本4 IPV4</h2><h3 id="IP数据报"><a href="#IP数据报" class="headerlink" title="IP数据报"></a>IP数据报</h3><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap7_1.png" alt="IP数据报"></p>
+<p>IP数据报总长度字段是16位,因此IP数据报的长度限制在$2^16-1$字节.<br>首部最小长度是20字节.最大长度是60.</p>
+<p>首部 + 数据</p>
+<p>首部长度(HLEN)  以<code>4</code>字节的字为单位</p>
+<p><strong><em>只有数据报中的数据是分片</em></strong><br>MTU 最大传送单元</p>
+<p>分片偏移 以<code>8</code>字节为度量单位<br>标志: D: 不分片; M: 还有分片(1表明后面还有分片)</p>
+<p>IP中的检验和只覆盖首部.不包含数据.</p>
+<h3 id="选项类型"><a href="#选项类型" class="headerlink" title="选项类型"></a>选项类型</h3><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap7_2.png" alt="选项"></p>
+<ul>
+<li><p>无操作选项. 用作不同长度选项之间的填充. <strong>用来进行16位或者32位边界的对齐</strong>.</p>
+</li>
+<li><p>选项结束选项. 一字节,全0.</p>
+</li>
+<li><p>记录路由选项. 用来记录处理数据报的路由器.最多9个</p>
+</li>
+<li><p>严格路由选项. 预先指定数据报在网络中传播时的路由.</p>
+</li>
+<li><p>不严格路由选项. 条件放宽,表中路由器必须通过,但也可以访问其他路由器</p>
+</li>
+<li><p>时间戳. IP地址+时间戳.</p>
+</li>
+</ul>
+<h2 id="chap-8-地址解析协议"><a href="#chap-8-地址解析协议" class="headerlink" title="chap 8 地址解析协议"></a>chap 8 地址解析协议</h2><h3 id="地址映像"><a href="#地址映像" class="headerlink" title="地址映像"></a>地址映像</h3><ul>
+<li><p>静态映射 将逻辑地址和物理地址关联起来</p>
+</li>
+<li><p>动态映射 地址解析协议(ARP) 和 逆地址解析协议(RARP)</p>
+</li>
+</ul>
+<h3 id="ARP协议"><a href="#ARP协议" class="headerlink" title="ARP协议"></a>ARP协议</h3><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap8_1.png" alt="差错报文"></p>
+<p>ARP请求采用广播发送;ARP回答采用单播发送<br>IP -&gt; 物理地址.</p>
+<p>硬件类型:用来定义运行ARP的网络类型.<br>协议类型:用来定义协议类型.<br>硬件长度:用来定义物理地址的长度,以字节为单位<br>协议长度:用来定义逻辑地址的长度,以字节为单位</p>
+<p>ARP分组直接封装在以太网的帧中.(代替之前的数据位置)</p>
+<h3 id="代理ARP"><a href="#代理ARP" class="headerlink" title="代理ARP"></a>代理ARP</h3><p>它是代表一组主机的ARP,可以用于产生一组子网划分的效果.<br>当运行代理ARP的路由器收到一个ARP请求,希望找出这些主机中的某一个主机的物理地址时,路由器就返回一个宣布了他自己硬件得知的ARP回答分组.(就是把代理服务器的硬件地址作为那个硬件地址)</p>
+<h2 id="chap-9-网址控制报文协议-ICMP"><a href="#chap-9-网址控制报文协议-ICMP" class="headerlink" title="chap 9 网址控制报文协议( ICMP)"></a>chap 9 网址控制报文协议( ICMP)</h2><p>由于IP协议有两个不足之处</p>
+<ul>
+<li><p>IP协议没有差错报告或者差错纠正机制</p>
+</li>
+<li><p>IP协议还缺少主机和管理查询所需要的机制</p>
+</li>
+</ul>
+<p>ICMP 首先要封装成IP数据报,然后再传输到下一层</p>
+<h3 id="差错报告报文"><a href="#差错报告报文" class="headerlink" title="差错报告报文"></a>差错报告报文</h3><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap9_1.png" alt="差错报文"></p>
+<p><strong>携带ICMP分组的IP协议字段值为1</strong>.</p>
+<p>ICMP由8字节的首部和可变长度的数据部分组成.<br>差错报文总是发送给最初的信号源.</p>
+<ol>
+<li><p>对于携带ICMP的数据报,不产生ICMP差错报文</p>
+</li>
+<li><p>只有第一个分片产生ICMP差错报文</p>
+</li>
+<li><p>多播地址的数据报,不产生差错报文</p>
+</li>
+<li><p>对于特殊地址的(127.0.0.0;0.0.0.0),不产生差错数据报文</p>
+</li>
+</ol>
+<h3 id="查询报文"><a href="#查询报文" class="headerlink" title="查询报文"></a>查询报文</h3><ol>
+<li><p>回送请求和回送回答. 为了诊断而设计的,组合起来来确定两个系统之间能否彼此通信. 比如:<code>ping</code></p>
+</li>
+<li><p>时间戳请求和回答. 来确定IP数据报在两个机器之间来回往返花费的时间.也可以用来同步两个时钟.</p>
+</li>
+</ol>
+<h2 id="chap-10-移动IP"><a href="#chap-10-移动IP" class="headerlink" title="chap 10 移动IP"></a>chap 10 移动IP</h2><h3 id="归属代理-外地代理"><a href="#归属代理-外地代理" class="headerlink" title="归属代理+外地代理"></a>归属代理+外地代理</h3><p>两个地址: 归属地址(永久) + 转交地址(临时)<br>主机从一个网络转交到另外一个地址,他的转交地址就会发生改变.</p>
+<p>为了让地址改变对于因特网其他部分是透明.<br>所以需要:归属代理 + 外地代理</p>
+<p>归属代理是代收其他主机发给该主机的信息,然后再转发给外地代理<br>外地代理接收,归属代理发来的信息,然后发送给主机.</p>
+<h3 id="远程主机通信的三个阶段"><a href="#远程主机通信的三个阶段" class="headerlink" title="远程主机通信的三个阶段"></a>远程主机通信的三个阶段</h3><h4 id="代理发现"><a href="#代理发现" class="headerlink" title="代理发现"></a>代理发现</h4><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap10_1.png" alt="代理"></p>
+<ol>
+<li><p>移动主机在离开归属网络之前,必须要发现归属代理</p>
+</li>
+<li><p>移动主机移动到外地网络之后要发现外地代理</p>
+</li>
+</ol>
+<h4 id="登记"><a href="#登记" class="headerlink" title="登记"></a>登记</h4><p>登记有四个要素:</p>
+<ul>
+<li><p>移动主机必须要向外地代理登记.</p>
+</li>
+<li><p>移动主机必须要向归属代理登记.(由外地代理代替完成)</p>
+</li>
+<li><p>截止期到了,必须更新登记</p>
+</li>
+<li><p>移动主机回到归属网络,必须取消登记.</p>
+</li>
+</ul>
+<h4 id="数据传送"><a href="#数据传送" class="headerlink" title="数据传送"></a>数据传送</h4><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap10_2.png" alt="数据传送"></p>
+<h3 id="移动IP的低效率"><a href="#移动IP的低效率" class="headerlink" title="移动IP的低效率"></a>移动IP的低效率</h3><ol>
+<li><p>两次穿越.远程主机和移动主机在同一个归属网络.(只有远程主机向移动主机发送分组时候才会发生,移动主机向远程主机发送时候就不会存在低效率问题)</p>
+</li>
+<li><p>三角路由选择. 三角形两边之和大于第三边(路径浪费)</p>
+</li>
+</ol>
+]]></content>
       <categories>
-          
-          <category> Advanced_network </category>
-          
+        <category>Advanced_network</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Advancednetwork_第一阶段复习</title>
-      <link href="/2020/06/28/Advanced_network/chap2_3/"/>
-      <url>/2020/06/28/Advanced_network/chap2_3/</url>
-      
-        <content type="html"><![CDATA[<h1 id="第一阶段复习"><a href="#第一阶段复习" class="headerlink" title="第一阶段复习"></a>第一阶段复习</h1><h2 id="chap2"><a href="#chap2" class="headerlink" title="chap2"></a>chap2</h2><h3 id="OSI-模型-open-systemed-internet"><a href="#OSI-模型-open-systemed-internet" class="headerlink" title="OSI 模型 open systemed internet"></a>OSI 模型 open systemed internet</h3><div class="table-container"><table><thead><tr><th style="text-align:center">层次</th><th style="text-align:center">作用</th><th style="text-align:center">传输内容</th></tr></thead><tbody><tr><td style="text-align:center">应用层</td><td style="text-align:center">使用户允许访问网络资源</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">表示层</td><td style="text-align:center">数据的转换，加密和压缩(将数据转化成公认的比特)</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">会话层</td><td style="text-align:center">建立,管理,终止会话</td><td style="text-align:center"></td></tr><tr><td style="text-align:center">运输层</td><td style="text-align:center">提供可靠的进程到进程的交付和差错恢复</td><td style="text-align:center">TCP,UDP,SCTP(报文段,用户数据报或者分组)</td></tr><tr><td style="text-align:center">网络层</td><td style="text-align:center">从源到终点传送分组,提供网络互联</td><td style="text-align:center">IP数据报 帧的分组</td></tr><tr><td style="text-align:center">数据链路层</td><td style="text-align:center">将比特组成帧结构,提供逐跳交付</td><td style="text-align:center">帧的分组+首部(说明帧的源地址和目的地址)</td></tr><tr><td style="text-align:center">物理层</td><td style="text-align:center">经过媒体传送比特,提供机械和电气规约</td><td style="text-align:center">在帧首部加入前同步码,提醒接收站有数据到来(可以允许错过几个比特)SFD(帧首定界符)</td></tr></tbody></table></div><p><strong><em>如果使用五层模型,则将应用层,表示层,会话层统一合并成应用层</em></strong>  传输内容是 <strong>报文</strong></p><h3 id="编址"><a href="#编址" class="headerlink" title="编址"></a>编址</h3><p><strong>物理地址是逐跳改变的,逻辑地址和端口地址保持不变.</strong></p><p>每经过一个路由器,物理地址就被更新,如果该计算机的逻辑地址和目的逻辑地址不一致,则继续进行传递.</p><h2 id="chap-3"><a href="#chap-3" class="headerlink" title="chap 3"></a>chap 3</h2><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap3_1.png" alt="帧"></p><p>帧最小长度是64字节,最大长度是1518字节(不算前同步码和SFD)</p><p>目的地址的第一个字节的最低位指定了传播类型.<br>0 代表单播,1代表多播<br>目的地址全为1,代表广播</p><p>地址是从左往右,逐字节发送.<br>而每个字节是从右往左,逐位发送</p><p>最小帧长的目的是为了让CSMA/CA正常工作:因为如果一个帧发完之后是不会留有该帧副本,所以必须在帧发完之前,检测出来是否发成冲突.而冲突检测时间是两倍的最大传播时间,所以帧长等于冲突检测时间乘以帧发射速率.</p><ul><li><p><code>转发器</code>(一层交换机)相当于一个信号放大器(是信号保持),防止信号衰减</p></li><li><p><code>网桥</code>(两层交换机)的表项中需要存MAC地址对应的端口,而他的更新一般是自动的.通过传输帧中的<code>目的地址</code>来<strong>查找相应的端口</strong>,通过<code>源地址</code>来进行<strong>更新或者新添表项</strong>,网桥不改变MAC地址</p></li><li><p><code>路由器</code>(三层交换机).转发器和网桥是连接一个局域网的各个网段,路由器是将多个局域网连接在一起. 路由器的每个接口都对应着一个逻辑地址和物理地址,在传输过程中改变,帧的MAC地址(目的+源).</p></li></ul>]]></content>
-      
-      
+  </entry>
+  <entry>
+    <title>ATTENTION IN DOCKER</title>
+    <url>/2020/06/26/docker/attention_docker/</url>
+    <content><![CDATA[<h1 id="ATTENTION-IN-DOCKER"><a href="#ATTENTION-IN-DOCKER" class="headerlink" title="ATTENTION IN DOCKER"></a>ATTENTION IN DOCKER</h1><h2 id="1-在docker删除image中"><a href="#1-在docker删除image中" class="headerlink" title="1.在docker删除image中"></a>1.在docker删除image中</h2><p><strong>有一部分容器使用的是相同的ID，因此不能通过删除ID来实现。</strong><br>比如 :  </p>
+<pre><code>docker  rmi 111111   // 111111代表着容器ID
+</code></pre><p>必须要通过删除容器名字来实现 如 ：</p>
+<pre><code>docker rmi hello   // hello代表着容器名字
+</code></pre><h2 id="2-在删除镜像前，需要先删除容器"><a href="#2-在删除镜像前，需要先删除容器" class="headerlink" title="2.在删除镜像前，需要先删除容器"></a>2.在删除镜像前，需要先删除容器</h2><pre><code>docker rm $(docker ps -aq)  
+</code></pre><p>-a 列出本地所有镜像，-q 只显示镜像ID</p>
+<h2 id="3-正确退出容器"><a href="#3-正确退出容器" class="headerlink" title="3.正确退出容器"></a>3.正确退出容器</h2><pre><code>ctrl+p                    +                        ctrl+q
+</code></pre><p>绝对不能使用exit或者ctrl+d来退出，这样整个系统就退出了！！</p>
+<h2 id="4-宿主机和容器之间的文件传输"><a href="#4-宿主机和容器之间的文件传输" class="headerlink" title="4.宿主机和容器之间的文件传输"></a>4.<a href="https://blog.csdn.net/xtfge0915/article/details/52169445" target="_blank" rel="noopener">宿主机和容器之间的文件传输</a></h2><p>从主机复制到容器</p>
+<pre><code>sudo docker cp host_path containerID:container_path
+</code></pre><p>从容器复制到主机</p>
+<pre><code>sudo docker cp containerID:container_path host_path
+</code></pre>]]></content>
       <categories>
-          
-          <category> Advanced_network </category>
-          
+        <category>Docker</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>process</title>
-      <link href="/2020/06/28/process/"/>
-      <url>/2020/06/28/process/</url>
-      
-        <content type="html"><![CDATA[<h1 id="进程的几种状态"><a href="#进程的几种状态" class="headerlink" title="进程的几种状态"></a>进程的几种状态</h1><hr><p><img src="https://img-blog.csdn.net/20170820200728157?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcWljaGVuZzc3Nw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="三态模型" title="三态模型"></p><h2 id="阻塞"><a href="#阻塞" class="headerlink" title="阻塞"></a>阻塞</h2><p>阻塞是一种被动的方式，由于获取资源获取不到而引起的等待。</p><h2 id="睡眠"><a href="#睡眠" class="headerlink" title="睡眠"></a>睡眠</h2><p>睡眠的确是一种主动的方式</p><h2 id="挂起"><a href="#挂起" class="headerlink" title="挂起"></a>挂起</h2><p>挂起也是一种主动的行为，是系统层面对进程作出的合理操作。<br>挂起的标志就是换出到外存，在外存的进程肯定是不能执行的，所以挂起的目的就很明显，在内存资源不足时，需要把一些进程换出到外存，给着急运行的进程腾地方。</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>udp</title>
-      <link href="/2020/06/28/udp/"/>
-      <url>/2020/06/28/udp/</url>
-      
-        <content type="html"><![CDATA[<h1 id="UDP-for-VPN"><a href="#UDP-for-VPN" class="headerlink" title="UDP for VPN"></a>UDP for VPN</h1><h2 id="nc"><a href="#nc" class="headerlink" title="nc"></a>nc</h2><pre><code>dzx@dzx-N8xEJEK:~$ nc -vuz 192.168.209.121 123Connection to 192.168.209.121 123 port [udp/ntp] succeeded!</code></pre><p>实际使用时可以只用-u参数，-u代表udp协议 ，-v代表详细模式，-z代表只监测端口不发送数据</p><h1 id=""><a href="#" class="headerlink" title="#"></a>#</h1>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Aics_Chap6</title>
-      <link href="/2020/06/27/Aics/chap6/"/>
-      <url>/2020/06/27/Aics/chap6/</url>
-      
-        <content type="html"><![CDATA[<h1 id="深度学习处理器机理"><a href="#深度学习处理器机理" class="headerlink" title="深度学习处理器机理"></a>深度学习处理器机理</h1><h2 id="如何设计DLP：deep-learning-processor"><a href="#如何设计DLP：deep-learning-processor" class="headerlink" title="如何设计DLP：deep learning processor"></a>如何设计DLP：deep learning processor</h2><p>ISA：指令集</p>]]></content>
-      
-      
+  </entry>
+  <entry>
+    <title>Advanced_network 往年试卷解答纠错</title>
+    <url>/2020/07/04/Advanced_network/review/</url>
+    <content><![CDATA[<h1 id="往年试卷解答纠错"><a href="#往年试卷解答纠错" class="headerlink" title="往年试卷解答纠错"></a>往年试卷解答纠错</h1><h2 id="卷1"><a href="#卷1" class="headerlink" title="卷1"></a>卷1</h2><ul>
+<li><p>TCP/IP协议4层.不是五层.分别是: 应用层, 运输层, 网络层, 网络接口层</p>
+</li>
+<li><p>以太网:<br>  标准以太网: 10Mbps, IEEE 802.3<br>  快速以太网: 100Mbps, IEEE 802.3u</p>
+</li>
+<li><p>现在以太网都是采用: CSMA/CD 技术,无限网络采用CSMA/CA技术</p>
+</li>
+<li><p>IPv6 的格式是 128 比特. 用<code>:</code>分成八段, 然后用16进制表示, XXXX:XXXX…<br>IPv4 的格式是 32 比特 (4 * 8)</p>
+</li>
+<li><p>任意子网的 主机号 全1 为 这个网络的广播,<br>全0表示了 这个 网段.</p>
+<blockquote>
+<p>以 192.168.0.0/255.255.0.0 为例<br>192.168.255.255 表示 在这个网络的广播<br>192.168.0.0 代表着这个子网的网段</p>
+</blockquote>
+</li>
+<li><p>集线器不可以分割碰撞域<br>网桥可以分割碰撞域<br>路由器可以分割碰撞域,广播域</p>
+</li>
+<li><p>三种基本的数据交换方式</p>
+<blockquote>
+<p>电路交换：整个报文的比特流连续的从源点直达终点，好像在一个管道中传送。<br>报文交换：整个报文先传输到相邻的结点，全部存储下来后查找转发表，转发到下一个结点。<br>分组交换：单个分组(报文的一部分)传送到相邻结点，传送到相邻结点，存储下来后查找转发表，转发到下一个结点</p>
+</blockquote>
+</li>
+<li><p>香农定理给出了信道信息传送速率的上限（比特每秒）和信道信噪比及带宽的关系<br>信道容量Rmax与信道带宽W，信噪比S/N关系为： Rmax=W*log2(1+S/N)。注意这里的log2是以2为底的对数</p>
+</li>
+<li><p>曼彻斯特编码: 0: 低-&gt;高, 1: 高-&gt;低<br>差分曼彻斯特编码: 0: 表示有跳变, 1: 表示无跳变.(跳变指的是每个周期的起始位)</p>
+</li>
+<li><p>距离矢量名称的由来是因为路由是以矢量（距离，方向）的方式被通告出去的，这里的距离是根据度量来决定的。通俗点就是：往某个方向上的距离.<br>距离矢量路由算法是动态路由算法。它是这样工作的：每个路由器维护一张矢量表，<br>表中列出了当前已知的到 每个目标的最佳距离，以及所使用的线路。通过在邻居之间相互交换信息，路由器不断地更新它们内部的表</p>
+</li>
+<li><p>链路状态路由选择协议又称为最短路径优先协议或分布式数据库协议,它基于Edsger Dijkstra的最短路径优先（SPF）算法。<br>算法易理解。链路状态协议从网络或者网络的限定区域内的所有其他路由器处收集信息，<br>最终每个链路状态路由器上都有一个相同的有关网络的信息。并且每台路由器都可以独立的计算各自的最优路径。</p>
+</li>
+<li><p>TCP 首部有长度字段的原因是, TCP首部由于选项,导致长度不定.</p>
+</li>
+<li><p>无限局域网使用CSMA/CA,而不是用CSMA/CD的原因:</p>
+<blockquote>
+<ol>
+<li>CSMA/CD要求站点在发送数据的同时,也要不间断的检测信道,这种功能在无限局域网中花费巨大</li>
+<li>无限电波向所有方向传输数据,且传播距离受限,在接收端仍然有冲突可能,从而产生隐藏站问题和暴露站问题.(冲突检测不完全)</li>
+</ol>
+</blockquote>
+<ol>
+<li><p><code>隐藏站</code>问题:<br>假设有3无线通信站ABC如下所示：<br>A        B         C<br>其中B在C的无线电波范围内，但A不在C的无线电波范围内。此时C正在向B传送数据，而A也试图向B传送数据。此时，A不能够监听到B正在忙（因为A在监听信道的时候什么也听不到，所以它会错误的认为此时可以向B传送数据了）。如果A向B传送数据，则将导致错误。此即隐藏站问题。其中C是A的隐藏站</p>
+</li>
+<li><p><code>暴露站</code>问题:<br>假设有3无线通信站ABC如下所示：<br>A        B          C<br>其中B在A的无线电波范围内，但C不在A的无线电波范围内。此时A正在传送数据（向除B以外的某通信站），而B希望给C发送数据，但是错误地认为该传送过程将会失败（因为B会监听到一次传输，所以它会错误地认为此时不能向C发送数据）。此即暴露站问题。其中A是B的暴露站</p>
+</li>
+</ol>
+</li>
+<li><p>CSMA/CD 信道空闲立即发送. 如果信道忙，则按照一定的退避算法进行延时监听。<br>CSMA/CA 信道空闲随机发送. 先发送一个很小的信道侦测帧RTS，如果收到最近的接入点返回的CTS，就认为信道是空闲的，然后再发送数据</p>
+</li>
+<li><p><strong>网桥没有Mac地址</strong>,因为网桥并不对转发的数据帧进行拆包重封装。所以对于交换机来说，如果只是完成数据帧交换，则可以不要MAC地址.<br><strong>标准路由器上，每个端口有个一个自己的MAC地址</strong>，以进行各网段的通信.</p>
+</li>
+<li><p>MTU大小</p>
+<blockquote>
+<p>大型MTU的优点：适合长距离传输大量数据无需分段；传输速度更快，无需重组,丢失的数据报更少,效率更高（开销更少）<br>小型MTU的优点：<br>适用于传输对时间敏感的数据，例如音频或视频<br>更适合多路复用</p>
+</blockquote>
+</li>
+<li><p>隧道技术是一种通过使用互联网络的基础设施在网络之间传递数据的方式。使用隧道传递的数据(或负载)可以是<strong>不同协议</strong>的数据帧或包。隧道协议将这些其他协议的数据帧或包重新封装在新的包头中发送。新的包头提供了路由信息，从而使封装的负载数据能够通过互联网络传递.</p>
+</li>
+<li><p>路由问题</p>
+<ol>
+<li>在距离矢量路由中，每个路由器都会发送有关自动路由的所有信息。定期将其与相邻网络上的所有路由器连接。它使用相当简单的算法来更新路由表，但会导致大量不必要的网络流量。</li>
+<li>在链路状态路由中，路由器仅在发生更改时才向自治系统发送有关网络更改的信息。与距离矢量路由相比，它使用的网络资源更少，因为它在网络上发送的流量更少，但是它使用复杂得多的Dijkstra算法从链路状态数据库计算路由表。</li>
+</ol>
+</li>
+<li><p>OSPF报文传播的比RIP报文的快,原因是: OSPF消息的传播速度更快，因为使用OSPF的路由器会立即向其网络传播有关其邻居发生任何更改的消息; RIP消息的分发速度较慢，因为使用RIP的网络需要每30秒进行一次定期更新来携带来自某个站点的任何消息路由到下一个路由器。此过程可能需要很多时间。</p>
+</li>
+<li><p>rwnd 接收窗口, cwnd: 拥塞窗口.</p>
+</li>
+</ul>
+]]></content>
       <categories>
-          
-          <category> Aics </category>
-          
+        <category>Advanced_network</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> 理论 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Aics_Chap5</title>
-      <link href="/2020/06/27/Aics/chap5/"/>
-      <url>/2020/06/27/Aics/chap5/</url>
-      
-        <content type="html"><![CDATA[<h1 id="编程框架机理"><a href="#编程框架机理" class="headerlink" title="编程框架机理"></a>编程框架机理</h1><hr><p>==<strong>编程框架的内部运转 具备开发框架的能力</strong>==</p><h2 id="tensorflow-设计原则"><a href="#tensorflow-设计原则" class="headerlink" title="tensorflow 设计原则"></a>tensorflow 设计原则</h2><p>TensorFlow 的目的：</p><ol><li><p><strong>高性能</strong></p><ul><li>算子：每个算子对底层部件已经优化，可以更好的利用硬件性能。</li><li>计算图：优化了计算图，提高了计算图的计算效率（TODO 计算图如何优化）</li><li>并行： 根据计算图，并行没有数据依赖的节点</li></ul></li><li><p><strong>易开发</strong></p><p> 提炼了深度学习的很多共性算子，方便用户调用。</p></li><li><p><strong>可移植</strong></p><p> 可以适用于不同的异构系统，方便代码移植。<br> 表明对于同一个算子，开发了适合同步底层的代码。</p></li></ol><h2 id="TensorFlow-计算图"><a href="#TensorFlow-计算图" class="headerlink" title="TensorFlow 计算图"></a>TensorFlow 计算图</h2><h3 id="计算图求导方法"><a href="#计算图求导方法" class="headerlink" title="计算图求导方法"></a>计算图求导方法</h3><h4 id="手动求解法"><a href="#手动求解法" class="headerlink" title="手动求解法"></a>手动求解法</h4><ul><li>手动编写链式法则求导转化成计算机程序特别困难</li><li>如果更改网络模型，需要改好多梯度求解算法</li></ul><h4 id="数值求导法"><a href="#数值求导法" class="headerlink" title="数值求导法"></a>数值求导法</h4><p>给一个很小的初始值，算出来偏差</p><ul><li>计算量大，求解速度慢</li><li>可能引入舍入误差和截断误差</li></ul><h4 id="符号求导法"><a href="#符号求导法" class="headerlink" title="符号求导法"></a>符号求导法</h4><p>会引起表达式膨胀</p><h4 id="自动求导法"><a href="#自动求导法" class="headerlink" title="自动求导法"></a>自动求导法</h4><p>==自动求导方法是界于数值求导方法和符号求导方法之间==</p><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Aics/Automatic_derivation.png" alt="自动求导方法"></p><p>求导方法对比：</p><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Aics/derivation.png" alt="自动求导方法"></p><h4 id="计算图分配"><a href="#计算图分配" class="headerlink" title="计算图分配"></a>计算图分配</h4><ol><li><p>从起始点开始遍历计算图的每一个节点</p></li><li><p>然后考虑每个节点的可行设备集合</p></li><li><p>采用<strong>贪心算法</strong>，选择最快完成时间的设备分配给该节点。</p></li></ol><p>&gt;</p><blockquote><p>常量折叠：有的常数节点可以被提亲计算，用新生成的节点代替原来的节点。<br>算数优化：对表达式优化<br>布局优化<br>Tensorflow 默认NHWC；GPU默认NCHW。<br>两个连续的GPU计算节点之间的 NCHW2NHWC 与NHWC2NCHE 可以相互抵消。<br>重映射：将出现频率较高的子图用一个单独的算子来替代。<br>消除子图的调度开销<br>不需要在计算过程中将数据调入内存，再调出内存。访存开销减少</p></blockquote>]]></content>
-      
-      
+  </entry>
+  <entry>
+    <title>Auto-Docker-Build</title>
+    <url>/2020/06/26/docker/auto-docker/</url>
+    <content><![CDATA[<h1 id="Auto-Docker-Build"><a href="#Auto-Docker-Build" class="headerlink" title="Auto-Docker-Build"></a><a href="https://www.jianshu.com/p/21cd9aeee12b" target="_blank" rel="noopener">Auto-Docker-Build</a></h1><h2 id="1-新建文件Dockerfile"><a href="#1-新建文件Dockerfile" class="headerlink" title="1. 新建文件Dockerfile"></a>1. 新建文件Dockerfile</h2><p>写入如下内容，构建命令非常简单：从谷歌的镜像开始构建，然后加上维护人信息</p>
+<pre><code>From ubuntu:v1.1.1
+MAINTAINER dzx &lt;dzx@qq.com&gt;
+</code></pre><h2 id="2-提交版本"><a href="#2-提交版本" class="headerlink" title="2. 提交版本"></a>2. 提交版本</h2><pre><code>git add Dockerfile  
+git commit -m &quot;add Dockerfile&quot;
+</code></pre><h3 id="一定要打上tag，并按照如下格式"><a href="#一定要打上tag，并按照如下格式" class="headerlink" title="一定要打上tag，并按照如下格式"></a>一定要打上tag，并按照如下格式</h3><pre><code>git tag -a release-v1.12.3 -m &quot;version 1.12.3&quot;
+</code></pre><h2 id="3-将tag对应版本，push到仓库，就会开始自动构建过程"><a href="#3-将tag对应版本，push到仓库，就会开始自动构建过程" class="headerlink" title="3. 将tag对应版本，push到仓库，就会开始自动构建过程"></a>3. 将tag对应版本，push到仓库，就会开始自动构建过程</h2><pre><code>git push origin release-v1.12.3
+</code></pre><p>通常的git push不会将标签对象提交到git服务器，我们需要进行显式的操作</p>
+<pre><code>git push origin v0.1.2 # 将v0.1.2标签提交到git服务器
+git push origin –tags # 将本地所有标签一次性提交到git服务器
+</code></pre><h1 id="Dockefile-Grammar"><a href="#Dockefile-Grammar" class="headerlink" title="Dockefile Grammar"></a><a href="https://www.jianshu.com/p/5f4b1ade9dfc" target="_blank" rel="noopener">Dockefile Grammar</a></h1><h2 id="RUN"><a href="#RUN" class="headerlink" title="RUN"></a>RUN</h2><p>RUN命令是Dockerfile执行命令的核心部分。它接受命令作为参数并用于创建镜像。不像CMD命令，RUN命令用于创建镜像（在之前commit的层之上形成新的层）<br>格式为Run 或者  </p>
+<pre><code>Run [“executable” ,”Param1”, “param2”]
+</code></pre><p>前者在shell终端上运行，即/bin/sh -C，后者使用exec运行。<br>例如：</p>
+<pre><code>RUN [“/bin/bash”, “-c”,”echo hello”]
+</code></pre><h2 id="USER"><a href="#USER" class="headerlink" title="USER"></a>USER</h2><p>格式为 USER daemon 。<br>指定运行容器时的用户名或UID，后续的 RUN 也会使用指定用户。<br>当服务不需要管理员权限时，可以通过该命令指定运行用户。并且可以在之前创建所需要的用户。<br>例如：</p>
+<pre><code>RUN groupadd -r postgres &amp;&amp; useradd -r -g postgres postgres 。
+</code></pre><p>要临时获取管理员权限可以使用 gosu ，而不推荐 sudo</p>
+<h2 id="VOLUME"><a href="#VOLUME" class="headerlink" title="VOLUME"></a>VOLUME</h2><p>VOLUME命令用于让你的容器访问宿主机上的目录。<br>格式为</p>
+<pre><code>VOLUME [“/data”] 
+</code></pre><p>创建一个可以从本地主机或其他容器挂载的挂载点，一般用来存放数据库和需要保持的数据等。</p>
+<h2 id="WORKDIR"><a href="#WORKDIR" class="headerlink" title="WORKDIR"></a>WORKDIR</h2><p>WORKDIR命令用于设置CMD指明的命令的运行目录。<br>格式为 WORKDIR /path/to/workdir 。<br>为后续的 RUN 、 CMD 、 ENTRYPOINT 指令配置工作目录。<br>可以使用多个 WORKDIR 指令，后续命令如果参数是相对路径，则会基于之前命令指定的路径</p>
+<pre><code>WORKDIR /a
+WORKDIR b
+WORKDIR c
+RUN pwd
+</code></pre><p>最终路径为 <code>/a/b/c</code></p>
+<h2 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a>CMD</h2><p>CMD 是容器运行时候开始的命令<br>CMD [“executable” ,”Param1”, “param2”]使用exec执行，推荐<br>CMD command param1 param2，在/bin/sh上执行<br>CMD [“Param1”, “param2”] 提供给ENTRYPOINT做默认参数。<br>每个容器只能执行一条CMD命令，多个CMD命令时，只最后一条被执行。</p>
+<h2 id="ENV"><a href="#ENV" class="headerlink" title="ENV"></a>ENV</h2><p>格式为 ENV 。 指定一个环境变量，会被后续 RUN 指令使用，并在容器运行时保持</p>
+<pre><code>ADD /my_app_folder /my_app_folder 
+ENV TZ &quot;Asia/Shanghai&quot;
+ENV LANG en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+</code></pre><h2 id="ADD"><a href="#ADD" class="headerlink" title="ADD"></a>ADD</h2><p>ADD命令有两个参数，源和目标。它的基本作用是从源系统的文件系统上复制文件到目标容器的文件系统。如果源是一个URL，那该URL的内容将被下载并复制到容器中。如果文件是可识别的压缩格式，则docker会帮忙解压缩。</p>
+<pre><code> Usage: ADD [source directory or URL] [destination directory]
+ADD /my_app_folder /my_app_folder 
+</code></pre><h2 id="EXPOSE"><a href="#EXPOSE" class="headerlink" title="EXPOSE"></a>EXPOSE</h2><p>指定在docker允许时指定的端口进行转发</p>
+<h2 id="ENTRYPOINT"><a href="#ENTRYPOINT" class="headerlink" title="ENTRYPOINT"></a>ENTRYPOINT</h2><pre><code>ENTRYPOINT [&quot;executable&quot;, &quot;param1&quot;, &quot;param2&quot;]
+ENTRYPOINT command param1 param2（shell中执行。
+</code></pre><p>配置容器启动后执行的命令，并且不可被 docker run 提供的参数覆盖。</p>
+<p>每个 Dockerfile 中只能有一个 ENTRYPOINT，当指定多个时,”只有最后一个起效”</p>
+]]></content>
       <categories>
-          
-          <category> Aics </category>
-          
+        <category>Docker</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> 理论 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Aics_Chap4</title>
-      <link href="/2020/06/27/Aics/chap4/"/>
-      <url>/2020/06/27/Aics/chap4/</url>
-      
-        <content type="html"><![CDATA[<h1 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h1>]]></content>
-      
-      
+  </entry>
+  <entry>
+    <title>WRITE DOCKERFILE ATTENTION</title>
+    <url>/2020/06/26/docker/attention_dockerfile/</url>
+    <content><![CDATA[<h1 id="WRITE-DOCKERFILE-ATTENTION"><a href="#WRITE-DOCKERFILE-ATTENTION" class="headerlink" title="WRITE DOCKERFILE ATTENTION"></a>WRITE DOCKERFILE ATTENTION</h1><p>1.在Ubuntu的Docker官方镜像中是没有缓存Apt的软件包列表的。因此在做其他任何基础软件的安装前，都需要至少先做一次</p>
+<pre><code>apt-get update。
+</code></pre><p>2.docker 中安装过程需要判断，用-y来默认表示同意。</p>
+<pre><code>apt install -y git -y代表着yes
+</code></pre>]]></content>
       <categories>
-          
-          <category> Aics </category>
-          
+        <category>Docker</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> 理论 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Aics_Chap3</title>
-      <link href="/2020/06/27/Aics/chap3/"/>
-      <url>/2020/06/27/Aics/chap3/</url>
-      
-        <content type="html"><![CDATA[<h1 id="Chap3-知识汇总"><a href="#Chap3-知识汇总" class="headerlink" title="Chap3 知识汇总"></a>Chap3 知识汇总</h1><h2 id="chap3-3"><a href="#chap3-3" class="headerlink" title="chap3.3"></a>chap3.3</h2><h3 id="Alexnet"><a href="#Alexnet" class="headerlink" title="Alexnet"></a>Alexnet</h3><ul><li><p>ReLU 激活函数：训练中收敛速度更快。（比sigmod函数）</p></li><li><p>LRN局部响应归一化：提升较大响应，抑制较小响应 （现在被证明无明显效果）</p></li><li><p>MaxPool: 避免特征值被平均池化，提升代码鲁棒性</p></li><li><p>Dropout: 随机舍弃部分隐层节点，避免过拟合</p></li></ul><h3 id="VGG"><a href="#VGG" class="headerlink" title="VGG"></a>VGG</h3><p>VGG 实现更深的网络<br>VGG16 一共16层，不方便训练。<br>他的实现方法是 先训练<code>一部分层</code>，比如11层，得到的数据中部分作为初始值，然后在初始条件下进行重新训练<code>更深</code>的神经网络。(但不适合更深的神经网络)</p><p>==VGG 使用更小的卷积的原因==:</p><ul><li>5x5的卷积核，可以用两个3x3的卷积核替代</li></ul><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Aics/small_core_1.png" alt="小的卷积可以替代大的卷积"></p><ul><li>干同样的事情所需要更少的参数，计算量存储变小了，还可以防止过拟合</li></ul><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Aics/small_core_2.png" alt="更少的参数"></p><h2 id="chap3-4"><a href="#chap3-4" class="headerlink" title="chap3.4"></a>chap3.4</h2><h3 id="Inception"><a href="#Inception" class="headerlink" title="Inception"></a>Inception</h3><p>==1x1的卷积核可以更改通道c的大小==</p><p>辅助神经网络防止过拟合。</p><p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Aics/softmax_assit_net.png" alt="辅助神经网络"><br>越接近输入的地方，更新权重越小，越不好更新。</p><h3 id="BN-Inception"><a href="#BN-Inception" class="headerlink" title="BN-Inception"></a>BN-Inception</h3><p><strong>BathNorm 函数</strong>：</p><ul><li>normalize</li></ul><p>将激活层输入部分分布在==激活函数的敏感部分==。</p><ul><li>scale and shift(bias)</li></ul><p>归一化后的输入是的网络的表达能力下降。通过增加训练参数提高网络的表达能力</p><p>BathNorm 函数 还可以将训练的学习率提高到5倍，乃至30倍。训练速度可以得到明显加快。</p><h3 id="Inception-v3"><a href="#Inception-v3" class="headerlink" title="Inception-v3"></a>Inception-v3</h3><p><strong>Factorization(因式分解的思想)</strong>（inception-v3）：</p><p>将3x3的卷积拆分成1x3和3x1的卷积，减少了参数数量，同时通过<strong>非对称</strong>的卷积结构拆分增加了特征多样性。</p><h2 id="chap3-5"><a href="#chap3-5" class="headerlink" title="chap3.5"></a>chap3.5</h2><h3 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h3><p>之前遇到的<strong>问题</strong>：更深的卷积神经网络的误差比较大。</p><p><strong>梯度消失？</strong> No！使用BathNorm课有效地缓解梯度消失<br><strong>过拟合？</strong> No！更深的神经网络在训练集的误差同样更高。</p><p>==神经网络退化==：收敛到极值点而非最值点。（陷入局部最优）</p>]]></content>
-      
-      
+  </entry>
+  <entry>
+    <title>Aics_Chap1</title>
+    <url>/2020/06/27/Aics/chap1/</url>
+    <content><![CDATA[<h1 id="人工智能概述"><a href="#人工智能概述" class="headerlink" title="人工智能概述"></a>人工智能概述</h1><h2 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h2><h3 id="人工智能的三大方法"><a href="#人工智能的三大方法" class="headerlink" title="人工智能的三大方法"></a>人工智能的三大方法</h3><ol>
+<li><p>行为主义</p>
+<p> 基于<strong>控制论</strong>构建 <strong><em>感知-动作型</em></strong> 控制系统。<br> 通过<strong>反馈</strong>来进行行为动作。</p>
+</li>
+<li><p>逻辑主义<br> 基于逻辑符号。<br> <code>命题逻辑</code>： 与或非<br> <code>谓词逻辑</code>： X是Y。用0,1来进行输出。比如： 鸟会飞。<br> <code>时态逻辑</code>： 在一阶逻辑上加入时间。<br> <code>计算树逻辑</code>： 表示对不确定未来的判断。<br> <strong>困难</strong>：<br> &gt;</p>
+<blockquote>
+<p>1、 逻辑表达式需要常识来进行支撑，但常识太多了无法进行汇总。<br>2、 逻辑求解器，是一个NP完全问题。时间复杂度非常高。  </p>
+</blockquote>
+</li>
+<li>连接主义<br> 基于人脑的树突和轴突进行<br> &gt;<blockquote>
+<p>泛化能力差，需要大量的样本进行学习<br>缺乏推理能力.不擅长解决认知类的问题。<br>缺乏可解释性。重视安全领域比较重视可解释性。比如某个决策是怎么做出来的。深度学习为什么识别错误了。<br>鲁棒性不好。有些很小的图片差别，就导致识别错误。</p>
+</blockquote>
+</li>
+</ol>
+]]></content>
       <categories>
-          
-          <category> Aics </category>
-          
+        <category>Aics</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> 理论 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Aics_chap2</title>
-      <link href="/2020/06/27/Aics/chap2/"/>
-      <url>/2020/06/27/Aics/chap2/</url>
-      
-        <content type="html"><![CDATA[<h1 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h1><h2 id="课外知识补充"><a href="#课外知识补充" class="headerlink" title="课外知识补充"></a>课外知识补充</h2><ul><li><p>最大似然函数</p><p>  极大似然估计中采样需满足一个重要的假设，就是所有的采样都是<strong>独立同分布</strong>的<br>  <strong>似然函数</strong>：<br>  $f(x_1,x_2|\theta) = f(x_1|\theta) \times f(x_2|\theta)$<br>  $L(\theta|x_1,x_2) = f(x_1,x_2|\theta)$<br>  目的是：<strong>采取的方法是让这个样本结果出现的可能性最大</strong><br>  $ln(L(\theta|x_1,x_2)) = ln(f(x_1,x_2|\theta)) = ln(f(x_1|\theta)) + ln(f(x_2|\theta))$<br>  通过求<strong>对数</strong>，将乘法转变成加法（因为是独立同分布的）<br>  然后再去寻找最大值。</p></li><li><p>激活函数非线性<br>  如果激活函数也是线性的，比如$sign$函数，那么他就不能解决那些线性不可分问题。<br>  PS：虽然然和非线性问题，在某种程度上都可以变成更高维度的线性可分问题。</p></li></ul>]]></content>
-      
-      
+      <tags>
+        <tag>理论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Aics_chap2</title>
+    <url>/2020/06/27/Aics/chap2/</url>
+    <content><![CDATA[<h1 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h1><h2 id="课外知识补充"><a href="#课外知识补充" class="headerlink" title="课外知识补充"></a>课外知识补充</h2><ul>
+<li><p>最大似然函数</p>
+<p>  极大似然估计中采样需满足一个重要的假设，就是所有的采样都是<strong>独立同分布</strong>的<br>  <strong>似然函数</strong>：<br>  $f(x_1,x_2|\theta) = f(x_1|\theta) \times f(x_2|\theta)$<br>  $L(\theta|x_1,x_2) = f(x_1,x_2|\theta)$<br>  目的是：<strong>采取的方法是让这个样本结果出现的可能性最大</strong><br>  $ln(L(\theta|x_1,x_2)) = ln(f(x_1,x_2|\theta)) = ln(f(x_1|\theta)) + ln(f(x_2|\theta))$<br>  通过求<strong>对数</strong>，将乘法转变成加法（因为是独立同分布的）<br>  然后再去寻找最大值。</p>
+</li>
+<li><p>激活函数非线性<br>  如果激活函数也是线性的，比如$sign$函数，那么他就不能解决那些线性不可分问题。<br>  PS：虽然然和非线性问题，在某种程度上都可以变成更高维度的线性可分问题。</p>
+</li>
+</ul>
+]]></content>
       <categories>
-          
-          <category> Aics </category>
-          
+        <category>Aics</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> 理论 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Aics_Chap1</title>
-      <link href="/2020/06/27/Aics/chap1/"/>
-      <url>/2020/06/27/Aics/chap1/</url>
-      
-        <content type="html"><![CDATA[<h1 id="人工智能概述"><a href="#人工智能概述" class="headerlink" title="人工智能概述"></a>人工智能概述</h1><h2 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h2><h3 id="人工智能的三大方法"><a href="#人工智能的三大方法" class="headerlink" title="人工智能的三大方法"></a>人工智能的三大方法</h3><ol><li><p>行为主义</p><p> 基于<strong>控制论</strong>构建 <strong><em>感知-动作型</em></strong> 控制系统。<br> 通过<strong>反馈</strong>来进行行为动作。</p></li><li><p>逻辑主义<br> 基于逻辑符号。<br> <code>命题逻辑</code>： 与或非<br> <code>谓词逻辑</code>： X是Y。用0,1来进行输出。比如： 鸟会飞。<br> <code>时态逻辑</code>： 在一阶逻辑上加入时间。<br> <code>计算树逻辑</code>： 表示对不确定未来的判断。<br> <strong>困难</strong>：<br> &gt;</p><blockquote><p>1、 逻辑表达式需要常识来进行支撑，但常识太多了无法进行汇总。<br>2、 逻辑求解器，是一个NP完全问题。时间复杂度非常高。  </p></blockquote></li><li>连接主义<br> 基于人脑的树突和轴突进行<br> &gt;<blockquote><p>泛化能力差，需要大量的样本进行学习<br>缺乏推理能力.不擅长解决认知类的问题。<br>缺乏可解释性。重视安全领域比较重视可解释性。比如某个决策是怎么做出来的。深度学习为什么识别错误了。<br>鲁棒性不好。有些很小的图片差别，就导致识别错误。</p></blockquote></li></ol>]]></content>
-      
-      
+      <tags>
+        <tag>理论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Aics_Chap3</title>
+    <url>/2020/06/27/Aics/chap3/</url>
+    <content><![CDATA[<h1 id="Chap3-知识汇总"><a href="#Chap3-知识汇总" class="headerlink" title="Chap3 知识汇总"></a>Chap3 知识汇总</h1><h2 id="chap3-3"><a href="#chap3-3" class="headerlink" title="chap3.3"></a>chap3.3</h2><h3 id="Alexnet"><a href="#Alexnet" class="headerlink" title="Alexnet"></a>Alexnet</h3><ul>
+<li><p>ReLU 激活函数：训练中收敛速度更快。（比sigmod函数）</p>
+</li>
+<li><p>LRN局部响应归一化：提升较大响应，抑制较小响应 （现在被证明无明显效果）</p>
+</li>
+<li><p>MaxPool: 避免特征值被平均池化，提升代码鲁棒性</p>
+</li>
+<li><p>Dropout: 随机舍弃部分隐层节点，避免过拟合</p>
+</li>
+</ul>
+<h3 id="VGG"><a href="#VGG" class="headerlink" title="VGG"></a>VGG</h3><p>VGG 实现更深的网络<br>VGG16 一共16层，不方便训练。<br>他的实现方法是 先训练<code>一部分层</code>，比如11层，得到的数据中部分作为初始值，然后在初始条件下进行重新训练<code>更深</code>的神经网络。(但不适合更深的神经网络)</p>
+<p>==VGG 使用更小的卷积的原因==:</p>
+<ul>
+<li>5x5的卷积核，可以用两个3x3的卷积核替代</li>
+</ul>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Aics/small_core_1.png" alt="小的卷积可以替代大的卷积"></p>
+<ul>
+<li>干同样的事情所需要更少的参数，计算量存储变小了，还可以防止过拟合</li>
+</ul>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Aics/small_core_2.png" alt="更少的参数"></p>
+<h2 id="chap3-4"><a href="#chap3-4" class="headerlink" title="chap3.4"></a>chap3.4</h2><h3 id="Inception"><a href="#Inception" class="headerlink" title="Inception"></a>Inception</h3><p>==1x1的卷积核可以更改通道c的大小==</p>
+<p>辅助神经网络防止过拟合。</p>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Aics/softmax_assit_net.png" alt="辅助神经网络"><br>越接近输入的地方，更新权重越小，越不好更新。</p>
+<h3 id="BN-Inception"><a href="#BN-Inception" class="headerlink" title="BN-Inception"></a>BN-Inception</h3><p><strong>BathNorm 函数</strong>：</p>
+<ul>
+<li>normalize</li>
+</ul>
+<p>将激活层输入部分分布在==激活函数的敏感部分==。</p>
+<ul>
+<li>scale and shift(bias)</li>
+</ul>
+<p>归一化后的输入是的网络的表达能力下降。通过增加训练参数提高网络的表达能力</p>
+<p>BathNorm 函数 还可以将训练的学习率提高到5倍，乃至30倍。训练速度可以得到明显加快。</p>
+<h3 id="Inception-v3"><a href="#Inception-v3" class="headerlink" title="Inception-v3"></a>Inception-v3</h3><p><strong>Factorization(因式分解的思想)</strong>（inception-v3）：</p>
+<p>将3x3的卷积拆分成1x3和3x1的卷积，减少了参数数量，同时通过<strong>非对称</strong>的卷积结构拆分增加了特征多样性。</p>
+<h2 id="chap3-5"><a href="#chap3-5" class="headerlink" title="chap3.5"></a>chap3.5</h2><h3 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h3><p>之前遇到的<strong>问题</strong>：更深的卷积神经网络的误差比较大。</p>
+<p><strong>梯度消失？</strong> No！使用BathNorm课有效地缓解梯度消失<br><strong>过拟合？</strong> No！更深的神经网络在训练集的误差同样更高。</p>
+<p>==神经网络退化==：收敛到极值点而非最值点。（陷入局部最优）</p>
+]]></content>
       <categories>
-          
-          <category> Aics </category>
-          
+        <category>Aics</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> 理论 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>ATTENTION IN DOCKER</title>
-      <link href="/2020/06/26/docker/attention_docker/"/>
-      <url>/2020/06/26/docker/attention_docker/</url>
-      
-        <content type="html"><![CDATA[<h1 id="ATTENTION-IN-DOCKER"><a href="#ATTENTION-IN-DOCKER" class="headerlink" title="ATTENTION IN DOCKER"></a>ATTENTION IN DOCKER</h1><h2 id="1-在docker删除image中"><a href="#1-在docker删除image中" class="headerlink" title="1.在docker删除image中"></a>1.在docker删除image中</h2><p><strong>有一部分容器使用的是相同的ID，因此不能通过删除ID来实现。</strong><br>比如 :  </p><pre><code>docker  rmi 111111   // 111111代表着容器ID</code></pre><p>必须要通过删除容器名字来实现 如 ：</p><pre><code>docker rmi hello   // hello代表着容器名字</code></pre><h2 id="2-在删除镜像前，需要先删除容器"><a href="#2-在删除镜像前，需要先删除容器" class="headerlink" title="2.在删除镜像前，需要先删除容器"></a>2.在删除镜像前，需要先删除容器</h2><pre><code>docker rm $(docker ps -aq)  </code></pre><p>-a 列出本地所有镜像，-q 只显示镜像ID</p><h2 id="3-正确退出容器"><a href="#3-正确退出容器" class="headerlink" title="3.正确退出容器"></a>3.正确退出容器</h2><pre><code>ctrl+p                    +                        ctrl+q</code></pre><p>绝对不能使用exit或者ctrl+d来退出，这样整个系统就退出了！！</p><h2 id="4-宿主机和容器之间的文件传输"><a href="#4-宿主机和容器之间的文件传输" class="headerlink" title="4.宿主机和容器之间的文件传输"></a>4.<a href="https://blog.csdn.net/xtfge0915/article/details/52169445" target="_blank" rel="noopener">宿主机和容器之间的文件传输</a></h2><p>从主机复制到容器</p><pre><code>sudo docker cp host_path containerID:container_path</code></pre><p>从容器复制到主机</p><pre><code>sudo docker cp containerID:container_path host_path</code></pre>]]></content>
-      
-      
+      <tags>
+        <tag>理论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Aics_Chap4</title>
+    <url>/2020/06/27/Aics/chap4/</url>
+    <content><![CDATA[<h1 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h1>]]></content>
       <categories>
-          
-          <category> Docker </category>
-          
+        <category>Aics</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>WRITE DOCKERFILE ATTENTION</title>
-      <link href="/2020/06/26/docker/attention_dockerfile/"/>
-      <url>/2020/06/26/docker/attention_dockerfile/</url>
-      
-        <content type="html"><![CDATA[<h1 id="WRITE-DOCKERFILE-ATTENTION"><a href="#WRITE-DOCKERFILE-ATTENTION" class="headerlink" title="WRITE DOCKERFILE ATTENTION"></a>WRITE DOCKERFILE ATTENTION</h1><p>1.在Ubuntu的Docker官方镜像中是没有缓存Apt的软件包列表的。因此在做其他任何基础软件的安装前，都需要至少先做一次</p><pre><code>apt-get update。</code></pre><p>2.docker 中安装过程需要判断，用-y来默认表示同意。</p><pre><code>apt install -y git -y代表着yes</code></pre>]]></content>
-      
-      
+      <tags>
+        <tag>理论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Aics_Chap5</title>
+    <url>/2020/06/27/Aics/chap5/</url>
+    <content><![CDATA[<h1 id="编程框架机理"><a href="#编程框架机理" class="headerlink" title="编程框架机理"></a>编程框架机理</h1><hr>
+<p>==<strong>编程框架的内部运转 具备开发框架的能力</strong>==</p>
+<h2 id="tensorflow-设计原则"><a href="#tensorflow-设计原则" class="headerlink" title="tensorflow 设计原则"></a>tensorflow 设计原则</h2><p>TensorFlow 的目的：</p>
+<ol>
+<li><p><strong>高性能</strong></p>
+<ul>
+<li>算子：每个算子对底层部件已经优化，可以更好的利用硬件性能。</li>
+<li>计算图：优化了计算图，提高了计算图的计算效率（TODO 计算图如何优化）</li>
+<li>并行： 根据计算图，并行没有数据依赖的节点</li>
+</ul>
+</li>
+<li><p><strong>易开发</strong></p>
+<p> 提炼了深度学习的很多共性算子，方便用户调用。</p>
+</li>
+<li><p><strong>可移植</strong></p>
+<p> 可以适用于不同的异构系统，方便代码移植。<br> 表明对于同一个算子，开发了适合同步底层的代码。</p>
+</li>
+</ol>
+<h2 id="TensorFlow-计算图"><a href="#TensorFlow-计算图" class="headerlink" title="TensorFlow 计算图"></a>TensorFlow 计算图</h2><h3 id="计算图求导方法"><a href="#计算图求导方法" class="headerlink" title="计算图求导方法"></a>计算图求导方法</h3><h4 id="手动求解法"><a href="#手动求解法" class="headerlink" title="手动求解法"></a>手动求解法</h4><ul>
+<li>手动编写链式法则求导转化成计算机程序特别困难</li>
+<li>如果更改网络模型，需要改好多梯度求解算法</li>
+</ul>
+<h4 id="数值求导法"><a href="#数值求导法" class="headerlink" title="数值求导法"></a>数值求导法</h4><p>给一个很小的初始值，算出来偏差</p>
+<ul>
+<li>计算量大，求解速度慢</li>
+<li>可能引入舍入误差和截断误差</li>
+</ul>
+<h4 id="符号求导法"><a href="#符号求导法" class="headerlink" title="符号求导法"></a>符号求导法</h4><p>会引起表达式膨胀</p>
+<h4 id="自动求导法"><a href="#自动求导法" class="headerlink" title="自动求导法"></a>自动求导法</h4><p>==自动求导方法是界于数值求导方法和符号求导方法之间==</p>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Aics/Automatic_derivation.png" alt="自动求导方法"></p>
+<p>求导方法对比：</p>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Aics/derivation.png" alt="自动求导方法"></p>
+<h4 id="计算图分配"><a href="#计算图分配" class="headerlink" title="计算图分配"></a>计算图分配</h4><ol>
+<li><p>从起始点开始遍历计算图的每一个节点</p>
+</li>
+<li><p>然后考虑每个节点的可行设备集合</p>
+</li>
+<li><p>采用<strong>贪心算法</strong>，选择最快完成时间的设备分配给该节点。</p>
+</li>
+</ol>
+<p>&gt;</p>
+<blockquote>
+<p>常量折叠：有的常数节点可以被提亲计算，用新生成的节点代替原来的节点。<br>算数优化：对表达式优化<br>布局优化<br>Tensorflow 默认NHWC；GPU默认NCHW。<br>两个连续的GPU计算节点之间的 NCHW2NHWC 与NHWC2NCHE 可以相互抵消。<br>重映射：将出现频率较高的子图用一个单独的算子来替代。<br>消除子图的调度开销<br>不需要在计算过程中将数据调入内存，再调出内存。访存开销减少</p>
+</blockquote>
+]]></content>
       <categories>
-          
-          <category> Docker </category>
-          
+        <category>Aics</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Auto-Docker-Build</title>
-      <link href="/2020/06/26/docker/auto-docker/"/>
-      <url>/2020/06/26/docker/auto-docker/</url>
-      
-        <content type="html"><![CDATA[<h1 id="Auto-Docker-Build"><a href="#Auto-Docker-Build" class="headerlink" title="Auto-Docker-Build"></a><a href="https://www.jianshu.com/p/21cd9aeee12b" target="_blank" rel="noopener">Auto-Docker-Build</a></h1><h2 id="1-新建文件Dockerfile"><a href="#1-新建文件Dockerfile" class="headerlink" title="1. 新建文件Dockerfile"></a>1. 新建文件Dockerfile</h2><p>写入如下内容，构建命令非常简单：从谷歌的镜像开始构建，然后加上维护人信息</p><pre><code>From ubuntu:v1.1.1MAINTAINER dzx &lt;dzx@qq.com&gt;</code></pre><h2 id="2-提交版本"><a href="#2-提交版本" class="headerlink" title="2. 提交版本"></a>2. 提交版本</h2><pre><code>git add Dockerfile  git commit -m &quot;add Dockerfile&quot;</code></pre><h3 id="一定要打上tag，并按照如下格式"><a href="#一定要打上tag，并按照如下格式" class="headerlink" title="一定要打上tag，并按照如下格式"></a>一定要打上tag，并按照如下格式</h3><pre><code>git tag -a release-v1.12.3 -m &quot;version 1.12.3&quot;</code></pre><h2 id="3-将tag对应版本，push到仓库，就会开始自动构建过程"><a href="#3-将tag对应版本，push到仓库，就会开始自动构建过程" class="headerlink" title="3. 将tag对应版本，push到仓库，就会开始自动构建过程"></a>3. 将tag对应版本，push到仓库，就会开始自动构建过程</h2><pre><code>git push origin release-v1.12.3</code></pre><p>通常的git push不会将标签对象提交到git服务器，我们需要进行显式的操作</p><pre><code>git push origin v0.1.2 # 将v0.1.2标签提交到git服务器git push origin –tags # 将本地所有标签一次性提交到git服务器</code></pre><h1 id="Dockefile-Grammar"><a href="#Dockefile-Grammar" class="headerlink" title="Dockefile Grammar"></a><a href="https://www.jianshu.com/p/5f4b1ade9dfc" target="_blank" rel="noopener">Dockefile Grammar</a></h1><h2 id="RUN"><a href="#RUN" class="headerlink" title="RUN"></a>RUN</h2><p>RUN命令是Dockerfile执行命令的核心部分。它接受命令作为参数并用于创建镜像。不像CMD命令，RUN命令用于创建镜像（在之前commit的层之上形成新的层）<br>格式为Run 或者  </p><pre><code>Run [“executable” ,”Param1”, “param2”]</code></pre><p>前者在shell终端上运行，即/bin/sh -C，后者使用exec运行。<br>例如：</p><pre><code>RUN [“/bin/bash”, “-c”,”echo hello”]</code></pre><h2 id="USER"><a href="#USER" class="headerlink" title="USER"></a>USER</h2><p>格式为 USER daemon 。<br>指定运行容器时的用户名或UID，后续的 RUN 也会使用指定用户。<br>当服务不需要管理员权限时，可以通过该命令指定运行用户。并且可以在之前创建所需要的用户。<br>例如：</p><pre><code>RUN groupadd -r postgres &amp;&amp; useradd -r -g postgres postgres 。</code></pre><p>要临时获取管理员权限可以使用 gosu ，而不推荐 sudo</p><h2 id="VOLUME"><a href="#VOLUME" class="headerlink" title="VOLUME"></a>VOLUME</h2><p>VOLUME命令用于让你的容器访问宿主机上的目录。<br>格式为</p><pre><code>VOLUME [“/data”] </code></pre><p>创建一个可以从本地主机或其他容器挂载的挂载点，一般用来存放数据库和需要保持的数据等。</p><h2 id="WORKDIR"><a href="#WORKDIR" class="headerlink" title="WORKDIR"></a>WORKDIR</h2><p>WORKDIR命令用于设置CMD指明的命令的运行目录。<br>格式为 WORKDIR /path/to/workdir 。<br>为后续的 RUN 、 CMD 、 ENTRYPOINT 指令配置工作目录。<br>可以使用多个 WORKDIR 指令，后续命令如果参数是相对路径，则会基于之前命令指定的路径</p><pre><code>WORKDIR /aWORKDIR bWORKDIR cRUN pwd</code></pre><p>最终路径为 <code>/a/b/c</code></p><h2 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a>CMD</h2><p>CMD 是容器运行时候开始的命令<br>CMD [“executable” ,”Param1”, “param2”]使用exec执行，推荐<br>CMD command param1 param2，在/bin/sh上执行<br>CMD [“Param1”, “param2”] 提供给ENTRYPOINT做默认参数。<br>每个容器只能执行一条CMD命令，多个CMD命令时，只最后一条被执行。</p><h2 id="ENV"><a href="#ENV" class="headerlink" title="ENV"></a>ENV</h2><p>格式为 ENV 。 指定一个环境变量，会被后续 RUN 指令使用，并在容器运行时保持</p><pre><code>ADD /my_app_folder /my_app_folder ENV TZ &quot;Asia/Shanghai&quot;ENV LANG en_US.UTF-8ENV LC_ALL en_US.UTF-8</code></pre><h2 id="ADD"><a href="#ADD" class="headerlink" title="ADD"></a>ADD</h2><p>ADD命令有两个参数，源和目标。它的基本作用是从源系统的文件系统上复制文件到目标容器的文件系统。如果源是一个URL，那该URL的内容将被下载并复制到容器中。如果文件是可识别的压缩格式，则docker会帮忙解压缩。</p><pre><code> Usage: ADD [source directory or URL] [destination directory]ADD /my_app_folder /my_app_folder </code></pre><h2 id="EXPOSE"><a href="#EXPOSE" class="headerlink" title="EXPOSE"></a>EXPOSE</h2><p>指定在docker允许时指定的端口进行转发</p><h2 id="ENTRYPOINT"><a href="#ENTRYPOINT" class="headerlink" title="ENTRYPOINT"></a>ENTRYPOINT</h2><pre><code>ENTRYPOINT [&quot;executable&quot;, &quot;param1&quot;, &quot;param2&quot;]ENTRYPOINT command param1 param2（shell中执行。</code></pre><p>配置容器启动后执行的命令，并且不可被 docker run 提供的参数覆盖。</p><p>每个 Dockerfile 中只能有一个 ENTRYPOINT，当指定多个时,”只有最后一个起效”</p>]]></content>
-      
-      
+      <tags>
+        <tag>理论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Aics_Chap6</title>
+    <url>/2020/06/27/Aics/chap6/</url>
+    <content><![CDATA[<h1 id="深度学习处理器机理"><a href="#深度学习处理器机理" class="headerlink" title="深度学习处理器机理"></a>深度学习处理器机理</h1><h2 id="如何设计DLP：deep-learning-processor"><a href="#如何设计DLP：deep-learning-processor" class="headerlink" title="如何设计DLP：deep learning processor"></a>如何设计DLP：deep learning processor</h2><p>ISA：指令集</p>
+]]></content>
       <categories>
-          
-          <category> Docker </category>
-          
+        <category>Aics</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>spark_1</title>
-      <link href="/2020/05/06/spark_1/"/>
-      <url>/2020/05/06/spark_1/</url>
-      
-        <content type="html"><![CDATA[<h1 id="SPARK-学习之路"><a href="#SPARK-学习之路" class="headerlink" title="SPARK 学习之路"></a>SPARK 学习之路</h1><h2 id="基础了解-amp-Scala"><a href="#基础了解-amp-Scala" class="headerlink" title="基础了解 &amp; Scala"></a>基础了解 &amp; Scala</h2><h3 id="函数式编程与命令式编程"><a href="#函数式编程与命令式编程" class="headerlink" title="函数式编程与命令式编程"></a>函数式编程与命令式编程</h3><p><strong>命令式编程</strong>: 主要用于C++，Java，Python 这一种输入一条命令，然后程序对应执行的这种情况。并发度并不高，由于访存一致性原因，在并发时候，需要考虑加锁，所以效率不高。</p><p><strong>函数式编程</strong>: 用于spark,hadoop等语言。其中内部变量，大部分是不可以更改的，所以就不存在什么访存一致性。并发度更高。特别是由于在CPU天花板之后，CPU转向多核发展，所以这种编程就开始使用广泛了。</p><h3 id="Scala-运行"><a href="#Scala-运行" class="headerlink" title="Scala 运行"></a>Scala 运行</h3><p>在Scala 交互程序内部</p><pre><code>load ./hello.scala</code></pre><p>在shell窗口时候<br><strong>1.编译</strong></p><pre><code>scalac Hello.scala</code></pre><p><strong>2.运行</strong><br>运行生成的.class文件</p><pre><code>scala Hello.class</code></pre><p>因为scalac 编译出来的也是.class文件，所以 也可以用java来运行,但是需要在路径中加入scala包</p><pre><code>java -classpath .:/usr/local/scala/lib/scala.library.jar Hello.class</code></pre><h3 id="Scala-语法"><a href="#Scala-语法" class="headerlink" title="Scala 语法"></a>Scala 语法</h3><div class="table-container"><table><thead><tr><th>基本类型</th><th>是否可变</th><th>赋初值</th></tr></thead><tbody><tr><td>val</td><td>不可变</td><td>val a:Int = 5 (val a = 5)</td></tr><tr><td>var</td><td>可变</td><td>var a:Int = 5 (var a = 5)</td></tr></tbody></table></div><p>scala 他也会自动的判断数据类型</p><p><strong>scala 的运算实际上是方法的运算</strong>:</p><pre><code>3 + 5   等效与 (3).+ 5即 A 方法 B  = A.方法（B）</code></pre><p><strong><em>scala 类与对象</em></strong><br><code>类</code>：</p><pre><code>Class class_dzx {    val name_1 = &quot;Hello World&quot;}</code></pre><p><code>对象</code>：</p><pre><code>Object object_dzx {    val name_2 = &quot;Hello Ting&quot;}</code></pre><p>如果 <strong>类与对象</strong> 同名，并且在同一个文件里面，那他们可以相互访问其内部的成员和方法。称之为<strong>伴生</strong>。</p><p>对于类：</p><pre><code>Class class_dzx(var name:String) {    val name_1 = &quot;Hello World&quot;    def this(num_1:Int) {        this()        println(&quot;this is the 第一层辅助构造器&quot;)    }    def this(num_1:Int,num_2:Int) {        this(num_1)        println(&quot;this is the 第二层辅助构造器&quot;)    }}</code></pre><p>在类中 用var 定义的name 它会自动的创建读写方法。<br><strong><em>主构造器&lt;—辅助构造器&lt;—辅助构造器</em></strong><br>处于底层构造器主要先引入上一层构造器</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>unbuntu</title>
-      <link href="/2020/04/23/unbuntu/"/>
-      <url>/2020/04/23/unbuntu/</url>
-      
-        <content type="html"><![CDATA[<h1 id="CMD-IN-UBUNTU"><a href="#CMD-IN-UBUNTU" class="headerlink" title="CMD IN UBUNTU"></a>CMD IN UBUNTU</h1><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get -f install 修复安装”-f = –fix-missing”</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>top</title>
-      <link href="/2020/04/23/top/"/>
-      <url>/2020/04/23/top/</url>
-      
-        <content type="html"><![CDATA[<h1 id="top-命令详解"><a href="#top-命令详解" class="headerlink" title="top 命令详解"></a>top 命令详解</h1><h2 id="第一行详解"><a href="#第一行详解" class="headerlink" title="第一行详解"></a>第一行详解</h2><pre><code>01:06:48 当前时间up 1:22 系统运行时间，格式为时:分1 user 当前登录用户数load average: 0.06, 0.60, 0.48 系统负载，即任务队列的平均长度。三个数值分别为 1分钟、5分钟、15分钟前到现在的平均值。</code></pre><h2 id="第二，三行详解"><a href="#第二，三行详解" class="headerlink" title="第二，三行详解"></a>第二，三行详解</h2><pre><code>Tasks: 29 total 进程总数1 running 正在运行的进程数28 sleeping 睡眠的进程数0 stopped 停止的进程数0 zombie 僵尸进程数Cpu(s): 0.3% us 用户空间占用CPU百分比1.0% sy 内核空间占用CPU百分比0.0% ni 用户进程空间内改变过优先级的进程占用CPU百分比98.7% id 空闲CPU百分比0.0% wa 等待输入输出的CPU时间百分比</code></pre><h2 id="进程动态显示属性"><a href="#进程动态显示属性" class="headerlink" title="进程动态显示属性"></a>进程动态显示属性</h2><pre><code>PR 优先级  NI nice值。负值表示高优先级，正值表示低优先级  TIME 进程使用的CPU时间总计，单位秒  TIME+ 进程使用的CPU时间总计，单位1/100秒  VIRT 进程使用的虚拟内存总量 VIRT=SWAP+RES  SWAP 进程使用的虚拟内存中，被换出的大小  RES 进程使用的、未被换出的物理内存大小  SHR 共享内存大小，单位kb  </code></pre><p>PRI也还是比较好理解的，即进程的优先级，或者通俗点说就是程序被CPU执行的先后顺序，<strong><em>此值越小进程的优先级别越高。</em></strong> 那NI呢？就是我们所要说的nice值了，其表示进程可被执行的优先级的修正数值。如前面所说，PRI值越小越快被执行，那么加入nice值后，将会使得PRI变为：</p><pre><code>PRI(new)=PRI(old)+nice。</code></pre><p>这样，当nice值为负值的时候，那么该程序将会优先级值将变小，即其优先级会变高，则其越快被执行。<br>到目前为止，更需要强调一点的是，进程的nice值不是进程的优先级，他们不是一个概念，但是进程nice值会影响到进程的优先级变化。  </p><p><strong><em>进程状态</em></strong></p><pre><code>D=不可中断的睡眠状态R=运行S=睡眠T=跟踪/停止Z=僵尸进程</code></pre><h2 id="交换分区"><a href="#交换分区" class="headerlink" title="交换分区"></a>交换分区</h2><p>就是当内存不足的时候，把一部分 <strong><em>硬盘空间</em></strong>  虚拟成内存使用,从而解决内存容量不足的情况</p><h2 id="top命令"><a href="#top命令" class="headerlink" title="top命令"></a><strong><em>top命令</em></strong></h2><p>top运行时候可以输入的命令</p><pre><code>i 忽略闲置和僵死进程。这是一个开关式命令P 根据CPU使用百分比大小进行排序</code></pre>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>blog_demo</title>
-      <link href="/2020/04/23/blog-demo/"/>
-      <url>/2020/04/23/blog-demo/</url>
-      
-        <content type="html"><![CDATA[<p>My_blog demo</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Hello World</title>
-      <link href="/2020/04/23/hello-world/"/>
-      <url>/2020/04/23/hello-world/</url>
-      
-        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-  
-  
+      <tags>
+        <tag>理论</tag>
+      </tags>
+  </entry>
 </search>

@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":true},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="UDP for VPNncdzx@dzx-N8xEJEK:~$ nc -vuz 192.168.209.121 123 Connection to 192.168.209.121 123 port [udp&#x2F;ntp] succeeded! 实际使用时可以只用-u参数，-u代表udp协议 ，-v代表详细模式，-z代表只监测端口不发送数据 #">
+  <meta name="description" content="SPARK 学习之路基础了解 &amp; Scala函数式编程与命令式编程命令式编程: 主要用于C++，Java，Python 这一种输入一条命令，然后程序对应执行的这种情况。并发度并不高，由于访存一致性原因，在并发时候，需要考虑加锁，所以效率不高。 函数式编程: 用于spark,hadoop等语言。其中内部变量，大部分是不可以更改的，所以就不存在什么访存一致性。并发度更高。特别是由于在CPU天花">
 <meta property="og:type" content="article">
-<meta property="og:title" content="udp">
-<meta property="og:url" content="http://yoursite.com/2020/06/28/udp/index.html">
+<meta property="og:title" content="spark_1">
+<meta property="og:url" content="http://yoursite.com/2020/04/29/spark_1/index.html">
 <meta property="og:site_name" content="斗志">
-<meta property="og:description" content="UDP for VPNncdzx@dzx-N8xEJEK:~$ nc -vuz 192.168.209.121 123 Connection to 192.168.209.121 123 port [udp&#x2F;ntp] succeeded! 实际使用时可以只用-u参数，-u代表udp协议 ，-v代表详细模式，-z代表只监测端口不发送数据 #">
+<meta property="og:description" content="SPARK 学习之路基础了解 &amp; Scala函数式编程与命令式编程命令式编程: 主要用于C++，Java，Python 这一种输入一条命令，然后程序对应执行的这种情况。并发度并不高，由于访存一致性原因，在并发时候，需要考虑加锁，所以效率不高。 函数式编程: 用于spark,hadoop等语言。其中内部变量，大部分是不可以更改的，所以就不存在什么访存一致性。并发度更高。特别是由于在CPU天花">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-06-27T16:06:07.493Z">
-<meta property="article:modified_time" content="2020-06-27T16:06:07.494Z">
+<meta property="article:published_time" content="2020-04-29T09:37:34.239Z">
+<meta property="article:modified_time" content="2020-05-06T07:54:47.644Z">
 <meta property="article:author" content="douzhi">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/2020/06/28/udp/">
+<link rel="canonical" href="http://yoursite.com/2020/04/29/spark_1/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>udp | 斗志</title>
+  <title>spark_1 | 斗志</title>
   
 
 
@@ -194,7 +194,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/28/udp/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/29/spark_1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="http://123.57.5.52:8080/Firefox_wallpaper.png">
@@ -207,7 +207,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          udp
+          spark_1
         </h1>
 
         <div class="post-meta">
@@ -217,8 +217,15 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-06-28 00:06:07" itemprop="dateCreated datePublished" datetime="2020-06-28T00:06:07+08:00">2020-06-28</time>
+              <time title="创建时间：2020-04-29 17:37:34" itemprop="dateCreated datePublished" datetime="2020-04-29T17:37:34+08:00">2020-04-29</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-06 15:54:47" itemprop="dateModified" datetime="2020-05-06T15:54:47+08:00">2020-05-06</time>
+              </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -238,10 +245,66 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="UDP-for-VPN"><a href="#UDP-for-VPN" class="headerlink" title="UDP for VPN"></a>UDP for VPN</h1><h2 id="nc"><a href="#nc" class="headerlink" title="nc"></a>nc</h2><pre><code>dzx@dzx-N8xEJEK:~$ nc -vuz 192.168.209.121 123
-Connection to 192.168.209.121 123 port [udp/ntp] succeeded!
-</code></pre><p>实际使用时可以只用-u参数，-u代表udp协议 ，-v代表详细模式，-z代表只监测端口不发送数据</p>
-<h1 id=""><a href="#" class="headerlink" title="#"></a>#</h1>
+        <h1 id="SPARK-学习之路"><a href="#SPARK-学习之路" class="headerlink" title="SPARK 学习之路"></a>SPARK 学习之路</h1><h2 id="基础了解-amp-Scala"><a href="#基础了解-amp-Scala" class="headerlink" title="基础了解 &amp; Scala"></a>基础了解 &amp; Scala</h2><h3 id="函数式编程与命令式编程"><a href="#函数式编程与命令式编程" class="headerlink" title="函数式编程与命令式编程"></a>函数式编程与命令式编程</h3><p><strong>命令式编程</strong>: 主要用于C++，Java，Python 这一种输入一条命令，然后程序对应执行的这种情况。并发度并不高，由于访存一致性原因，在并发时候，需要考虑加锁，所以效率不高。</p>
+<p><strong>函数式编程</strong>: 用于spark,hadoop等语言。其中内部变量，大部分是不可以更改的，所以就不存在什么访存一致性。并发度更高。特别是由于在CPU天花板之后，CPU转向多核发展，所以这种编程就开始使用广泛了。</p>
+<h3 id="Scala-运行"><a href="#Scala-运行" class="headerlink" title="Scala 运行"></a>Scala 运行</h3><p>在Scala 交互程序内部</p>
+<pre><code>load ./hello.scala
+</code></pre><p>在shell窗口时候<br><strong>1.编译</strong></p>
+<pre><code>scalac Hello.scala
+</code></pre><p><strong>2.运行</strong><br>运行生成的.class文件</p>
+<pre><code>scala Hello.class
+</code></pre><p>因为scalac 编译出来的也是.class文件，所以 也可以用java来运行,但是需要在路径中加入scala包</p>
+<pre><code>java -classpath .:/usr/local/scala/lib/scala.library.jar Hello.class
+</code></pre><h3 id="Scala-语法"><a href="#Scala-语法" class="headerlink" title="Scala 语法"></a>Scala 语法</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>基本类型</th>
+<th>是否可变</th>
+<th>赋初值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val</td>
+<td>不可变</td>
+<td>val a:Int = 5 (val a = 5)</td>
+</tr>
+<tr>
+<td>var</td>
+<td>可变</td>
+<td>var a:Int = 5 (var a = 5)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>scala 他也会自动的判断数据类型</p>
+<p><strong>scala 的运算实际上是方法的运算</strong>:</p>
+<pre><code>3 + 5   等效与 (3).+ 5
+即 A 方法 B  = A.方法（B）
+</code></pre><p><strong><em>scala 类与对象</em></strong><br><code>类</code>：</p>
+<pre><code>Class class_dzx {
+    val name_1 = &quot;Hello World&quot;
+}
+</code></pre><p><code>对象</code>：</p>
+<pre><code>Object object_dzx {
+    val name_2 = &quot;Hello Ting&quot;
+}
+</code></pre><p>如果 <strong>类与对象</strong> 同名，并且在同一个文件里面，那他们可以相互访问其内部的成员和方法。称之为<strong>伴生</strong>。</p>
+<p>对于类：</p>
+<pre><code>Class class_dzx(var name:String) {
+    val name_1 = &quot;Hello World&quot;
+    def this(num_1:Int) {
+        this()
+        println(&quot;this is the 第一层辅助构造器&quot;)
+    }
+    def this(num_1:Int,num_2:Int) {
+        this(num_1)
+        println(&quot;this is the 第二层辅助构造器&quot;)
+    }
+}
+</code></pre><p>在类中 用var 定义的name 它会自动的创建读写方法。<br><strong><em>主构造器&lt;—辅助构造器&lt;—辅助构造器</em></strong><br>处于底层构造器主要先引入上一层构造器</p>
+
     </div>
 
     
@@ -256,12 +319,12 @@ Connection to 192.168.209.121 123 port [udp/ntp] succeeded!
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/06/27/Aics/chap6/" rel="prev" title="Aics_Chap6">
-      <i class="fa fa-chevron-left"></i> Aics_Chap6
+    <a href="/2020/04/23/unbuntu/" rel="prev" title="unbuntu">
+      <i class="fa fa-chevron-left"></i> unbuntu
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/06/28/process/" rel="next" title="process">
-      process <i class="fa fa-chevron-right"></i>
+    <a href="/2020/06/26/docker/attention_dockerfile/" rel="next" title="WRITE DOCKERFILE ATTENTION">
+      WRITE DOCKERFILE ATTENTION <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -321,7 +384,7 @@ Connection to 192.168.209.121 123 port [udp/ntp] succeeded!
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#UDP-for-VPN"><span class="nav-number">1.</span> <span class="nav-text">UDP for VPN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#nc"><span class="nav-number">1.1.</span> <span class="nav-text">nc</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">#</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SPARK-学习之路"><span class="nav-number">1.</span> <span class="nav-text">SPARK 学习之路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础了解-amp-Scala"><span class="nav-number">1.1.</span> <span class="nav-text">基础了解 &amp; Scala</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数式编程与命令式编程"><span class="nav-number">1.1.1.</span> <span class="nav-text">函数式编程与命令式编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scala-运行"><span class="nav-number">1.1.2.</span> <span class="nav-text">Scala 运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scala-语法"><span class="nav-number">1.1.3.</span> <span class="nav-text">Scala 语法</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
