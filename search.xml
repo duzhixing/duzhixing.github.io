@@ -1,26 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>blog_demo</title>
-    <url>/2020/04/23/blog-demo/</url>
-    <content><![CDATA[<p>My_blog demo</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2020/04/23/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>spark_1</title>
     <url>/2020/04/29/spark_1/</url>
     <content><![CDATA[<h1 id="SPARK-学习之路"><a href="#SPARK-学习之路" class="headerlink" title="SPARK 学习之路"></a>SPARK 学习之路</h1><h2 id="基础了解-amp-Scala"><a href="#基础了解-amp-Scala" class="headerlink" title="基础了解 &amp; Scala"></a>基础了解 &amp; Scala</h2><h3 id="函数式编程与命令式编程"><a href="#函数式编程与命令式编程" class="headerlink" title="函数式编程与命令式编程"></a>函数式编程与命令式编程</h3><p><strong>命令式编程</strong>: 主要用于C++，Java，Python 这一种输入一条命令，然后程序对应执行的这种情况。并发度并不高，由于访存一致性原因，在并发时候，需要考虑加锁，所以效率不高。</p>
@@ -85,14 +65,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>udp</title>
-    <url>/2020/04/23/udp/</url>
-    <content><![CDATA[<h1 id="UDP-for-VPN"><a href="#UDP-for-VPN" class="headerlink" title="UDP for VPN"></a>UDP for VPN</h1><h2 id="nc"><a href="#nc" class="headerlink" title="nc"></a>nc</h2><pre><code>dzx@dzx-N8xEJEK:~$ nc -vuz 192.168.209.121 123
-Connection to 192.168.209.121 123 port [udp/ntp] succeeded!
-</code></pre><p>实际使用时可以只用-u参数，-u代表udp协议 ，-v代表详细模式，-z代表只监测端口不发送数据</p>
-<h1 id=""><a href="#" class="headerlink" title="#"></a>#</h1>]]></content>
-  </entry>
-  <entry>
     <title>process</title>
     <url>/2020/04/23/process/</url>
     <content><![CDATA[<h1 id="进程的几种状态"><a href="#进程的几种状态" class="headerlink" title="进程的几种状态"></a>进程的几种状态</h1><hr>
@@ -103,9 +75,23 @@ Connection to 192.168.209.121 123 port [udp/ntp] succeeded!
 ]]></content>
   </entry>
   <entry>
-    <title>unbuntu</title>
-    <url>/2020/04/23/unbuntu/</url>
-    <content><![CDATA[<h1 id="CMD-IN-UBUNTU"><a href="#CMD-IN-UBUNTU" class="headerlink" title="CMD IN UBUNTU"></a>CMD IN UBUNTU</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">apt-get -f install 修复安装”-f = –fix-missing”</span><br></pre></td></tr></table></figure>
+    <title>blog_demo</title>
+    <url>/2020/04/23/blog-demo/</url>
+    <content><![CDATA[<p>My_blog demo</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/04/23/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 ]]></content>
   </entry>
   <entry>
@@ -147,6 +133,105 @@ Z=僵尸进程
 <pre><code>i 忽略闲置和僵死进程。这是一个开关式命令
 P 根据CPU使用百分比大小进行排序
 </code></pre>]]></content>
+  </entry>
+  <entry>
+    <title>unbuntu</title>
+    <url>/2020/04/23/unbuntu/</url>
+    <content><![CDATA[<h1 id="CMD-IN-UBUNTU"><a href="#CMD-IN-UBUNTU" class="headerlink" title="CMD IN UBUNTU"></a>CMD IN UBUNTU</h1><figure class="highlight sh"><table><tr><td class="code"><pre><span class="line">apt-get -f install 修复安装”-f = –fix-missing”</span><br></pre></td></tr></table></figure>
+]]></content>
+  </entry>
+  <entry>
+    <title>udp</title>
+    <url>/2020/04/23/udp/</url>
+    <content><![CDATA[<h1 id="UDP-for-VPN"><a href="#UDP-for-VPN" class="headerlink" title="UDP for VPN"></a>UDP for VPN</h1><h2 id="nc"><a href="#nc" class="headerlink" title="nc"></a>nc</h2><pre><code>dzx@dzx-N8xEJEK:~$ nc -vuz 192.168.209.121 123
+Connection to 192.168.209.121 123 port [udp/ntp] succeeded!
+</code></pre><p>实际使用时可以只用-u参数，-u代表udp协议 ，-v代表详细模式，-z代表只监测端口不发送数据</p>
+<h1 id=""><a href="#" class="headerlink" title="#"></a>#</h1>]]></content>
+  </entry>
+  <entry>
+    <title>Advancednetwork_第四阶段复习</title>
+    <url>/2020/06/28/Advanced_network/chap13_15/</url>
+    <content><![CDATA[<h1 id="第四阶段"><a href="#第四阶段" class="headerlink" title="第四阶段"></a>第四阶段</h1><h2 id="chap-13-运输层"><a href="#chap-13-运输层" class="headerlink" title="chap 13 运输层"></a>chap 13 运输层</h2><h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><p>端口号 0~65535 之间的整数.<br>客户端-&gt;临时端口号(生存时间较短)<br>服务器端-&gt;熟知端口号(让客户端知道,才能进行访问)</p>
+<p>熟知端口号-&gt;0~1023</p>
+<ul>
+<li>流量控制:<br>  &gt;<blockquote>
+<p>推送:不管接收方响应,发送方直接发送<br>拉取:发送方在接收方请求之后才发送数据</p>
+</blockquote>
+</li>
+</ul>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap13_1.png" alt="运输层通信"></p>
+<ul>
+<li><p>差错控制:</p>
+<ul>
+<li><p>检查并丢弃损坏的分组</p>
+</li>
+<li><p>跟踪丢失和丢弃的分组并重传他们</p>
+</li>
+<li><p>识别重复的分组并丢弃他们</p>
+</li>
+<li><p>识别失序到达的分组,直至缺失的分组全部抵达</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="运输层协议"><a href="#运输层协议" class="headerlink" title="运输层协议"></a>运输层协议</h3><h4 id="停止等待协议"><a href="#停止等待协议" class="headerlink" title="停止等待协议"></a>停止等待协议</h4><p>每次让一个分组处于等待确认状态.</p>
+<p>&gt;</p>
+<blockquote>
+<p>流量控制通过迫使发送发等待确认来实现.</p>
+<p>差错控制通过丢失损坏的分组,并且让发送方在计时器超时后重传未确认的分组来实现</p>
+</blockquote>
+<p>停止等待协议中,所有的序号都是模2的. 0,1,0,1,0,1</p>
+<h4 id="返回N协议-GBN"><a href="#返回N协议-GBN" class="headerlink" title="返回N协议(GBN)"></a>返回N协议(GBN)</h4><p>让多个分组处于等待确认状态.</p>
+<p>返回N协议中,序号必须是模$2^m$的,其中m为序号字段的比特长度.</p>
+<ul>
+<li>发送窗口:定义了一个想象的方框.最大是$2^m$</li>
+</ul>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap13_2.png" alt="发送窗口"></p>
+<ul>
+<li>接收窗口:定义了一个大小为1,且只有一个变量Rn的想象的方框</li>
+</ul>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap13_3.png" alt="发送窗口"></p>
+<p>当第一个未确认的分组计时器超时,就重传<strong>所有</strong>待确认的分组.<br>在GBN协议中,<strong>确认号定义了下一个希望接收到的分组序号</strong></p>
+<h4 id="选择重传协议"><a href="#选择重传协议" class="headerlink" title="选择重传协议"></a>选择重传协议</h4><p>只重传真正丢失的分组</p>
+<ul>
+<li><p>窗口</p>
+<ul>
+<li>发送窗口, 最大值要小的多,是$2^m-1$,其中m为序号字段的比特长度.</li>
+<li>接受窗口,它和发送窗口一样大</li>
+</ul>
+</li>
+<li><p>计时器:每一个待确认的分组使用一个计时器.当某一个计时器超时后,只有相应的分组被重传</p>
+</li>
+</ul>
+<p>在选择重传协议中,<strong>确认号定义了无差错的接收到的那个分组的序号</strong>(并不是下一个希望接收到的分组序号)</p>
+<h2 id="chap14-用户数据报协议-UDP"><a href="#chap14-用户数据报协议-UDP" class="headerlink" title="chap14 用户数据报协议(UDP)"></a>chap14 用户数据报协议(UDP)</h2><p>UDP在运输层.是一种<strong>无连接的,不可靠</strong>的传输协议.</p>
+<p><code>差错控制</code>:检测出由差错的分组,就悄悄的丢弃他.</p>
+<p>没有<code>流量控制</code>.</p>
+<p>8个字节的首部.</p>
+<p>源端口号 + 目的端口号 + 总长度(UDP的总长度,包括首部) + 检验和.(各占2个字节)</p>
+<h2 id="chap15-传输控制协议-TCP"><a href="#chap15-传输控制协议-TCP" class="headerlink" title="chap15 传输控制协议(TCP)"></a>chap15 传输控制协议(TCP)</h2><p>TCP首部<br><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap15_1.png" alt="发送窗口"></p>
+<p>窗口大小: 以字节为单位,指的是接收窗口,由接收方来决定.</p>
+<p>检验和: 需要附加相同的伪首部</p>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap15_2.png" alt="发送窗口"></p>
+<p>TCP的检验和是强制性的,UDP的检验和是可选的.</p>
+<p><strong>封装结构</strong>:</p>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap15_3.png" alt="发送窗口"></p>
+<p>SYN报文段不携带任何数据,但是要消耗一个序号.</p>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap15_4.png" alt="发送窗口"></p>
+<p>不携带数据,但要消耗一个序号的有<br>SYN报文段, SYN报文段+ACK报文段,<br>ACK报文段.</p>
+<h3 id="拥塞策略"><a href="#拥塞策略" class="headerlink" title="拥塞策略"></a>拥塞策略</h3><ul>
+<li><p>慢开始:指数增大</p>
+</li>
+<li><p>拥塞避免:指数加大</p>
+</li>
+<li><p>拥塞检测: 乘法减小(门限值降到一半)</p>
+</li>
+</ul>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap15_5.png" alt="发送窗口"></p>
+]]></content>
+      <categories>
+        <category>Advanced_network</category>
+      </categories>
   </entry>
   <entry>
     <title>Advanced_network 网络中使用的各种算法</title>
@@ -248,166 +333,6 @@ P 根据CPU使用百分比大小进行排序
       </categories>
   </entry>
   <entry>
-    <title>Advanced_network 往年试卷解答纠错</title>
-    <url>/2020/07/04/Advanced_network/review/</url>
-    <content><![CDATA[<h1 id="往年试卷解答纠错"><a href="#往年试卷解答纠错" class="headerlink" title="往年试卷解答纠错"></a>往年试卷解答纠错</h1><h2 id="卷1"><a href="#卷1" class="headerlink" title="卷1"></a>卷1</h2><ul>
-<li><p>TCP/IP协议4层.不是五层.分别是: 应用层, 运输层, 网络层, 网络接口层</p>
-</li>
-<li><p>以太网:<br>  标准以太网: 10Mbps, IEEE 802.3<br>  快速以太网: 100Mbps, IEEE 802.3u</p>
-</li>
-<li><p>现在以太网都是采用: CSMA/CD 技术,无限网络采用CSMA/CA技术</p>
-</li>
-<li><p>IPv6 的格式是 128 比特. 用<code>:</code>分成八段, 然后用16进制表示, XXXX:XXXX…<br>IPv4 的格式是 32 比特 (4 * 8)</p>
-</li>
-<li><p>任意子网的 主机号 全1 为 这个网络的广播,<br>全0表示了 这个 网段.</p>
-<blockquote>
-<p>以 192.168.0.0/255.255.0.0 为例<br>192.168.255.255 表示 在这个网络的广播<br>192.168.0.0 代表着这个子网的网段</p>
-</blockquote>
-</li>
-<li><p>集线器不可以分割碰撞域<br>网桥可以分割碰撞域<br>路由器可以分割碰撞域,广播域</p>
-</li>
-<li><p>三种基本的数据交换方式</p>
-<blockquote>
-<p>电路交换：整个报文的比特流连续的从源点直达终点，好像在一个管道中传送。<br>报文交换：整个报文先传输到相邻的结点，全部存储下来后查找转发表，转发到下一个结点。<br>分组交换：单个分组(报文的一部分)传送到相邻结点，传送到相邻结点，存储下来后查找转发表，转发到下一个结点</p>
-</blockquote>
-</li>
-<li><p>香农定理给出了信道信息传送速率的上限（比特每秒）和信道信噪比及带宽的关系<br>信道容量Rmax与信道带宽W，信噪比S/N关系为： Rmax=W*log2(1+S/N)。注意这里的log2是以2为底的对数</p>
-</li>
-<li><p>曼彻斯特编码: 0: 低-&gt;高, 1: 高-&gt;低<br>差分曼彻斯特编码: 0: 表示有跳变, 1: 表示无跳变.(跳变指的是每个周期的起始位)</p>
-</li>
-<li><p>距离矢量名称的由来是因为路由是以矢量（距离，方向）的方式被通告出去的，这里的距离是根据度量来决定的。通俗点就是：往某个方向上的距离.<br>距离矢量路由算法是动态路由算法。它是这样工作的：每个路由器维护一张矢量表，<br>表中列出了当前已知的到 每个目标的最佳距离，以及所使用的线路。通过在邻居之间相互交换信息，路由器不断地更新它们内部的表</p>
-</li>
-<li><p>链路状态路由选择协议又称为最短路径优先协议或分布式数据库协议,它基于Edsger Dijkstra的最短路径优先（SPF）算法。<br>算法易理解。链路状态协议从网络或者网络的限定区域内的所有其他路由器处收集信息，<br>最终每个链路状态路由器上都有一个相同的有关网络的信息。并且每台路由器都可以独立的计算各自的最优路径。</p>
-</li>
-<li><p>TCP 首部有长度字段的原因是, TCP首部由于选项,导致长度不定.</p>
-</li>
-<li><p>无限局域网使用CSMA/CA,而不是用CSMA/CD的原因:</p>
-<blockquote>
-<ol>
-<li>CSMA/CD要求站点在发送数据的同时,也要不间断的检测信道,这种功能在无限局域网中花费巨大</li>
-<li>无限电波向所有方向传输数据,且传播距离受限,在接收端仍然有冲突可能,从而产生隐藏站问题和暴露站问题.(冲突检测不完全)</li>
-</ol>
-</blockquote>
-<ol>
-<li><p><code>隐藏站</code>问题:<br>假设有3无线通信站ABC如下所示：<br>A        B         C<br>其中B在C的无线电波范围内，但A不在C的无线电波范围内。此时C正在向B传送数据，而A也试图向B传送数据。此时，A不能够监听到B正在忙（因为A在监听信道的时候什么也听不到，所以它会错误的认为此时可以向B传送数据了）。如果A向B传送数据，则将导致错误。此即隐藏站问题。其中C是A的隐藏站</p>
-</li>
-<li><p><code>暴露站</code>问题:<br>假设有3无线通信站ABC如下所示：<br>A        B          C<br>其中B在A的无线电波范围内，但C不在A的无线电波范围内。此时A正在传送数据（向除B以外的某通信站），而B希望给C发送数据，但是错误地认为该传送过程将会失败（因为B会监听到一次传输，所以它会错误地认为此时不能向C发送数据）。此即暴露站问题。其中A是B的暴露站</p>
-</li>
-</ol>
-</li>
-<li><p>CSMA/CD 信道空闲立即发送. 如果信道忙，则按照一定的退避算法进行延时监听。<br>CSMA/CA 信道空闲随机发送. 先发送一个很小的信道侦测帧RTS，如果收到最近的接入点返回的CTS，就认为信道是空闲的，然后再发送数据</p>
-</li>
-<li><p><strong>网桥没有Mac地址</strong>,因为网桥并不对转发的数据帧进行拆包重封装。所以对于交换机来说，如果只是完成数据帧交换，则可以不要MAC地址.<br><strong>标准路由器上，每个端口有个一个自己的MAC地址</strong>，以进行各网段的通信.</p>
-</li>
-<li><p>MTU大小</p>
-<blockquote>
-<p>大型MTU的优点：适合长距离传输大量数据无需分段；传输速度更快，无需重组,丢失的数据报更少,效率更高（开销更少）<br>小型MTU的优点：<br>适用于传输对时间敏感的数据，例如音频或视频<br>更适合多路复用</p>
-</blockquote>
-</li>
-<li><p>隧道技术是一种通过使用互联网络的基础设施在网络之间传递数据的方式。使用隧道传递的数据(或负载)可以是<strong>不同协议</strong>的数据帧或包。隧道协议将这些其他协议的数据帧或包重新封装在新的包头中发送。新的包头提供了路由信息，从而使封装的负载数据能够通过互联网络传递.</p>
-</li>
-<li><p>路由问题</p>
-<ol>
-<li>在距离矢量路由中，每个路由器都会发送有关自动路由的所有信息。定期将其与相邻网络上的所有路由器连接。它使用相当简单的算法来更新路由表，但会导致大量不必要的网络流量。</li>
-<li>在链路状态路由中，路由器仅在发生更改时才向自治系统发送有关网络更改的信息。与距离矢量路由相比，它使用的网络资源更少，因为它在网络上发送的流量更少，但是它使用复杂得多的Dijkstra算法从链路状态数据库计算路由表。</li>
-</ol>
-</li>
-<li><p>OSPF报文传播的比RIP报文的快,原因是: OSPF消息的传播速度更快，因为使用OSPF的路由器会立即向其网络传播有关其邻居发生任何更改的消息; RIP消息的分发速度较慢，因为使用RIP的网络需要每30秒进行一次定期更新来携带来自某个站点的任何消息路由到下一个路由器。此过程可能需要很多时间。</p>
-</li>
-<li><p>rwnd 接收窗口, cwnd: 拥塞窗口.</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Advanced_network</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Advancednetwork_第四阶段复习</title>
-    <url>/2020/06/28/Advanced_network/chap13_15/</url>
-    <content><![CDATA[<h1 id="第四阶段"><a href="#第四阶段" class="headerlink" title="第四阶段"></a>第四阶段</h1><h2 id="chap-13-运输层"><a href="#chap-13-运输层" class="headerlink" title="chap 13 运输层"></a>chap 13 运输层</h2><h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><p>端口号 0~65535 之间的整数.<br>客户端-&gt;临时端口号(生存时间较短)<br>服务器端-&gt;熟知端口号(让客户端知道,才能进行访问)</p>
-<p>熟知端口号-&gt;0~1023</p>
-<ul>
-<li>流量控制:<br>  &gt;<blockquote>
-<p>推送:不管接收方响应,发送方直接发送<br>拉取:发送方在接收方请求之后才发送数据</p>
-</blockquote>
-</li>
-</ul>
-<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap13_1.png" alt="运输层通信"></p>
-<ul>
-<li><p>差错控制:</p>
-<ul>
-<li><p>检查并丢弃损坏的分组</p>
-</li>
-<li><p>跟踪丢失和丢弃的分组并重传他们</p>
-</li>
-<li><p>识别重复的分组并丢弃他们</p>
-</li>
-<li><p>识别失序到达的分组,直至缺失的分组全部抵达</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="运输层协议"><a href="#运输层协议" class="headerlink" title="运输层协议"></a>运输层协议</h3><h4 id="停止等待协议"><a href="#停止等待协议" class="headerlink" title="停止等待协议"></a>停止等待协议</h4><p>每次让一个分组处于等待确认状态.</p>
-<p>&gt;</p>
-<blockquote>
-<p>流量控制通过迫使发送发等待确认来实现.</p>
-<p>差错控制通过丢失损坏的分组,并且让发送方在计时器超时后重传未确认的分组来实现</p>
-</blockquote>
-<p>停止等待协议中,所有的序号都是模2的. 0,1,0,1,0,1</p>
-<h4 id="返回N协议-GBN"><a href="#返回N协议-GBN" class="headerlink" title="返回N协议(GBN)"></a>返回N协议(GBN)</h4><p>让多个分组处于等待确认状态.</p>
-<p>返回N协议中,序号必须是模$2^m$的,其中m为序号字段的比特长度.</p>
-<ul>
-<li>发送窗口:定义了一个想象的方框.最大是$2^m$</li>
-</ul>
-<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap13_2.png" alt="发送窗口"></p>
-<ul>
-<li>接收窗口:定义了一个大小为1,且只有一个变量Rn的想象的方框</li>
-</ul>
-<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap13_3.png" alt="发送窗口"></p>
-<p>当第一个未确认的分组计时器超时,就重传<strong>所有</strong>待确认的分组.<br>在GBN协议中,<strong>确认号定义了下一个希望接收到的分组序号</strong></p>
-<h4 id="选择重传协议"><a href="#选择重传协议" class="headerlink" title="选择重传协议"></a>选择重传协议</h4><p>只重传真正丢失的分组</p>
-<ul>
-<li><p>窗口</p>
-<ul>
-<li>发送窗口, 最大值要小的多,是$2^m-1$,其中m为序号字段的比特长度.</li>
-<li>接受窗口,它和发送窗口一样大</li>
-</ul>
-</li>
-<li><p>计时器:每一个待确认的分组使用一个计时器.当某一个计时器超时后,只有相应的分组被重传</p>
-</li>
-</ul>
-<p>在选择重传协议中,<strong>确认号定义了无差错的接收到的那个分组的序号</strong>(并不是下一个希望接收到的分组序号)</p>
-<h2 id="chap14-用户数据报协议-UDP"><a href="#chap14-用户数据报协议-UDP" class="headerlink" title="chap14 用户数据报协议(UDP)"></a>chap14 用户数据报协议(UDP)</h2><p>UDP在运输层.是一种<strong>无连接的,不可靠</strong>的传输协议.</p>
-<p><code>差错控制</code>:检测出由差错的分组,就悄悄的丢弃他.</p>
-<p>没有<code>流量控制</code>.</p>
-<p>8个字节的首部.</p>
-<p>源端口号 + 目的端口号 + 总长度(UDP的总长度,包括首部) + 检验和.(各占2个字节)</p>
-<h2 id="chap15-传输控制协议-TCP"><a href="#chap15-传输控制协议-TCP" class="headerlink" title="chap15 传输控制协议(TCP)"></a>chap15 传输控制协议(TCP)</h2><p>TCP首部<br><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap15_1.png" alt="发送窗口"></p>
-<p>窗口大小: 以字节为单位,指的是接收窗口,由接收方来决定.</p>
-<p>检验和: 需要附加相同的伪首部</p>
-<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap15_2.png" alt="发送窗口"></p>
-<p>TCP的检验和是强制性的,UDP的检验和是可选的.</p>
-<p><strong>封装结构</strong>:</p>
-<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap15_3.png" alt="发送窗口"></p>
-<p>SYN报文段不携带任何数据,但是要消耗一个序号.</p>
-<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap15_4.png" alt="发送窗口"></p>
-<p>不携带数据,但要消耗一个序号的有<br>SYN报文段, SYN报文段+ACK报文段,<br>ACK报文段.</p>
-<h3 id="拥塞策略"><a href="#拥塞策略" class="headerlink" title="拥塞策略"></a>拥塞策略</h3><ul>
-<li><p>慢开始:指数增大</p>
-</li>
-<li><p>拥塞避免:指数加大</p>
-</li>
-<li><p>拥塞检测: 乘法减小(门限值降到一半)</p>
-</li>
-</ul>
-<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Advanced_network/chap15_5.png" alt="发送窗口"></p>
-]]></content>
-      <categories>
-        <category>Advanced_network</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Advancednetwork_第一阶段复习</title>
     <url>/2020/06/28/Advanced_network/chap2_3/</url>
     <content><![CDATA[<h1 id="第一阶段复习"><a href="#第一阶段复习" class="headerlink" title="第一阶段复习"></a>第一阶段复习</h1><h2 id="chap2"><a href="#chap2" class="headerlink" title="chap2"></a>chap2</h2><h3 id="OSI-模型-open-systemed-internet"><a href="#OSI-模型-open-systemed-internet" class="headerlink" title="OSI 模型 open systemed internet"></a>OSI 模型 open systemed internet</h3><div class="table-container">
@@ -478,6 +403,31 @@ P 根据CPU使用百分比大小进行排序
       <categories>
         <category>Advanced_network</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Aics_Chap1</title>
+    <url>/2020/06/27/Aics/chap1/</url>
+    <content><![CDATA[<h1 id="人工智能概述"><a href="#人工智能概述" class="headerlink" title="人工智能概述"></a>人工智能概述</h1><h2 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h2><h3 id="人工智能的三大方法"><a href="#人工智能的三大方法" class="headerlink" title="人工智能的三大方法"></a>人工智能的三大方法</h3><ol>
+<li><p>行为主义</p>
+<p> 基于<strong>控制论</strong>构建 <strong><em>感知-动作型</em></strong> 控制系统。<br> 通过<strong>反馈</strong>来进行行为动作。</p>
+</li>
+<li><p>逻辑主义<br> 基于逻辑符号。<br> <code>命题逻辑</code>： 与或非<br> <code>谓词逻辑</code>： X是Y。用0,1来进行输出。比如： 鸟会飞。<br> <code>时态逻辑</code>： 在一阶逻辑上加入时间。<br> <code>计算树逻辑</code>： 表示对不确定未来的判断。<br> <strong>困难</strong>：<br> &gt;</p>
+<blockquote>
+<p>1、 逻辑表达式需要常识来进行支撑，但常识太多了无法进行汇总。<br>2、 逻辑求解器，是一个NP完全问题。时间复杂度非常高。  </p>
+</blockquote>
+</li>
+<li>连接主义<br> 基于人脑的树突和轴突进行<br> &gt;<blockquote>
+<p>泛化能力差，需要大量的样本进行学习<br>缺乏推理能力.不擅长解决认知类的问题。<br>缺乏可解释性。重视安全领域比较重视可解释性。比如某个决策是怎么做出来的。深度学习为什么识别错误了。<br>鲁棒性不好。有些很小的图片差别，就导致识别错误。</p>
+</blockquote>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Aics</category>
+      </categories>
+      <tags>
+        <tag>理论</tag>
+      </tags>
   </entry>
   <entry>
     <title>Advancednetwork_第二阶段复习</title>
@@ -615,89 +565,91 @@ P 根据CPU使用百分比大小进行排序
       </categories>
   </entry>
   <entry>
-    <title>Aics_Chap1</title>
-    <url>/2020/06/27/Aics/chap1/</url>
-    <content><![CDATA[<h1 id="人工智能概述"><a href="#人工智能概述" class="headerlink" title="人工智能概述"></a>人工智能概述</h1><h2 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h2><h3 id="人工智能的三大方法"><a href="#人工智能的三大方法" class="headerlink" title="人工智能的三大方法"></a>人工智能的三大方法</h3><ol>
-<li><p>行为主义</p>
-<p> 基于<strong>控制论</strong>构建 <strong><em>感知-动作型</em></strong> 控制系统。<br> 通过<strong>反馈</strong>来进行行为动作。</p>
+    <title>Advanced_network 往年试卷解答纠错</title>
+    <url>/2020/07/04/Advanced_network/review/</url>
+    <content><![CDATA[<h1 id="往年试卷解答纠错"><a href="#往年试卷解答纠错" class="headerlink" title="往年试卷解答纠错"></a>往年试卷解答纠错</h1><h2 id="卷1"><a href="#卷1" class="headerlink" title="卷1"></a>卷1</h2><ul>
+<li><p>TCP/IP协议4层.不是五层.分别是: 应用层, 运输层, 网络层, 网络接口层</p>
 </li>
-<li><p>逻辑主义<br> 基于逻辑符号。<br> <code>命题逻辑</code>： 与或非<br> <code>谓词逻辑</code>： X是Y。用0,1来进行输出。比如： 鸟会飞。<br> <code>时态逻辑</code>： 在一阶逻辑上加入时间。<br> <code>计算树逻辑</code>： 表示对不确定未来的判断。<br> <strong>困难</strong>：<br> &gt;</p>
+<li><p>以太网:<br>  标准以太网: 10Mbps, IEEE 802.3<br>  快速以太网: 100Mbps, IEEE 802.3u</p>
+</li>
+<li><p>现在以太网都是采用: CSMA/CD 技术,无限网络采用CSMA/CA技术</p>
+</li>
+<li><p>IPv6 的格式是 128 比特. 用<code>:</code>分成八段, 然后用16进制表示, XXXX:XXXX…<br>IPv4 的格式是 32 比特 (4 * 8)</p>
+</li>
+<li><p>任意子网的 主机号 全1 为 这个网络的广播,<br>全0表示了 这个 网段.</p>
 <blockquote>
-<p>1、 逻辑表达式需要常识来进行支撑，但常识太多了无法进行汇总。<br>2、 逻辑求解器，是一个NP完全问题。时间复杂度非常高。  </p>
+<p>以 192.168.0.0/255.255.0.0 为例<br>192.168.255.255 表示 在这个网络的广播<br>192.168.0.0 代表着这个子网的网段</p>
 </blockquote>
 </li>
-<li>连接主义<br> 基于人脑的树突和轴突进行<br> &gt;<blockquote>
-<p>泛化能力差，需要大量的样本进行学习<br>缺乏推理能力.不擅长解决认知类的问题。<br>缺乏可解释性。重视安全领域比较重视可解释性。比如某个决策是怎么做出来的。深度学习为什么识别错误了。<br>鲁棒性不好。有些很小的图片差别，就导致识别错误。</p>
+<li><p>集线器不可以分割碰撞域<br>网桥可以分割碰撞域<br>路由器可以分割碰撞域,广播域</p>
+</li>
+<li><p>三种基本的数据交换方式</p>
+<blockquote>
+<p>电路交换：整个报文的比特流连续的从源点直达终点，好像在一个管道中传送。<br>报文交换：整个报文先传输到相邻的结点，全部存储下来后查找转发表，转发到下一个结点。<br>分组交换：单个分组(报文的一部分)传送到相邻结点，传送到相邻结点，存储下来后查找转发表，转发到下一个结点</p>
 </blockquote>
 </li>
-</ol>
-]]></content>
-      <categories>
-        <category>Aics</category>
-      </categories>
-      <tags>
-        <tag>理论</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Aics_Chap5</title>
-    <url>/2020/06/27/Aics/chap5/</url>
-    <content><![CDATA[<h1 id="编程框架机理"><a href="#编程框架机理" class="headerlink" title="编程框架机理"></a>编程框架机理</h1><hr>
-<p>==<strong>编程框架的内部运转 具备开发框架的能力</strong>==</p>
-<h2 id="tensorflow-设计原则"><a href="#tensorflow-设计原则" class="headerlink" title="tensorflow 设计原则"></a>tensorflow 设计原则</h2><p>TensorFlow 的目的：</p>
+<li><p>香农定理给出了信道信息传送速率的上限（比特每秒）和信道信噪比及带宽的关系<br>信道容量Rmax与信道带宽W，信噪比S/N关系为： Rmax=W*log2(1+S/N)。注意这里的log2是以2为底的对数</p>
+</li>
+<li><p>曼彻斯特编码: 0: 低-&gt;高, 1: 高-&gt;低<br>差分曼彻斯特编码: 0: 表示有跳变, 1: 表示无跳变.(跳变指的是每个周期的起始位)</p>
+</li>
+<li><p>距离矢量名称的由来是因为路由是以矢量（距离，方向）的方式被通告出去的，这里的距离是根据度量来决定的。通俗点就是：往某个方向上的距离.<br>距离矢量路由算法是动态路由算法。它是这样工作的：每个路由器维护一张矢量表，<br>表中列出了当前已知的到 每个目标的最佳距离，以及所使用的线路。通过在邻居之间相互交换信息，路由器不断地更新它们内部的表</p>
+</li>
+<li><p>链路状态路由选择协议又称为最短路径优先协议或分布式数据库协议,它基于Edsger Dijkstra的最短路径优先（SPF）算法。<br>算法易理解。链路状态协议从网络或者网络的限定区域内的所有其他路由器处收集信息，<br>最终每个链路状态路由器上都有一个相同的有关网络的信息。并且每台路由器都可以独立的计算各自的最优路径。</p>
+</li>
+<li><p>TCP 首部有长度字段的原因是, TCP首部由于选项,导致长度不定.</p>
+</li>
+<li><p>无限局域网使用CSMA/CA,而不是用CSMA/CD的原因:</p>
+<blockquote>
 <ol>
-<li><p><strong>高性能</strong></p>
-<ul>
-<li>算子：每个算子对底层部件已经优化，可以更好的利用硬件性能。</li>
-<li>计算图：优化了计算图，提高了计算图的计算效率（TODO 计算图如何优化）</li>
-<li>并行： 根据计算图，并行没有数据依赖的节点</li>
-</ul>
-</li>
-<li><p><strong>易开发</strong></p>
-<p> 提炼了深度学习的很多共性算子，方便用户调用。</p>
-</li>
-<li><p><strong>可移植</strong></p>
-<p> 可以适用于不同的异构系统，方便代码移植。<br> 表明对于同一个算子，开发了适合同步底层的代码。</p>
-</li>
+<li>CSMA/CD要求站点在发送数据的同时,也要不间断的检测信道,这种功能在无限局域网中花费巨大</li>
+<li>无限电波向所有方向传输数据,且传播距离受限,在接收端仍然有冲突可能,从而产生隐藏站问题和暴露站问题.(冲突检测不完全)</li>
 </ol>
-<h2 id="TensorFlow-计算图"><a href="#TensorFlow-计算图" class="headerlink" title="TensorFlow 计算图"></a>TensorFlow 计算图</h2><h3 id="计算图求导方法"><a href="#计算图求导方法" class="headerlink" title="计算图求导方法"></a>计算图求导方法</h3><h4 id="手动求解法"><a href="#手动求解法" class="headerlink" title="手动求解法"></a>手动求解法</h4><ul>
-<li>手动编写链式法则求导转化成计算机程序特别困难</li>
-<li>如果更改网络模型，需要改好多梯度求解算法</li>
-</ul>
-<h4 id="数值求导法"><a href="#数值求导法" class="headerlink" title="数值求导法"></a>数值求导法</h4><p>给一个很小的初始值，算出来偏差</p>
-<ul>
-<li>计算量大，求解速度慢</li>
-<li>可能引入舍入误差和截断误差</li>
-</ul>
-<h4 id="符号求导法"><a href="#符号求导法" class="headerlink" title="符号求导法"></a>符号求导法</h4><p>会引起表达式膨胀</p>
-<h4 id="自动求导法"><a href="#自动求导法" class="headerlink" title="自动求导法"></a>自动求导法</h4><p>==自动求导方法是界于数值求导方法和符号求导方法之间==</p>
-<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Aics/Automatic_derivation.png" alt="自动求导方法"></p>
-<p>求导方法对比：</p>
-<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Aics/derivation.png" alt="自动求导方法"></p>
-<h4 id="计算图分配"><a href="#计算图分配" class="headerlink" title="计算图分配"></a>计算图分配</h4><ol>
-<li><p>从起始点开始遍历计算图的每一个节点</p>
-</li>
-<li><p>然后考虑每个节点的可行设备集合</p>
-</li>
-<li><p>采用<strong>贪心算法</strong>，选择最快完成时间的设备分配给该节点。</p>
-</li>
-</ol>
-<p>&gt;</p>
-<blockquote>
-<p>常量折叠：有的常数节点可以被提亲计算，用新生成的节点代替原来的节点。<br>算数优化：对表达式优化<br>布局优化<br>Tensorflow 默认NHWC；GPU默认NCHW。<br>两个连续的GPU计算节点之间的 NCHW2NHWC 与NHWC2NCHE 可以相互抵消。<br>重映射：将出现频率较高的子图用一个单独的算子来替代。<br>消除子图的调度开销<br>不需要在计算过程中将数据调入内存，再调出内存。访存开销减少</p>
 </blockquote>
+<ol>
+<li><p><code>隐藏站</code>问题:<br>假设有3无线通信站ABC如下所示：<br>A        B         C<br>其中B在C的无线电波范围内，但A不在C的无线电波范围内。此时C正在向B传送数据，而A也试图向B传送数据。此时，A不能够监听到B正在忙（因为A在监听信道的时候什么也听不到，所以它会错误的认为此时可以向B传送数据了）。如果A向B传送数据，则将导致错误。此即隐藏站问题。其中C是A的隐藏站</p>
+</li>
+<li><p><code>暴露站</code>问题:<br>假设有3无线通信站ABC如下所示：<br>A        B          C<br>其中B在A的无线电波范围内，但C不在A的无线电波范围内。此时A正在传送数据（向除B以外的某通信站），而B希望给C发送数据，但是错误地认为该传送过程将会失败（因为B会监听到一次传输，所以它会错误地认为此时不能向C发送数据）。此即暴露站问题。其中A是B的暴露站</p>
+</li>
+</ol>
+</li>
+<li><p>CSMA/CD 信道空闲立即发送. 如果信道忙，则按照一定的退避算法进行延时监听。<br>CSMA/CA 信道空闲随机发送. 先发送一个很小的信道侦测帧RTS，如果收到最近的接入点返回的CTS，就认为信道是空闲的，然后再发送数据</p>
+</li>
+<li><p><strong>网桥没有Mac地址</strong>,因为网桥并不对转发的数据帧进行拆包重封装。所以对于交换机来说，如果只是完成数据帧交换，则可以不要MAC地址.<br><strong>标准路由器上，每个端口有个一个自己的MAC地址</strong>，以进行各网段的通信.</p>
+</li>
+<li><p>MTU大小</p>
+<blockquote>
+<p>大型MTU的优点：适合长距离传输大量数据无需分段；传输速度更快，无需重组,丢失的数据报更少,效率更高（开销更少）<br>小型MTU的优点：<br>适用于传输对时间敏感的数据，例如音频或视频<br>更适合多路复用</p>
+</blockquote>
+</li>
+<li><p>隧道技术是一种通过使用互联网络的基础设施在网络之间传递数据的方式。使用隧道传递的数据(或负载)可以是<strong>不同协议</strong>的数据帧或包。隧道协议将这些其他协议的数据帧或包重新封装在新的包头中发送。新的包头提供了路由信息，从而使封装的负载数据能够通过互联网络传递.</p>
+</li>
+<li><p>路由问题</p>
+<ol>
+<li>在距离矢量路由中，每个路由器都会发送有关自动路由的所有信息。定期将其与相邻网络上的所有路由器连接。它使用相当简单的算法来更新路由表，但会导致大量不必要的网络流量。</li>
+<li>在链路状态路由中，路由器仅在发生更改时才向自治系统发送有关网络更改的信息。与距离矢量路由相比，它使用的网络资源更少，因为它在网络上发送的流量更少，但是它使用复杂得多的Dijkstra算法从链路状态数据库计算路由表。</li>
+</ol>
+</li>
+<li><p>OSPF报文传播的比RIP报文的快,原因是: OSPF消息的传播速度更快，因为使用OSPF的路由器会立即向其网络传播有关其邻居发生任何更改的消息; RIP消息的分发速度较慢，因为使用RIP的网络需要每30秒进行一次定期更新来携带来自某个站点的任何消息路由到下一个路由器。此过程可能需要很多时间。</p>
+</li>
+<li><p>rwnd 接收窗口, cwnd: 拥塞窗口.</p>
+</li>
+</ul>
 ]]></content>
       <categories>
-        <category>Aics</category>
+        <category>Advanced_network</category>
       </categories>
-      <tags>
-        <tag>理论</tag>
-      </tags>
   </entry>
   <entry>
-    <title>Aics_Chap4</title>
-    <url>/2020/06/27/Aics/chap4/</url>
-    <content><![CDATA[<h1 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h1>]]></content>
+    <title>Aics_chap2</title>
+    <url>/2020/06/27/Aics/chap2/</url>
+    <content><![CDATA[<h1 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h1><h2 id="课外知识补充"><a href="#课外知识补充" class="headerlink" title="课外知识补充"></a>课外知识补充</h2><ul>
+<li><p>最大似然函数</p>
+<p>  极大似然估计中采样需满足一个重要的假设，就是所有的采样都是<strong>独立同分布</strong>的<br>  <strong>似然函数</strong>：<br>  $f(x_1,x_2|\theta) = f(x_1|\theta) \times f(x_2|\theta)$<br>  $L(\theta|x_1,x_2) = f(x_1,x_2|\theta)$<br>  目的是：<strong>采取的方法是让这个样本结果出现的可能性最大</strong><br>  $ln(L(\theta|x_1,x_2)) = ln(f(x_1,x_2|\theta)) = ln(f(x_1|\theta)) + ln(f(x_2|\theta))$<br>  通过求<strong>对数</strong>，将乘法转变成加法（因为是独立同分布的）<br>  然后再去寻找最大值。</p>
+</li>
+<li><p>激活函数非线性<br>  如果激活函数也是线性的，比如$sign$函数，那么他就不能解决那些线性不可分问题。<br>  PS：虽然然和非线性问题，在某种程度上都可以变成更高维度的线性可分问题。</p>
+</li>
+</ul>
+]]></content>
       <categories>
         <category>Aics</category>
       </categories>
@@ -775,10 +727,9 @@ P 根据CPU使用百分比大小进行排序
       </categories>
   </entry>
   <entry>
-    <title>Aics_Chap6</title>
-    <url>/2020/06/27/Aics/chap6/</url>
-    <content><![CDATA[<h1 id="深度学习处理器机理"><a href="#深度学习处理器机理" class="headerlink" title="深度学习处理器机理"></a>深度学习处理器机理</h1><h2 id="如何设计DLP：deep-learning-processor"><a href="#如何设计DLP：deep-learning-processor" class="headerlink" title="如何设计DLP：deep learning processor"></a>如何设计DLP：deep learning processor</h2><p>ISA：指令集</p>
-]]></content>
+    <title>Aics_Chap4</title>
+    <url>/2020/06/27/Aics/chap4/</url>
+    <content><![CDATA[<h1 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h1>]]></content>
       <categories>
         <category>Aics</category>
       </categories>
@@ -797,6 +748,73 @@ P 根据CPU使用百分比大小进行排序
       <categories>
         <category>Docker</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Aics_Chap6</title>
+    <url>/2020/06/27/Aics/chap6/</url>
+    <content><![CDATA[<h1 id="深度学习处理器机理"><a href="#深度学习处理器机理" class="headerlink" title="深度学习处理器机理"></a>深度学习处理器机理</h1><h2 id="如何设计DLP：deep-learning-processor"><a href="#如何设计DLP：deep-learning-processor" class="headerlink" title="如何设计DLP：deep learning processor"></a>如何设计DLP：deep learning processor</h2><p>ISA：指令集</p>
+]]></content>
+      <categories>
+        <category>Aics</category>
+      </categories>
+      <tags>
+        <tag>理论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Aics_Chap5</title>
+    <url>/2020/06/27/Aics/chap5/</url>
+    <content><![CDATA[<h1 id="编程框架机理"><a href="#编程框架机理" class="headerlink" title="编程框架机理"></a>编程框架机理</h1><hr>
+<p>==<strong>编程框架的内部运转 具备开发框架的能力</strong>==</p>
+<h2 id="tensorflow-设计原则"><a href="#tensorflow-设计原则" class="headerlink" title="tensorflow 设计原则"></a>tensorflow 设计原则</h2><p>TensorFlow 的目的：</p>
+<ol>
+<li><p><strong>高性能</strong></p>
+<ul>
+<li>算子：每个算子对底层部件已经优化，可以更好的利用硬件性能。</li>
+<li>计算图：优化了计算图，提高了计算图的计算效率（TODO 计算图如何优化）</li>
+<li>并行： 根据计算图，并行没有数据依赖的节点</li>
+</ul>
+</li>
+<li><p><strong>易开发</strong></p>
+<p> 提炼了深度学习的很多共性算子，方便用户调用。</p>
+</li>
+<li><p><strong>可移植</strong></p>
+<p> 可以适用于不同的异构系统，方便代码移植。<br> 表明对于同一个算子，开发了适合同步底层的代码。</p>
+</li>
+</ol>
+<h2 id="TensorFlow-计算图"><a href="#TensorFlow-计算图" class="headerlink" title="TensorFlow 计算图"></a>TensorFlow 计算图</h2><h3 id="计算图求导方法"><a href="#计算图求导方法" class="headerlink" title="计算图求导方法"></a>计算图求导方法</h3><h4 id="手动求解法"><a href="#手动求解法" class="headerlink" title="手动求解法"></a>手动求解法</h4><ul>
+<li>手动编写链式法则求导转化成计算机程序特别困难</li>
+<li>如果更改网络模型，需要改好多梯度求解算法</li>
+</ul>
+<h4 id="数值求导法"><a href="#数值求导法" class="headerlink" title="数值求导法"></a>数值求导法</h4><p>给一个很小的初始值，算出来偏差</p>
+<ul>
+<li>计算量大，求解速度慢</li>
+<li>可能引入舍入误差和截断误差</li>
+</ul>
+<h4 id="符号求导法"><a href="#符号求导法" class="headerlink" title="符号求导法"></a>符号求导法</h4><p>会引起表达式膨胀</p>
+<h4 id="自动求导法"><a href="#自动求导法" class="headerlink" title="自动求导法"></a>自动求导法</h4><p>==自动求导方法是界于数值求导方法和符号求导方法之间==</p>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Aics/Automatic_derivation.png" alt="自动求导方法"></p>
+<p>求导方法对比：</p>
+<p><img src="http://home.ustc.edu.cn/~dzx1/Picture/Aics/derivation.png" alt="自动求导方法"></p>
+<h4 id="计算图分配"><a href="#计算图分配" class="headerlink" title="计算图分配"></a>计算图分配</h4><ol>
+<li><p>从起始点开始遍历计算图的每一个节点</p>
+</li>
+<li><p>然后考虑每个节点的可行设备集合</p>
+</li>
+<li><p>采用<strong>贪心算法</strong>，选择最快完成时间的设备分配给该节点。</p>
+</li>
+</ol>
+<p>&gt;</p>
+<blockquote>
+<p>常量折叠：有的常数节点可以被提亲计算，用新生成的节点代替原来的节点。<br>算数优化：对表达式优化<br>布局优化<br>Tensorflow 默认NHWC；GPU默认NCHW。<br>两个连续的GPU计算节点之间的 NCHW2NHWC 与NHWC2NCHE 可以相互抵消。<br>重映射：将出现频率较高的子图用一个单独的算子来替代。<br>消除子图的调度开销<br>不需要在计算过程中将数据调入内存，再调出内存。访存开销减少</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Aics</category>
+      </categories>
+      <tags>
+        <tag>理论</tag>
+      </tags>
   </entry>
   <entry>
     <title>Auto-Docker-Build</title>
@@ -845,23 +863,5 @@ ENTRYPOINT command param1 param2（shell中执行。
       <categories>
         <category>Docker</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Aics_chap2</title>
-    <url>/2020/06/27/Aics/chap2/</url>
-    <content><![CDATA[<h1 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h1><h2 id="课外知识补充"><a href="#课外知识补充" class="headerlink" title="课外知识补充"></a>课外知识补充</h2><ul>
-<li><p>最大似然函数</p>
-<p>  极大似然估计中采样需满足一个重要的假设，就是所有的采样都是<strong>独立同分布</strong>的<br>  <strong>似然函数</strong>：<br>  $f(x_1,x_2|\theta) = f(x_1|\theta) \times f(x_2|\theta)$<br>  $L(\theta|x_1,x_2) = f(x_1,x_2|\theta)$<br>  目的是：<strong>采取的方法是让这个样本结果出现的可能性最大</strong><br>  $ln(L(\theta|x_1,x_2)) = ln(f(x_1,x_2|\theta)) = ln(f(x_1|\theta)) + ln(f(x_2|\theta))$<br>  通过求<strong>对数</strong>，将乘法转变成加法（因为是独立同分布的）<br>  然后再去寻找最大值。</p>
-</li>
-<li><p>激活函数非线性<br>  如果激活函数也是线性的，比如$sign$函数，那么他就不能解决那些线性不可分问题。<br>  PS：虽然然和非线性问题，在某种程度上都可以变成更高维度的线性可分问题。</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Aics</category>
-      </categories>
-      <tags>
-        <tag>理论</tag>
-      </tags>
   </entry>
 </search>

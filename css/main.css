@@ -1166,6 +1166,7 @@ pre .javascript .function {
   margin: 0 auto;
   max-width: 120px;
   padding: 2px;
+  border-radius: 50%;
 }
 .site-author-name {
   color: var(--text-color);
@@ -1193,7 +1194,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #4ae5c2;
+  background: #6ee0ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2683,14 +2684,14 @@ mjx-container + br {
   }
 }
 body {
-  background: url("https://gss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/11385343fbf2b2118bd8f269c08065380cd78e26.jpg");
+  background: url("https://gitee.com/douzhixing/picture/raw/master/1.jpg");
   background-attachment: fixed;
   background-position: 50% 50%;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 @media (max-width: 767px) {
   body {
-    background-image: url("https://ziyuan.lruihao.cn/images/bg_cell.png");
+    background-image: url("https://gitee.com/douzhixing/picture/raw/master/1.jpg");
     background-size: cover;
   }
 }
